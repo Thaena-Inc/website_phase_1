@@ -8,10 +8,6 @@
   --color-light: #fff;
 }
 
-img {
-  border-radius: 4px;
-}
-
 /*
 * --------------------------------------------------
 * Non anchor links
@@ -344,7 +340,7 @@ button.reset:hover:not(:has(> *)) {
 * --------------------------------------------------
 * routes/__index
 * --------------------------------------------------
-*/
+
 .featured-collection {
   display: block;
   margin-bottom: 2rem;
@@ -376,12 +372,13 @@ button.reset:hover:not(:has(> *)) {
 .recommended-product img {
   height: auto;
 }
+*/
 
 /*
 * --------------------------------------------------
 * routes/collections._index.tsx
 * --------------------------------------------------
-*/
+
 .collections-grid {
   display: grid;
   grid-gap: 1.5rem;
@@ -392,12 +389,13 @@ button.reset:hover:not(:has(> *)) {
 .collection-item img {
   height: auto;
 }
+*/
 
 /*
 * --------------------------------------------------
 * routes/collections.$handle.tsx
 * --------------------------------------------------
-*/
+
 .collection-description {
   margin-bottom: 1rem;
   max-width: 95%;
@@ -417,12 +415,13 @@ button.reset:hover:not(:has(> *)) {
   height: auto;
   width: 100%;
 }
+*/
 
 /*
 * --------------------------------------------------
 * routes/products.$handle.tsx
 * --------------------------------------------------
-*/
+
 .product {
   display: grid;
   @media (min-width: 45em) {
@@ -478,12 +477,13 @@ button.reset:hover:not(:has(> *)) {
 .product-option-label-swatch img {
   width: 100%;
 }
+*/
 
 /*
 * --------------------------------------------------
 * routes/blog._index.tsx
 * --------------------------------------------------
-*/
+
 .blog-grid {
   display: grid;
   grid-gap: 1.5rem;
@@ -499,16 +499,18 @@ button.reset:hover:not(:has(> *)) {
 .blog-article-image img {
   height: 100%;
 }
+*/
 
 /*
 * --------------------------------------------------
 * routes/blog.$articlehandle.tsx
 * --------------------------------------------------
-*/
+
 .article img {
   height: auto;
   width: 100%;
 }
+*/
 
 /*
 * --------------------------------------------------

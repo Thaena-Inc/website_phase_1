@@ -16,7 +16,7 @@ export default function HeroAndBuyBox() {
   return (
     <>
     {/* Product Section */}
-    <div className="min-h-screen bg-[rgba(109,79,44,0.20)]">
+    <div className="min-h-screen bg-earth-brown/20">
     <div className="max-w-[1200px] mx-auto px-8 py-16 lg:py-24">
       {/* Hero Section */}
       <div className="flex flex-col items-center gap-6 mb-16">
@@ -84,7 +84,7 @@ export default function HeroAndBuyBox() {
           {/* Quantity Selection */}
           <div className="mb-8">
             <p className="font-roboto text-xl font-light leading-7 text-slate-dark mb-2">Quantity:</p>
-            <div className="flex items-center justify-center w-[122px] h-9 border-[0.5px] border-[rgba(67,65,79,0.30)] gap-8">
+            <div className="flex items-center justify-center w-[122px] h-9 border-[0.5px] border-slate-dark/30 gap-8">
               <button onClick={decrementQuantity} className="flex-shrink-0">
                 <Minus className="w-4 h-4 text-slate-dark" strokeWidth={1.6} />
               </button>
@@ -106,7 +106,7 @@ export default function HeroAndBuyBox() {
                   </span>
                 </div>
               </div>
-              <div className="border-2 border-[rgba(28,94,84,0.30)] rounded-xl bg-neutral-light p-8 pt-12">
+              <div className="border-2 border-teal-green/30 rounded-xl bg-neutral-light p-8 pt-12">
                 <div className="text-center mb-6">
                   <h3 className="font-playfair text-2xl leading-8 tracking-[-0.6px] text-slate-dark mb-2">
                     30 Capsules
@@ -136,7 +136,7 @@ export default function HeroAndBuyBox() {
                     <span className="font-roboto text-sm leading-5 text-slate-dark">Full month supply</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[rgba(28,94,84,0.10)] flex items-center justify-center flex-shrink-0">
+                    <div className="w-5 h-5 rounded-full bg-teal-green/10 flex items-center justify-center flex-shrink-0">
                       <span className="text-xs">💰</span>
                     </div>
                     <span className="font-roboto text-sm leading-5 text-slate-dark underline">30-day money-back guarantee</span>
@@ -163,7 +163,7 @@ export default function HeroAndBuyBox() {
                   </span>
                 </div>
               </div>
-              <div className="border-2 border-[rgba(160,93,64,0.30)] rounded-xl bg-neutral-light p-8 pt-12">
+              <div className="border-2 border-rust-dark/30 rounded-xl bg-neutral-light p-8 pt-12">
                 <div className="text-center mb-6">
                   <h3 className="font-playfair text-2xl leading-8 tracking-[-0.6px] text-slate-dark mb-2">
                     90 Capsules

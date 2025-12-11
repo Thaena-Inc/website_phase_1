@@ -2,14 +2,14 @@ export default function HowToTake() {
   return (
     <>
     {/* How to Take ThaenaBiotic Section */}
-    <div className="bg-[rgba(109,79,44,0.20)]">
+    <div className="bg-earth-brown/20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-24 py-20">
           {/* Header */}
           <div className="mb-12">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-0.96px] text-teal-green text-center font-normal mb-4">
               How to Take ThaenaBiotic®
             </h2>
-            <p className="font-roboto text-lg md:text-xl leading-7 text-[rgba(68,65,78,0.80)] text-center">
+            <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
               Flexible dosing for your lifestyle. Take with or without food, morning or evening.
             </p>
           </div>
@@ -17,7 +17,7 @@ export default function HowToTake() {
           {/* Dosage Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1: Daily Maintenance */}
-            <div className="bg-neutral-light rounded-xl border border-[#A8B3A8] shadow-sm p-6 flex flex-col gap-3">
+            <div className="bg-neutral-light rounded-xl border border-sage-grey shadow-sm p-6 flex flex-col gap-3">
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-sage self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">EVERYDAY</span>
               </div>
@@ -33,7 +33,7 @@ export default function HowToTake() {
             </div>
 
             {/* Card 2: Travel Support */}
-            <div className="bg-neutral-light rounded-xl border border-[#A8B3A8] shadow-sm p-6 flex flex-col gap-3">
+            <div className="bg-neutral-light rounded-xl border border-sage-grey shadow-sm p-6 flex flex-col gap-3">
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-sepia self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">ON THE GO</span>
               </div>
@@ -49,7 +49,7 @@ export default function HowToTake() {
             </div>
 
             {/* Card 3: Acute Support */}
-            <div className="bg-neutral-light rounded-xl border border-[#A8B3A8] shadow-sm p-6 flex flex-col gap-3">
+            <div className="bg-neutral-light rounded-xl border border-sage-grey shadow-sm p-6 flex flex-col gap-3">
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-teal-green self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">INTENSIVE</span>
               </div>
@@ -65,7 +65,7 @@ export default function HowToTake() {
             </div>
 
             {/* Card 4: Professional Guidance */}
-            <div className="bg-neutral-light rounded-xl border border-[#A8B3A8] shadow-sm p-6 flex flex-col gap-3">
+            <div className="bg-neutral-light rounded-xl border border-sage-grey shadow-sm p-6 flex flex-col gap-3">
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-golden self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">PERSONALIZED</span>
               </div>

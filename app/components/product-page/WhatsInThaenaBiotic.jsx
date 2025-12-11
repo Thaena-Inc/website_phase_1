@@ -9,7 +9,7 @@ export default function WhatsInThaenaBiotic() {
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal mb-6">
               What's in ThaenaBiotic®
             </h2>
-            <p className="font-roboto text-lg md:text-xl leading-7 text-[rgba(68,65,78,0.80)] text-center">
+            <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
               ThaenaBiotic® delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human donor.
             </p>
           </div>
@@ -24,13 +24,13 @@ export default function WhatsInThaenaBiotic() {
                   alt="Abstract visualization of healthy microbiome metabolites and molecular structures"
                   className="w-full h-auto"
                 />
-                <div className="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px_rgba(168,179,168,0.20)]"></div>
+                <div className="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px_sage-grey/20]"></div>
               </div>
             </div>
 
             {/* Content */}
             <div className="flex-1">
-              <p className="font-roboto text-lg md:text-xl leading-7 text-[rgba(68,65,78,0.80)] mb-8">
+              <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark/80 mb-8">
                 We highlight a few of the most well-known and well-studied postbiotics below, but they're only the beginning. Because it all comes from humans — not lab beakers — you get the real-world diversity and complexity that can only come from a human gut.
               </p>
 
@@ -41,7 +41,7 @@ export default function WhatsInThaenaBiotic() {
                   <h3 className="font-playfair text-[22px] font-medium leading-8 tracking-[-0.48px] text-slate-dark mb-2">
                     Short-chain fatty acids
                   </h3>
-                  <p className="font-roboto text-base leading-[26px] text-[rgba(68,65,78,0.70)]">
+                  <p className="font-roboto text-base leading-[26px] text-slate-dark/70">
                     Energy for gut cells
                   </p>
                 </div>
@@ -51,7 +51,7 @@ export default function WhatsInThaenaBiotic() {
                   <h3 className="font-playfair text-[22px] font-medium leading-8 tracking-[-0.48px] text-slate-dark mb-2">
                     Amino acids
                   </h3>
-                  <p className="font-roboto text-base leading-[26px] text-[rgba(68,65,78,0.70)]">
+                  <p className="font-roboto text-base leading-[26px] text-slate-dark/70">
                     Building blocks of life
                   </p>
                 </div>
@@ -61,7 +61,7 @@ export default function WhatsInThaenaBiotic() {
                   <h3 className="font-playfair text-[22px] font-medium leading-8 tracking-[-0.48px] text-slate-dark mb-2">
                     Indoles
                   </h3>
-                  <p className="font-roboto text-base leading-[26px] text-[rgba(68,65,78,0.70)]">
+                  <p className="font-roboto text-base leading-[26px] text-slate-dark/70">
                     Neurological signaling
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export default function WhatsInThaenaBiotic() {
                   <h3 className="font-playfair text-[22px] font-medium leading-8 tracking-[-0.48px] text-slate-dark mb-2">
                     Peptides
                   </h3>
-                  <p className="font-roboto text-base leading-[26px] text-[rgba(68,65,78,0.70)]">
+                  <p className="font-roboto text-base leading-[26px] text-slate-dark/70">
                     Cellular communication
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export default function WhatsInThaenaBiotic() {
                 <h3 className="font-playfair text-[22px] font-medium leading-10 tracking-[-0.48px] text-slate-dark">
                   + 10,000+ additional human-derived metabolites
                 </h3>
-                <p className="font-roboto text-base leading-[26px] text-[rgba(68,65,78,0.70)]">
+                <p className="font-roboto text-base leading-[26px] text-slate-dark/70">
                   Science is still mapping them — but your gut already knows what to do with them.
                 </p>
               </div>
