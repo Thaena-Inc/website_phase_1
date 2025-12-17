@@ -22,7 +22,7 @@ import '~/styles/tailwind.css';
 import tailwindCss from '~/styles/tailwind.css?url';
 
 import {PageLayout} from './components/PageLayout';
-
+import {CartFeedbackOverlay} from '~/components/CartFeedbackOverlay';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -64,6 +64,7 @@ export function links() {
       href: 'https://shop.app',
     },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    // Tailwind CSS loads last to ensure it has precedence over reset.css and app.css
     {rel: 'stylesheet', href: tailwindCss},
   ];
 }
@@ -160,13 +161,16 @@ export function Layout({children}) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {/* Load reset.css and app.css first, then Tailwind via Links() for proper precedence */}
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <div className="content-scale-wrapper">
+          {children}
+        </div>
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
@@ -189,6 +193,7 @@ export default function App() {
       consent={data.consent}
     >
       <CartProvider cart={data.cart}>
+        <CartFeedbackOverlay />
         <PageLayout {...data}>
           <Outlet />
         </PageLayout>

@@ -11,9 +11,11 @@ module.exports = {
           // Core neutrals
           "neutral-light": "#f7f3ec",
           "neutral-warm": "#ede8de",    // warm panels / backgrounds
+          "light-neutral": "hsl(var(--light-neutral) / <alpha-value>)", // affiliate page
   
           // Main text
           "slate-dark": "#43414f",      // body text
+          slate: "hsl(var(--slate) / <alpha-value>)",   // affiliate page
   
           // Greens / teals
           "teal-green": "#275b52",      // hero H1, CTAs
@@ -30,15 +32,23 @@ module.exports = {
           // Purples / mauves
           mauve: "#925781",             // CHLOE & some CTAs
           purple: "#925781",            // for text-purple / border-purple
+          "deep-purple": "hsl(var(--deep-purple) / <alpha-value>)", // affiliate page
   
           // Gold / highlights
           golden: "#deb065",            // vertical rules, small accents
+
+          // Homepage colors
+          cream: "hsl(var(--cream) / <alpha-value>)",
+          "warm-brown": "hsl(var(--warm-brown) / <alpha-value>)",
+          "rust-orange": "hsl(var(--rust-orange) / <alpha-value>)",
+          "brown-text": "hsl(var(--brown-text) / <alpha-value>)",
         },
         fontFamily: {
           playfair: ['"Playfair Display"', 'serif'],
           roboto: ['Roboto', 'system-ui', 'sans-serif'],
           cormorant: ['"Cormorant Garamond"', '"Playfair Display"', 'serif'],
           'roboto-mono': ['"Roboto Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          mono: ['"Roboto Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'], // alias for affiliate page
         },
       },
     },

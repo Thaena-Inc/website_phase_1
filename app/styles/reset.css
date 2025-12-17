@@ -79,14 +79,6 @@ body {
   min-height: 100vh;
 }
 
-body > main {
-  margin: 0;
-}
-
-section {
-  padding: 0;
-}
-
 fieldset {
   display: flex;
   flex-direction: column;

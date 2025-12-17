@@ -2,3 +2,49 @@
 
 @import "tailwindcss";
 @config "../../tailwind.config.cjs";
+
+@layer base {
+  /**
+   * CSS custom properties for HSL color usage
+   * These are used by the affiliate page components and referenced in tailwind.config.cjs
+   */
+  :root {
+    --teal-green: 158 44% 25%;
+    --slate: 254 9% 31%;
+    --deep-purple: 323 26% 53%;
+    --light-neutral: 42 57% 94%;
+    --rust: 18 46% 44%;
+    --earth-brown: 34 44% 30%;
+    /* Homepage colors */
+    --cream: 36 50% 95%;
+    --warm-brown: 18 46% 46%;
+    --rust-orange: 18 46% 39%;
+    --brown-text: 30 42% 29%;
+  }
+
+  /**
+   * Global 10% scale reduction - makes content appear 10% smaller
+   * while maintaining proper layout and filling the viewport
+   * Applied via .content-scale-wrapper class in Layout component
+   */
+  html {
+    overflow-x: hidden; /* Prevent horizontal scroll from scaled wrapper */
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+
+  .content-scale-wrapper {
+    width: 111.11vw; /* Compensate for 0.9 scale: 100vw / 0.9 = 111.11vw */
+    min-height: 111.11vh; /* Compensate for 0.9 scale: 100vh / 0.9 = 111.11vh */
+    transform: scale(0.9);
+    transform-origin: top left;
+    position: relative;
+    /* Ensure content fills viewport after scaling */
+    box-sizing: border-box;
+  }
+
+}

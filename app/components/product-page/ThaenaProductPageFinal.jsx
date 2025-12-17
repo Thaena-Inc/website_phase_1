@@ -38,7 +38,7 @@ import FinalCTA from "./FinalCTA";
  */
 export default function ThaenaProductPage({product}) {
   // Get the main product image - prefer variant image, then featured image, then first media image
-  const productImage = 
+  const productImage =
     product?.selectedOrFirstAvailableVariant?.image ||
     product?.featuredImage ||
     product?.media?.nodes?.[0]?.image ||

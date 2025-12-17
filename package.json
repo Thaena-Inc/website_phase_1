@@ -1,5 +1,5 @@
 {
-  "name": "12-2025-product-page",
+  "name": "website-phase1",
   "private": true,
   "sideEffects": false,
   "version": "2025.7.0",
@@ -14,6 +14,7 @@
   "prettier": "@shopify/prettier-config",
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
     "@shopify/hydrogen": "2025.7.0",
     "@shopify/hydrogen-react": "^2025.7.0",
     "graphql": "^16.10.0",
