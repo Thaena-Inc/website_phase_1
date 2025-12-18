@@ -72,7 +72,7 @@ export function CartFeedbackOverlay() {
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-end p-0 transition-opacity duration-300 ease-in-out"
+      className="fixed inset-0 bg-black/50 z-50 flex items-start justify-end pt-20 p-0 transition-opacity duration-300 ease-in-out"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"

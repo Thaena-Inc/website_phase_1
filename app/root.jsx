@@ -168,9 +168,7 @@ export function Layout({children}) {
         <Links />
       </head>
       <body>
-        <div className="content-scale-wrapper">
-          {children}
-        </div>
+        {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
       </body>
@@ -183,7 +181,11 @@ export default function App() {
   const data = useRouteLoaderData('root');
 
   if (!data) {
-    return <Outlet />;
+    return (
+      <div className="content-scale-wrapper">
+        <Outlet />
+      </div>
+    );
   }
 
   return (
@@ -194,9 +196,11 @@ export default function App() {
     >
       <CartProvider cart={data.cart}>
         <CartFeedbackOverlay />
-        <PageLayout {...data}>
-          <Outlet />
-        </PageLayout>
+        <div className="content-scale-wrapper">
+          <PageLayout {...data}>
+            <Outlet />
+          </PageLayout>
+        </div>
       </CartProvider>
     </Analytics.Provider>
   );
