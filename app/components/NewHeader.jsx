@@ -125,7 +125,8 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               strokeWidth={1.33}
             />
           </button>
-          <button
+          <a
+            href="https://thaena.com/cart"
             className="p-2.5 rounded-md hover:bg-gray-50 transition-colors"
             aria-label="Shopping cart"
           >
@@ -133,7 +134,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               className="w-[15px] h-[15px] text-slate-primary"
               strokeWidth={1.33}
             />
-          </button>
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -315,7 +316,8 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                     strokeWidth={1.33}
                   />
                 </button>
-                <button
+                <a
+                  href="https://thaena.com/cart"
                   className="p-2 hover:bg-gray-50 rounded-md"
                   aria-label="Shopping cart"
                 >
@@ -323,7 +325,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                     className="w-5 h-5 text-slate-primary"
                     strokeWidth={1.33}
                   />
-                </button>
+                </a>
               </div>
             </nav>
           </div>

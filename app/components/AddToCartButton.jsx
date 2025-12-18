@@ -71,11 +71,13 @@ function CartFeedbackTrigger({fetcher, lines, productImage, productTitle, size})
   const lastDispatchedDataRef = useRef(null);
 
   useEffect(() => {
-    const wasSubmitting = prevStateRef.current === 'submitting';
+    const wasActive = prevStateRef.current !== 'idle';
     const isNowIdle = fetcher.state === 'idle';
     const hasData = fetcher.data && !fetcher.data.errors;
 
-    if (wasSubmitting && isNowIdle && hasData) {
+    // Hydrogen fetchers often transition submitting -> loading -> idle.
+    // We want to dispatch once the request completes successfully.
+    if (wasActive && isNowIdle && hasData) {
       // Check if we've already dispatched for this data
       const currentDataId = JSON.stringify(fetcher.data);
       if (lastDispatchedDataRef.current !== currentDataId) {
