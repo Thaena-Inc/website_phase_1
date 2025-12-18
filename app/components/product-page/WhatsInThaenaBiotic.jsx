@@ -31,7 +31,7 @@ export default function WhatsInThaenaBiotic() {
             {/* Content */}
             <div className="flex-1">
               <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark/80 mb-8">
-                We highlight a few of the most well-known and well-studied postbiotics below, but they're only the beginning. Because it all comes from humans — not lab beakers — you get the real-world diversity and complexity that can only come from a human gut.
+                We highlight a few of the most well-known and well-studied postbiotics below, but they're only the beginning.
               </p>
 
               {/* 2x2 Grid */}

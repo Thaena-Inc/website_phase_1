@@ -308,7 +308,7 @@ const cards = [
   {
     id: 4,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/postbiotic-blend_png.png?v=1766004524",
-    title: "ThaenaBiotic<sup>®</sup> is the regenerative bridge.",
+    title: "ThaenaBiotic® is the regenerative bridge.",
     content: "We source our postbiotic nutrients from rare, biodiverse human microbiomes. They're sterilized and refined, then delivered to you as regenerative support. It's a bridge that helps re-establish healthy signaling while your ecosystem rebuilds.",
     contentBold: ["re-establish healthy signaling"]
   }
@@ -365,7 +365,7 @@ const flipCards = [
   {
     id: "sterilized",
     title: "How sterilized postbiotics work",
-    content: "We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.\n\nThaenaBiotic® captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.\n\nThe signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.",
+    content: "We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.\nThaenaBiotic® captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.\n\nThe signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.",
     contentBold: "without colonization"
   },
   {
@@ -381,12 +381,12 @@ const flipCards = [
   {
     id: "medicine",
     title: "Why poop has always been medicine",
-    content: "Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.\n\nThaenaBiotic® takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans."
+    content: "Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.\nThaenaBiotic® takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans."
   },
   {
     id: "infection",
     title: "How do you know there's no risk of infection?",
-    content: "ThaenaBiotic® is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.\n\nNo live microbes = no live-microbe infection risk."
+    content: "ThaenaBiotic® is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.\nNo live microbes = no live-microbe infection risk."
   },
   {
     id: "taste",

@@ -83,7 +83,7 @@ function findSellingPlanByFrequency(sellingPlans, frequency) {
  */
 export default function HeroAndBuyBox({productImage, product}) {
   const [selectedSize, setSelectedSize] = useState("30");
-  const [purchaseType, setPurchaseType] = useState("subscribe");
+  const [purchaseType, setPurchaseType] = useState("onetime");
   const [quantity, setQuantity] = useState(1);
   const [deliveryFrequency, setDeliveryFrequency] = useState("30 days");
   const [isDeliveryDropdownOpen, setIsDeliveryDropdownOpen] = useState(false);
@@ -124,11 +124,11 @@ export default function HeroAndBuyBox({productImage, product}) {
 
   // Find selling plan for current frequency
   const selectedSellingPlan = useMemo(() => {
-    if (purchaseType !== "subscribe" || sellingPlans.length === 0) {
+    if (sellingPlans.length === 0) {
       return null;
     }
     return findSellingPlanByFrequency(sellingPlans, deliveryFrequency);
-  }, [sellingPlans, deliveryFrequency, purchaseType]);
+  }, [sellingPlans, deliveryFrequency]);
 
   // Calculate subscription price
   const subscriptionPrice = useMemo(() => {
@@ -238,7 +238,7 @@ export default function HeroAndBuyBox({productImage, product}) {
   return (
     <>
       {/* Product Section */}
-      <div className="min-h-screen bg-neutral-warm">
+      <div className="min-h-screen bg-light-neutral">
         <main className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-7xl mx-auto">
             {/* Product Image Section */}
@@ -302,6 +302,9 @@ export default function HeroAndBuyBox({productImage, product}) {
                       </h3>
                       <p className="text-xs text-slate-dark/80">
                         1 month supply
+                      </p>
+                      <p className="text-slate-dark/80 text-xs font-light">
+                        <span className="underline">30-day money-back guarantee</span>
                       </p>
                     </div>
                     {selectedSize === "30" && (
@@ -473,7 +476,7 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Quantity and Add to Cart */}
-              <div className="flex flex-col gap-3 mt-6">
+              <div className="flex flex-col gap-3 mt-4">
                 <label className="text-slate-dark/80 text-xs font-roboto-mono uppercase tracking-wider">
                   Quantity
                 </label>
@@ -518,19 +521,11 @@ export default function HeroAndBuyBox({productImage, product}) {
                     productImage={{url: imageUrl}}
                     productTitle="ThaenaBiotic - Postbiotic Supplement"
                     size={selectedSize === "30" ? "30 capsules" : "90 capsules"}
-                    className="flex-1 bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all"
+                    className="flex-1 bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all w-full"
                   >
                     Add to Cart
                   </AddToCartButton>
                 </div>
-              </div>
-
-              {/* Footer Text */}
-              <div className="mt-6 text-center">
-                <p className="text-slate-dark/80 text-xs font-light">
-                  Human-derived, not lab-grown •{" "}
-                  <span className="underline">30-day money-back guarantee</span>
-                </p>
               </div>
             </div>
           </div>
