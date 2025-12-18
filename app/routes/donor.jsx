@@ -422,17 +422,30 @@ export default function DonorPage() {
         {/* CTA */}
         <section
           id="donor-application"
-          className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24"
-          style={{
-            backgroundColor: 'rgba(167, 179, 167, 0.3)',
-            backgroundImage:
-              'url(https://cdn.builder.io/api/v1/image/assets%2F2698fec9a90e4b17b35971f30190927b%2F0f9e0ab4aa2a42918497078428853d07)',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-          }}
+          className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24 overflow-hidden"
         >
-          <div className="w-full max-w-[786px] mx-auto">
+          {/* Background Image Layer */}
+          <div 
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/bharath-kumar-lJZII_3rg0M-unsplash_2.jpg?v=1765998606')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: 0.2 // 20% opacity
+            }}
+          />
+          
+          {/* Color Overlay Layer */}
+          <div 
+            className="absolute inset-0 z-10"
+            style={{
+              backgroundColor: 'rgba(167, 179, 167, 0.3)'
+            }}
+          />
+          
+          {/* Content Layer */}
+          <div className="relative z-20 w-full max-w-[786px] mx-auto">
             <div className="flex flex-col items-center justify-center gap-6">
               <div className="w-full">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">

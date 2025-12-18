@@ -27,32 +27,34 @@ export function AddToCartButton({
   size,
 }) {
   return (
-    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-      {(fetcher) => (
-        <>
-          <CartFeedbackTrigger 
-            fetcher={fetcher} 
-            lines={lines}
-            productImage={productImage}
-            productTitle={productTitle}
-            size={size}
-          />
-          <input
-            name="analytics"
-            type="hidden"
-            value={JSON.stringify(analytics)}
-          />
-          <button
-            type="submit"
-            onClick={onClick}
-            disabled={disabled ?? fetcher.state !== 'idle'}
-            className={className}
-          >
-            {children}
-          </button>
-        </>
-      )}
-    </CartForm>
+    <div className="w-full [&_form]:w-full">
+      <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
+        {(fetcher) => (
+          <>
+            <CartFeedbackTrigger 
+              fetcher={fetcher} 
+              lines={lines}
+              productImage={productImage}
+              productTitle={productTitle}
+              size={size}
+            />
+            <input
+              name="analytics"
+              type="hidden"
+              value={JSON.stringify(analytics)}
+            />
+            <button
+              type="submit"
+              onClick={onClick}
+              disabled={disabled ?? fetcher.state !== 'idle'}
+              className={className}
+            >
+              {children}
+            </button>
+          </>
+        )}
+      </CartForm>
+    </div>
   );
 }
 

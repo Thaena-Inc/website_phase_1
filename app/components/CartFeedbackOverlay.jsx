@@ -79,7 +79,7 @@ export function CartFeedbackOverlay() {
       aria-labelledby="cart-feedback-title"
     >
       <div
-        className="bg-[#ede8de] rounded-l-lg shadow-lg w-full max-w-md h-auto max-h-[40vh] flex flex-col transform transition-all duration-300 ease-in-out animate-slide-in-right overflow-hidden"
+        className="bg-[#ede8de] rounded-l-lg shadow-lg w-full max-w-md h-auto flex flex-col transform transition-all duration-300 ease-in-out animate-slide-in-right"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with close button */}
@@ -107,7 +107,7 @@ export function CartFeedbackOverlay() {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 p-6">
           <div className="cart-lines">
             <div className="flex gap-4">
               {/* Product Image */}

@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState, useMemo} from "react";
 import {ChevronDown, Minus, Plus} from "lucide-react";
 import {AddToCartButton} from "~/components/AddToCartButton";
+import {useAside} from "~/components/Aside";
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
@@ -40,13 +41,37 @@ function findSellingPlanByFrequency(sellingPlans, frequency) {
   if (!sellingPlans || sellingPlans.length === 0) return null;
   
   const days = frequency.split(" ")[0];
-  return sellingPlans.find(plan => {
-    // Check if plan name or description contains the frequency
+  
+  // First, try to match by options (most reliable for Recharge)
+  const matchByOptions = sellingPlans.find(plan => {
+    const frequencyOption = plan.options?.find(opt => 
+      opt.name?.toLowerCase().includes('frequency') || 
+      opt.name?.toLowerCase().includes('delivery')
+    );
+    
+    if (frequencyOption?.value) {
+      const match = frequencyOption.value.match(/\d+/);
+      if (match && match[0] === days) return true;
+    }
+    return false;
+  });
+  
+  if (matchByOptions) return matchByOptions;
+  
+  // Fallback to matching by recurringDeliveries, name, or description
+  const match = sellingPlans.find(plan => {
+    // Check recurringDeliveries
+    if (plan.recurringDeliveries?.toString() === days) return true;
+    
+    // Check name or description
     const name = plan.name?.toLowerCase() || "";
     const description = plan.description?.toLowerCase() || "";
-    return name.includes(days) || description.includes(days) || 
-           plan.recurringDeliveries?.toString() === days;
-  }) || sellingPlans[0]; // Fallback to first plan
+    if (name.includes(days) || description.includes(days)) return true;
+    
+    return false;
+  });
+  
+  return match || sellingPlans[0]; // Fallback to first plan
 }
 
 /**
@@ -81,20 +106,29 @@ function findSellingPlanByFrequency(sellingPlans, frequency) {
  * }}
  */
 export default function HeroAndBuyBox({productImage, product}) {
+  const {open} = useAside();
   const [selectedSize, setSelectedSize] = useState("30");
   const [purchaseType, setPurchaseType] = useState("onetime");
   const [quantity, setQuantity] = useState(1);
   const [deliveryFrequency, setDeliveryFrequency] = useState("30 days");
   const [isDeliveryDropdownOpen, setIsDeliveryDropdownOpen] = useState(false);
   const [highlightedOption, setHighlightedOption] = useState(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0); // Track which thumbnail is selected
   const dropdownRef = useRef(null);
 
-  // Extract selling plans from product
+  // Extract selling plans from product - get all plans from all groups
   const sellingPlans = useMemo(() => {
-    if (!product?.sellingPlanGroups?.nodes?.[0]?.sellingPlans?.nodes) {
+    if (!product?.sellingPlanGroups?.nodes) {
       return [];
     }
-    return product.sellingPlanGroups.nodes[0].sellingPlans.nodes;
+    // Collect all selling plans from all selling plan groups
+    const allPlans = [];
+    product.sellingPlanGroups.nodes.forEach(group => {
+      if (group?.sellingPlans?.nodes) {
+        allPlans.push(...group.sellingPlans.nodes);
+      }
+    });
+    return allPlans;
   }, [product]);
 
   // Get variants
@@ -120,43 +154,151 @@ export default function HeroAndBuyBox({productImage, product}) {
     return selectedSize === "30" ? 199.0 : 499.0;
   }, [selectedVariant, selectedSize]);
 
-  // Find selling plan for current frequency
-  const selectedSellingPlan = useMemo(() => {
-    if (sellingPlans.length === 0) {
-      return null;
+  // Build delivery options - always show both 30 and 90 day options
+  // Match them to actual selling plans using specific Recharge plan IDs
+  const deliveryOptions = useMemo(() => {
+    // Specific Recharge plan IDs (numeric part of Shopify GID)
+    const PLAN_ID_30_DAYS = "7350352";  // Recharge: 690829394225 (external), Shopify: 7350352
+    const PLAN_ID_90_DAYS = "17929757"; // Recharge: 690829361457 (external), Shopify: 17929757
+    
+    // Always start with both options
+    const options = [
+      {label: "Delivery every 30 days", value: "30 days", plan: null},
+      {label: "Delivery every 90 days", value: "90 days", plan: null},
+    ];
+    
+    // Try to match selling plans to our options
+    if (sellingPlans.length > 0) {
+      sellingPlans.forEach(plan => {
+        // Extract plan ID from GID format (e.g., "gid://shopify/SellingPlan/7350352" -> "7350352")
+        let planId = null;
+        if (plan.id) {
+          const idMatch = plan.id.match(/\/(\d+)$/);
+          if (idMatch) {
+            planId = idMatch[1];
+          }
+        }
+        
+        // Method 1: Match by specific plan ID (most reliable)
+        if (planId === PLAN_ID_30_DAYS) {
+          const optionIndex = options.findIndex(opt => opt.value === "30 days");
+          if (optionIndex >= 0 && !options[optionIndex].plan) {
+            options[optionIndex].plan = plan;
+          }
+        } else if (planId === PLAN_ID_90_DAYS) {
+          const optionIndex = options.findIndex(opt => opt.value === "90 days");
+          if (optionIndex >= 0 && !options[optionIndex].plan) {
+            options[optionIndex].plan = plan;
+          }
+        }
+        
+        // Method 2: Fallback - try to extract days from plan data
+        if (!planId || (planId !== PLAN_ID_30_DAYS && planId !== PLAN_ID_90_DAYS)) {
+          let planDays = null;
+          
+          // Check options (most reliable for Recharge)
+          const frequencyOption = plan.options?.find(opt => {
+            const optName = opt.name?.toLowerCase() || '';
+            return optName.includes('frequency') || 
+                   optName.includes('delivery') ||
+                   optName.includes('interval');
+          });
+          
+          if (frequencyOption?.value) {
+            const match = frequencyOption.value.match(/\d+/);
+            if (match) planDays = match[0];
+          }
+          
+          // Check recurringDeliveries
+          if (!planDays && plan.recurringDeliveries !== null && plan.recurringDeliveries !== undefined) {
+            if (typeof plan.recurringDeliveries === 'number') {
+              planDays = plan.recurringDeliveries.toString();
+            } else {
+              const parsed = parseInt(String(plan.recurringDeliveries), 10);
+              if (!isNaN(parsed)) planDays = parsed.toString();
+            }
+          }
+          
+          // Extract from name
+          if (!planDays && plan.name) {
+            const match = plan.name.match(/\d+/);
+            if (match) planDays = match[0];
+          }
+          
+          // Extract from description
+          if (!planDays && plan.description) {
+            const match = plan.description.match(/\d+/);
+            if (match) planDays = match[0];
+          }
+          
+          // Match the plan to our options (only if not already matched by ID)
+          if (planDays === "30") {
+            const optionIndex = options.findIndex(opt => opt.value === "30 days");
+            if (optionIndex >= 0 && !options[optionIndex].plan) {
+              options[optionIndex].plan = plan;
+            }
+          } else if (planDays === "90") {
+            const optionIndex = options.findIndex(opt => opt.value === "90 days");
+            if (optionIndex >= 0 && !options[optionIndex].plan) {
+              options[optionIndex].plan = plan;
+            }
+          }
+        }
+      });
     }
-    return findSellingPlanByFrequency(sellingPlans, deliveryFrequency);
-  }, [sellingPlans, deliveryFrequency]);
+    
+    return options;
+  }, [sellingPlans]);
 
-  // Calculate subscription price
+  // Find selling plan for current frequency
+  // Always calculate this so we can show subscription price even when not in subscribe mode
+  const selectedSellingPlan = useMemo(() => {
+    // Get the plan from the selected delivery option (or default to first option if not in subscribe mode)
+    const frequencyToUse = purchaseType === "subscribe" ? deliveryFrequency : "30 days";
+    const selectedOption = deliveryOptions.find(opt => opt.value === frequencyToUse);
+    // If the selected option has a plan, use it
+    if (selectedOption?.plan) {
+      return selectedOption.plan;
+    }
+    // Fallback: try to find any delivery option with a plan
+    const optionWithPlan = deliveryOptions.find(opt => opt.plan);
+    if (optionWithPlan?.plan) {
+      return optionWithPlan.plan;
+    }
+    // Final fallback: use first available selling plan
+    if (sellingPlans.length > 0) {
+      return sellingPlans[0];
+    }
+    return null;
+  }, [deliveryOptions, deliveryFrequency, purchaseType, sellingPlans]);
+
+  // Calculate subscription price - recalculates when variant or selling plan changes
+  // Always calculate this so it can be displayed in the "Subscribe & Save" button
   const subscriptionPrice = useMemo(() => {
     if (!selectedSellingPlan) return basePrice;
-    return calculateSubscriptionPrice(basePrice, selectedSellingPlan);
-  }, [basePrice, selectedSellingPlan]);
+    const calculatedPrice = calculateSubscriptionPrice(basePrice, selectedSellingPlan);
+    return calculatedPrice;
+  }, [basePrice, selectedSellingPlan, selectedVariant]);
 
   // Current price based on purchase type
   const currentPrice = purchaseType === "subscribe" ? subscriptionPrice : basePrice;
 
-  // Build delivery options from selling plans or use defaults
-  const deliveryOptions = useMemo(() => {
-    if (sellingPlans.length > 0) {
-      return sellingPlans.map(plan => {
-        const days = plan.recurringDeliveries?.toString() || 
-                    plan.name?.match(/\d+/)?.[0] || 
-                    "30";
-        return {
-          label: `Delivery every ${days} days`,
-          value: `${days} days`,
-          plan: plan
-        };
-      });
+  // Ensure deliveryFrequency matches an available option with a plan when switching to subscribe
+  useEffect(() => {
+    if (deliveryOptions.length > 0 && purchaseType === "subscribe") {
+      const matchingOption = deliveryOptions.find(opt => opt.value === deliveryFrequency);
+      if (!matchingOption) {
+        // If current frequency doesn't match, set to first available option
+        setDeliveryFrequency(deliveryOptions[0].value);
+      } else if (!matchingOption.plan) {
+        // If current option doesn't have a plan, find one that does
+        const optionWithPlan = deliveryOptions.find(opt => opt.plan);
+        if (optionWithPlan) {
+          setDeliveryFrequency(optionWithPlan.value);
+        }
+      }
     }
-    // Fallback to default options
-    return [
-      {label: "Delivery every 30 days", value: "30 days"},
-      {label: "Delivery every 90 days", value: "90 days"},
-    ];
-  }, [sellingPlans]);
+  }, [deliveryOptions, purchaseType, deliveryFrequency]);
 
   // Get selected variant ID
   const selectedVariantId = selectedVariant?.id || 
@@ -228,34 +370,87 @@ export default function HeroAndBuyBox({productImage, product}) {
   // const selectedVariantId = selectedVariant?.id || 
   //   (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90);
 
-  // Determine which image to show based on selected size
-  const imageUrl = selectedSize === "30" 
-    ? "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-13.jpg?v=1766006457"
-    : "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-14.jpg?v=1766006457";
+  // Define thumbnail images - will be updated based on selected size
+  const thumbnailImages = useMemo(() => {
+    const size30Image = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-13.jpg?v=1766006457";
+    const size90Image = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-14.jpg?v=1766006457";
+    const galleryImage1 = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Screenshot_2025-12-17_at_2.34.55_PM.png?v=1766010941";
+    const galleryImage2 = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Screenshot_2025-12-17_at_2.35.10_PM.png?v=1766010941";
+    
+    if (selectedSize === "30") {
+      return [
+        size30Image, // Top thumbnail - selected size image (30 cap)
+        galleryImage1, // Middle thumbnail - gallery image 1
+        galleryImage2, // Bottom thumbnail - gallery image 2
+      ];
+    } else {
+      return [
+        size90Image, // Top thumbnail - selected size image (90 cap)
+        galleryImage1, // Middle thumbnail - gallery image 1
+        galleryImage2, // Bottom thumbnail - gallery image 2
+      ];
+    }
+  }, [selectedSize]);
+
+  // Determine which image to show based on selected thumbnail
+  const imageUrl = thumbnailImages[selectedImageIndex];
+
+  // Reset selected image index when size changes
+  useEffect(() => {
+    setSelectedImageIndex(0); // Reset to top thumbnail when size changes
+  }, [selectedSize]);
 
   return (
     <>
       {/* Product Section */}
       <div className="min-h-screen bg-neutral-light">
-        <main className="container mx-auto px-4 py-12 md:py-20">
-          <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-7xl mx-auto">
+        <main className="container mx-auto px-4 py-8 md:py-12">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto">
             {/* Product Image Section */}
-            <div className="flex-1 max-w-[636px]">
-              <div className="relative w-[636px] h-[636px] mb-4">
-                <img
-                  src={imageUrl}
-                  alt="ThaenaBiotic Postbiotic Supplement bottle"
-                  className="w-full h-full object-cover rounded-lg"
-                  loading="eager"
-                />
+            <div className="flex-1 max-w-[700px]">
+              <div className="flex gap-2 items-start">
+                {/* Thumbnail Gallery */}
+                <div className="flex flex-col gap-2 flex-shrink-0 pt-0">
+                  {thumbnailImages.map((thumbUrl, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                        selectedImageIndex === index
+                          ? "border-teal-green shadow-md"
+                          : "border-slate-dark/20 hover:border-slate-dark/40"
+                      }`}
+                      aria-label={`View image ${index + 1}`}
+                    >
+                      <img
+                        src={thumbUrl}
+                        alt={`ThaenaBiotic product view ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      {selectedImageIndex === index && (
+                        <div className="absolute inset-0 border-2 border-teal-green rounded-lg pointer-events-none" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Main Image */}
+                <div className="flex-1 min-w-0">
+                  <div className="relative w-full max-w-[700px] h-[700px]">
+                    <img
+                      src={imageUrl}
+                      alt="ThaenaBiotic Postbiotic Supplement bottle"
+                      className="w-full h-full object-cover rounded-lg"
+                      loading="eager"
+                    />
+                  </div>
+                </div>
               </div>
-              <p className="text-center text-xs text-slate-dark/80 font-normal">
-                Third-party tested • GMP Certified • Made in USA
-              </p>
             </div>
 
             {/* Product Details Section */}
-            <div className="flex-1 max-w-[636px] flex flex-col gap-4">
+            <div className="flex-1 max-w-[636px] flex flex-col gap-2">
               {/* Category */}
               <p className="text-rust text-xs font-roboto-mono uppercase tracking-wider">
                 Daily Wellness
@@ -267,7 +462,7 @@ export default function HeroAndBuyBox({productImage, product}) {
               </h1>
 
               {/* Description */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 <p className="text-slate-dark text-base leading-relaxed">
                   Because it all comes from humans — not lab beakers — you get
                   the real-world diversity and complexity that can only come
@@ -280,7 +475,7 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Size Selection */}
-              <div className="flex flex-col gap-4 mt-4">
+              <div className="flex flex-col gap-3 mt-2">
                 <label className="text-slate-dark/80 text-xs font-roboto-mono uppercase tracking-wider">
                   Select Size
                 </label>
@@ -302,7 +497,15 @@ export default function HeroAndBuyBox({productImage, product}) {
                         1 month supply
                       </p>
                       <p className="text-slate-dark/80 text-xs font-light">
-                        <span className="underline">30-day money-back guarantee</span>
+                        <a 
+                          href="https://thaena.com/pages/chloe-app" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="underline hover:text-teal-green transition-colors"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          30-day money-back guarantee
+                        </a>
                       </p>
                     </div>
                     {selectedSize === "30" && (
@@ -339,7 +542,7 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Pricing and Purchase Options */}
-              <div className="flex flex-col sm:flex-row gap-8 items-start mt-4">
+              <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
                 {/* Price */}
                 <div className="flex-shrink-0">
                   <p className="font-playfair text-3xl text-slate-dark">
@@ -348,16 +551,16 @@ export default function HeroAndBuyBox({productImage, product}) {
                 </div>
 
                 {/* Purchase Options */}
-                <div className="flex-1 flex flex-col gap-3 w-full">
+                <div className="flex-1 flex flex-col gap-2 w-full">
                   {/* One-time Purchase */}
                   <button
                     onClick={() => setPurchaseType("onetime")}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${
+                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                       purchaseType === "onetime"
                         ? "border-teal-green bg-teal-green/5"
                         : "border-slate-dark/30 hover:border-slate-dark/50"
                     }`}
-                  >
+                    >
                     <div
                       className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
                         purchaseType === "onetime"
@@ -380,10 +583,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                   </button>
 
                   {/* Subscribe & Save */}
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2">
                     <button
                       onClick={() => setPurchaseType("subscribe")}
-                      className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${
+                      className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                         purchaseType === "subscribe"
                           ? "border-teal-green bg-teal-green/5"
                           : "border-slate-dark/30 hover:border-slate-dark/50"
@@ -418,12 +621,12 @@ export default function HeroAndBuyBox({productImage, product}) {
                             setIsDeliveryDropdownOpen(!isDeliveryDropdownOpen)
                           }
                           onKeyDown={handleDropdownKeyDown}
-                          className="w-full flex items-center justify-between p-4 rounded-xl border border-slate-dark/30 hover:border-slate-dark/50 transition-all bg-white"
+                          className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-dark/30 hover:border-slate-dark/50 transition-all bg-white"
                           aria-haspopup="listbox"
                           aria-expanded={isDeliveryDropdownOpen}
                         >
                           <span className="text-sm text-slate-dark">
-                            Delivery every {deliveryFrequency}
+                            {deliveryOptions.find(opt => opt.value === deliveryFrequency)?.label || `Delivery every ${deliveryFrequency}`}
                           </span>
                           <ChevronDown
                             className={`w-4 h-4 text-slate-dark transition-transform ${
@@ -474,13 +677,13 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Quantity and Add to Cart */}
-              <div className="flex flex-col gap-3 mt-4">
+              <div className="flex flex-col gap-2 mt-2">
                 <label className="text-slate-dark/80 text-xs font-roboto-mono uppercase tracking-wider">
                   Quantity
                 </label>
                 <div className="flex gap-6 items-stretch">
                   {/* Quantity Selector */}
-                  <div className="flex items-center border border-slate-dark/30 rounded">
+                  <div className="flex items-center border border-slate-dark/30 rounded flex-shrink-0">
                     <button
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       className="p-3 hover:bg-slate-dark/5 transition-colors"
@@ -503,23 +706,28 @@ export default function HeroAndBuyBox({productImage, product}) {
                   </div>
 
                   {/* Add to Cart Button */}
-                  <AddToCartButton
-                    lines={[
-                      {
-                        merchandiseId: selectedVariantId,
-                        quantity,
-                        ...(purchaseType === "subscribe" && selectedSellingPlan?.id
-                          ? {sellingPlanId: selectedSellingPlan.id}
-                          : {}),
-                      },
-                    ]}
-                    productImage={{url: imageUrl}}
-                    productTitle="ThaenaBiotic - Postbiotic Supplement"
-                    size={selectedSize === "30" ? "30 capsules" : "90 capsules"}
-                    className="flex-1 bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all w-full"
-                  >
-                    Add to Cart
-                  </AddToCartButton>
+                  <div className="flex-1 min-w-0">
+                    <AddToCartButton
+                      lines={[
+                        {
+                          merchandiseId: selectedVariantId,
+                          quantity,
+                          ...(purchaseType === "subscribe" && selectedSellingPlan?.id
+                            ? {sellingPlanId: selectedSellingPlan.id}
+                            : {}),
+                        },
+                      ]}
+                      onClick={() => {
+                        open("cart");
+                      }}
+                      productImage={{url: imageUrl}}
+                      productTitle="ThaenaBiotic - Postbiotic Supplement"
+                      size={selectedSize === "30" ? "30 capsules" : "90 capsules"}
+                      className="w-full bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all"
+                    >
+                      Add to Cart
+                    </AddToCartButton>
+                  </div>
                 </div>
               </div>
             </div>

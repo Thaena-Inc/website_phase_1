@@ -13,6 +13,13 @@ import {
   AccordionTrigger,
 } from '../components/ui/accordion';
 
+/**
+ * @type {Route.MetaFunction}
+ */
+export const meta = () => {
+  return [{title: 'Thaena | Affiliate'}];
+};
+
 export default function AffiliatePage() {
   const features = [
     'No colonization required',
@@ -79,6 +86,25 @@ export default function AffiliatePage() {
     },
   ];
 
+  const processSteps = [
+    {
+      title: "Collection",
+      description: "We work directly with vetted human donors using our own highly stringent health and biodiversity standards — not outsourced screening."
+    },
+    {
+      title: "Sterilization",
+      description: "Our patented autoclaving process eliminates microbes while preserving the postbiotic signals your body intuitively understands."
+    },
+    {
+      title: "Stabilization",
+      description: "Freeze drying protects potency and creates a shelf-stable powder for easy oral encapsulation."
+    },
+    {
+      title: "Processing",
+      description: "Every batch is produced under strict GMP conditions and third party tested for safety and purity."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-light-neutral">
       {/* Hero Section */}
@@ -111,8 +137,7 @@ export default function AffiliatePage() {
 
           <div className="w-full max-w-[672px]">
             <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-medium">
-              Create your free Thaena account below to access special pricing,
-              courtesy of {{affiliate_name}}.
+            Create your free Thaena account below to access special pricing, courtesy of {'{{affiliate_name}}'}.
             </p>
             <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-normal">
               This page is only available through their link.
