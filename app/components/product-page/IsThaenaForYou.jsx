@@ -32,7 +32,7 @@ export default function IsThaenaForYou() {
               Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic® delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
             </p>
           </div>
-          <button className="mt-5 flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
+          <button className="mt-3 flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
             Learn More About the Difference Between Probiotics + ThaenaBiotic®
             <svg className="w-[9.33px] h-[9.33px] flex-shrink-0" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.666504 5.33342H9.99984M9.99984 5.33342L5.33317 0.666748M9.99984 5.33342L5.33317 10.0001" stroke="#9F5D3C" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
@@ -80,7 +80,7 @@ export default function IsThaenaForYou() {
               If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic® gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
             </p>
           </div>
-          <button className="mt-5 flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
+          <button className="mt-3 flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
             🌿 To Help You Build Toward Real Food Freedom — Without Fear
           </button>
         </div>
@@ -132,7 +132,7 @@ export default function IsThaenaForYou() {
       {/* Bottom CTA */}
       <div className="flex flex-col items-center gap-6">
         <div className="w-16 h-[2px] bg-golden"></div>
-        <p className="font-roboto text-lg leading-7 text-slate-dark text-center max-w-2xl">
+        <p className="font-roboto text-lg leading-7 text-slate-dark text-center">
           Still not sure? Talk to your healthcare provider about whether ThaenaBiotic® is right for you.
         </p>
         <button className="h-14 px-11 rounded-xl border-2 border-purple bg-neutral-light hover:opacity-90 transition-opacity">

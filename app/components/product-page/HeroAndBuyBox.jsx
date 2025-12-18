@@ -238,7 +238,7 @@ export default function HeroAndBuyBox({productImage, product}) {
   return (
     <>
       {/* Product Section */}
-      <div className="min-h-screen bg-light-neutral">
+      <div className="min-h-screen bg-neutral-light">
         <main className="container mx-auto px-4 py-12 md:py-20">
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-7xl mx-auto">
             {/* Product Image Section */}

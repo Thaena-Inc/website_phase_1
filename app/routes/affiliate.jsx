@@ -84,10 +84,10 @@ export default function AffiliatePage() {
             backgroundImage: `
               linear-gradient(99deg, rgba(222, 176, 101, 0.00) -0.01%, rgba(222, 176, 101, 0.13) 50%, rgba(222, 176, 101, 0.25) 100.01%),
               linear-gradient(266deg, rgba(39, 91, 82, 0.12) -0.01%, rgba(39, 91, 82, 0.24) 48.18%, rgba(39, 91, 82, 0.40) 96.36%),
-              url('https://api.builder.io/api/v1/image/assets/TEMP/da0eb35572fda786f97e1b77855d12922e2b9e38?width=2850')
+              url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-75.jpg?v=1766006458')
             `,
-            backgroundPosition: 'center -0.694px',
-            backgroundSize: '100% 168.46%'
+            backgroundPosition: 'center center',
+            backgroundSize: 'cover'
           }}
         />
         
@@ -105,9 +105,17 @@ export default function AffiliatePage() {
           </h1>
           
           <div className="w-full max-w-[672px]">
+            <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-medium">
+            Create your free Thaena account below to access special pricing, courtesy of {{affiliate_name}}.
+            </p>
             <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-normal">
-              The world's first human-derived postbiotic supplement—designed to
-              restore the microbial signals your gut depends on.
+            This page is only available through their link.
+            </p>
+          </div>
+
+          <div className="w-full max-w-[672px]">
+            <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-normal font-light italic">
+            Account creation is free. No subscription required. Your discount is applied automatically after sign-up.
             </p>
           </div>
           
@@ -122,7 +130,7 @@ export default function AffiliatePage() {
       </section>
 
       {/* Product Section */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
@@ -229,7 +237,7 @@ export default function AffiliatePage() {
       </section>
 
       {/* Science Section */}
-      <section className="py-16 md:py-24 px-6">
+      <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="max-w-[1425px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
@@ -330,11 +338,46 @@ export default function AffiliatePage() {
           </div>
 
           <div className="max-w-[1280px] mx-auto w-full">
-            <img 
-              src="https://api.builder.io/api/v1/image/assets/TEMP/48ddff5f75837ac71ee8149ee6ebf248263670a3?width=2466"
-              alt="Our Process: Safety You Can Trust - Collection, Sterilization, Stabilization, Processing"
-              className="w-full h-auto rounded-lg"
-            />
+          <div className="flex flex-col items-center gap-3 w-full">
+            <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+              Safety Information
+            </p>
+            <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
+              Our Process: Safety You Can Trust
+            </h2>
+            <div className="w-24 h-[1px] bg-sage"></div>
+            <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center max-w-[768px] mt-2">
+              Every step is controlled by us, designed for safety first and regenerative integrity always.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="absolute top-8 left-0 right-0 h-[1px] bg-sage hidden lg:block"></div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+              {processSteps.map((step, index) => (
+                <div key={index} className="flex flex-col items-center gap-3 text-center">
+                  <div className="w-16 h-16 rounded-full border-2 border-rust-orange flex items-center justify-center bg-cream relative z-10">
+                    <div className="w-8 h-8 rounded-full bg-sage/20"></div>
+                  </div>
+                  
+                  <h3 className="font-playfair text-[26px] md:text-[30px] leading-[1.2] font-normal tracking-[-0.025em] text-deep-purple">
+                    {step.title}
+                  </h3>
+                  
+                  <p className="font-roboto text-[14px] md:text-[16px] leading-[1.7] text-brown-text max-w-[260px]">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-3 w-full mx-auto">
+            <p className="text-earth-brown font-playfair text-lg font-medium leading-7">
+              Built by scientists, we raised safety and quality to a new standard — and protected human postbiotic nutrients the industry once dismissed as irrelevant.
+            </p>
+          </div>
           </div>
 
           <div className="flex justify-center mt-8">
