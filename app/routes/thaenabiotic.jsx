@@ -41,6 +41,74 @@ export default function ThaenaBioticRoute() {
   return <ThaenaProductPageFinal product={product} />;
 }
 
+const SELLING_PLAN_FRAGMENT = `#graphql
+  fragment SellingPlan on SellingPlan {
+    id
+    name
+    description
+    options {
+      name
+      value
+    }
+    priceAdjustments {
+      adjustmentValue {
+        ... on SellingPlanFixedAmountPriceAdjustment {
+          __typename
+          adjustmentAmount {
+            ... on MoneyV2 {
+              amount
+              currencyCode
+            }
+          }
+        }
+        ... on SellingPlanFixedPriceAdjustment {
+          __typename
+          price {
+            ... on MoneyV2 {
+              amount
+              currencyCode
+            }
+          }
+        }
+        ... on SellingPlanPercentagePriceAdjustment {
+          __typename
+          adjustmentPercentage
+        }
+      }
+      orderCount
+    }
+    recurringDeliveries
+    checkoutCharge {
+      type
+      value {
+        ... on MoneyV2 {
+          amount
+          currencyCode
+        }
+        ... on SellingPlanCheckoutChargePercentageValue {
+          percentage
+        }
+      }
+    }
+  }
+`;
+
+const SELLING_PLAN_GROUP_FRAGMENT = `#graphql
+  fragment SellingPlanGroup on SellingPlanGroup {
+    name
+    options {
+      name
+      values
+    }
+    sellingPlans(first: 10) {
+      nodes {
+        ...SellingPlan
+      }
+    }
+  }
+  ${SELLING_PLAN_FRAGMENT}
+`;
+
 const PRODUCT_QUERY = `#graphql
   query Product(
     $country: CountryCode
@@ -82,9 +150,37 @@ const PRODUCT_QUERY = `#graphql
           width
           height
         }
+        price {
+          amount
+          currencyCode
+        }
+        compareAtPrice {
+          amount
+          currencyCode
+        }
+      }
+      variants(first: 10) {
+        nodes {
+          id
+          title
+          price {
+            amount
+            currencyCode
+          }
+          compareAtPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
+      sellingPlanGroups(first: 10) {
+        nodes {
+          ...SellingPlanGroup
+        }
       }
     }
   }
+  ${SELLING_PLAN_GROUP_FRAGMENT}
 `;
 
 /** @typedef {import('./+types/thaenabiotic').Route} Route */

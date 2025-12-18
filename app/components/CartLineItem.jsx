@@ -13,7 +13,7 @@ import {useAside} from './Aside';
  * }}
  */
 export function CartLineItem({layout, line}) {
-  const {id, merchandise} = line;
+  const {id, merchandise, sellingPlanAllocation} = line;
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
   const {close} = useAside();
@@ -45,6 +45,13 @@ export function CartLineItem({layout, line}) {
             <strong>{product.title}</strong>
           </p>
         </Link>
+        {sellingPlanAllocation?.sellingPlan && (
+          <p>
+            <small className="text-slate-dark/70">
+              Subscription: {sellingPlanAllocation.sellingPlan.name}
+            </small>
+          </p>
+        )}
         <ProductPrice price={line?.cost?.totalAmount} />
         <ul>
           {selectedOptions.map((option) => (

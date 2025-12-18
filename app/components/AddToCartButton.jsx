@@ -9,6 +9,10 @@ import {dispatchCartItemAdded} from '~/lib/cartFeedback';
  *   disabled?: boolean;
  *   lines: Array<OptimisticCartLineInput>;
  *   onClick?: () => void;
+ *   className?: string;
+ *   productImage?: {url: string} | null;
+ *   productTitle?: string;
+ *   size?: string;
  * }}
  */
 export function AddToCartButton({
@@ -18,12 +22,21 @@ export function AddToCartButton({
   lines,
   onClick,
   className,
+  productImage,
+  productTitle,
+  size,
 }) {
   return (
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
       {(fetcher) => (
         <>
-          <CartFeedbackTrigger fetcher={fetcher} lines={lines} />
+          <CartFeedbackTrigger 
+            fetcher={fetcher} 
+            lines={lines}
+            productImage={productImage}
+            productTitle={productTitle}
+            size={size}
+          />
           <input
             name="analytics"
             type="hidden"
@@ -45,9 +58,15 @@ export function AddToCartButton({
 
 /**
  * Inner component that tracks fetcher state and dispatches cart feedback event on success
- * @param {{fetcher: FetcherWithComponents; lines: Array<OptimisticCartLineInput>}}
+ * @param {{
+ *   fetcher: FetcherWithComponents;
+ *   lines: Array<OptimisticCartLineInput>;
+ *   productImage?: {url: string} | null;
+ *   productTitle?: string;
+ *   size?: string;
+ * }}
  */
-function CartFeedbackTrigger({fetcher, lines}) {
+function CartFeedbackTrigger({fetcher, lines, productImage, productTitle, size}) {
   const prevStateRef = useRef(fetcher.state);
   const lastDispatchedDataRef = useRef(null);
 
@@ -64,9 +83,15 @@ function CartFeedbackTrigger({fetcher, lines}) {
         const totalQuantity =
           lines.reduce((sum, line) => sum + (line.quantity || 0), 0) || 1;
 
+        // Get cart total quantity from response if available
+        const cartQuantity = fetcher.data?.cart?.totalQuantity || totalQuantity;
+
         dispatchCartItemAdded({
-          title: 'Added to bag',
+          title: productTitle || 'ThaenaBiotic - Postbiotic Supplement',
           quantity: totalQuantity,
+          cartQuantity: cartQuantity,
+          imageUrl: productImage?.url,
+          size: size,
         });
 
         lastDispatchedDataRef.current = currentDataId;
@@ -74,7 +99,7 @@ function CartFeedbackTrigger({fetcher, lines}) {
     }
 
     prevStateRef.current = fetcher.state;
-  }, [fetcher.state, fetcher.data, lines]);
+  }, [fetcher.state, fetcher.data, lines, productImage, productTitle, size]);
 
   return null;
 }

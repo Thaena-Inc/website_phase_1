@@ -1,11 +1,54 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useMemo} from "react";
 import {ChevronDown, Minus, Plus} from "lucide-react";
-import {Image} from "@shopify/hydrogen";
 import {AddToCartButton} from "~/components/AddToCartButton";
 import {useAside} from "~/components/Aside";
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
+
+/**
+ * Calculate the subscription price for a variant based on selling plan
+ * @param {number} basePrice - Base price of the variant
+ * @param {any} sellingPlan - Selling plan object
+ * @returns {number} - Calculated subscription price
+ */
+function calculateSubscriptionPrice(basePrice, sellingPlan) {
+  if (!sellingPlan?.priceAdjustments?.[0]?.adjustmentValue) {
+    return basePrice;
+  }
+
+  const adjustment = sellingPlan.priceAdjustments[0].adjustmentValue;
+
+  if (adjustment.__typename === "SellingPlanFixedPriceAdjustment") {
+    return parseFloat(adjustment.price?.amount || basePrice);
+  } else if (adjustment.__typename === "SellingPlanFixedAmountPriceAdjustment") {
+    return basePrice - parseFloat(adjustment.adjustmentAmount?.amount || 0);
+  } else if (adjustment.__typename === "SellingPlanPercentagePriceAdjustment") {
+    const discount = basePrice * (parseFloat(adjustment.adjustmentPercentage || 0) / 100);
+    return basePrice - discount;
+  }
+
+  return basePrice;
+}
+
+/**
+ * Find selling plan by delivery frequency
+ * @param {any[]} sellingPlans - Array of selling plans
+ * @param {string} frequency - Delivery frequency (e.g., "30 days")
+ * @returns {any|null} - Matching selling plan or null
+ */
+function findSellingPlanByFrequency(sellingPlans, frequency) {
+  if (!sellingPlans || sellingPlans.length === 0) return null;
+  
+  const days = frequency.split(" ")[0];
+  return sellingPlans.find(plan => {
+    // Check if plan name or description contains the frequency
+    const name = plan.name?.toLowerCase() || "";
+    const description = plan.description?.toLowerCase() || "";
+    return name.includes(days) || description.includes(days) || 
+           plan.recurringDeliveries?.toString() === days;
+  }) || sellingPlans[0]; // Fallback to first plan
+}
 
 /**
  * @param {{
@@ -15,9 +58,30 @@ const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
  *     width?: number;
  *     height?: number;
  *   } | null;
+ *   product?: {
+ *     variants?: {
+ *       nodes?: Array<{
+ *         id: string;
+ *         title?: string;
+ *         price?: {amount: string; currencyCode: string};
+ *         compareAtPrice?: {amount: string; currencyCode: string};
+ *       }>;
+ *     };
+ *     selectedOrFirstAvailableVariant?: {
+ *       price?: {amount: string; currencyCode: string};
+ *       compareAtPrice?: {amount: string; currencyCode: string};
+ *     };
+ *     sellingPlanGroups?: {
+ *       nodes?: Array<{
+ *         sellingPlans?: {
+ *           nodes?: Array<any>;
+ *         };
+ *       }>;
+ *     };
+ *   } | null;
  * }}
  */
-export default function HeroAndBuyBox({productImage}) {
+export default function HeroAndBuyBox({productImage, product}) {
   const [selectedSize, setSelectedSize] = useState("30");
   const [purchaseType, setPurchaseType] = useState("subscribe");
   const [quantity, setQuantity] = useState(1);
@@ -27,17 +91,78 @@ export default function HeroAndBuyBox({productImage}) {
   const dropdownRef = useRef(null);
   const {open} = useAside();
 
-  const deliveryOptions = [
-    {label: "Delivery every 30 days", value: "30 days"},
-    {label: "Delivery every 90 days", value: "90 days"},
-  ];
+  // Extract selling plans from product
+  const sellingPlans = useMemo(() => {
+    if (!product?.sellingPlanGroups?.nodes?.[0]?.sellingPlans?.nodes) {
+      return [];
+    }
+    return product.sellingPlanGroups.nodes[0].sellingPlans.nodes;
+  }, [product]);
 
-  const pricing = {
-    "30": {onetime: 199.0, subscribe: 189.05},
-    "90": {onetime: 499.0, subscribe: 474.05},
-  };
+  // Get variants
+  const variants = useMemo(() => {
+    return product?.variants?.nodes || [];
+  }, [product]);
 
-  const currentPrice = pricing[selectedSize][purchaseType];
+  // Find variant by size (30 or 90)
+  const selectedVariant = useMemo(() => {
+    const sizeMatch = selectedSize === "30" ? "30" : "90";
+    return variants.find(v => 
+      v.title?.includes(sizeMatch) || 
+      v.id === (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90)
+    ) || variants[0];
+  }, [variants, selectedSize]);
+
+  // Get base price from variant or fallback
+  const basePrice = useMemo(() => {
+    if (selectedVariant?.price?.amount) {
+      return parseFloat(selectedVariant.price.amount);
+    }
+    // Fallback to hardcoded prices if variant data not available
+    return selectedSize === "30" ? 199.0 : 499.0;
+  }, [selectedVariant, selectedSize]);
+
+  // Find selling plan for current frequency
+  const selectedSellingPlan = useMemo(() => {
+    if (purchaseType !== "subscribe" || sellingPlans.length === 0) {
+      return null;
+    }
+    return findSellingPlanByFrequency(sellingPlans, deliveryFrequency);
+  }, [sellingPlans, deliveryFrequency, purchaseType]);
+
+  // Calculate subscription price
+  const subscriptionPrice = useMemo(() => {
+    if (!selectedSellingPlan) return basePrice;
+    return calculateSubscriptionPrice(basePrice, selectedSellingPlan);
+  }, [basePrice, selectedSellingPlan]);
+
+  // Current price based on purchase type
+  const currentPrice = purchaseType === "subscribe" ? subscriptionPrice : basePrice;
+
+  // Build delivery options from selling plans or use defaults
+  const deliveryOptions = useMemo(() => {
+    if (sellingPlans.length > 0) {
+      return sellingPlans.map(plan => {
+        const days = plan.recurringDeliveries?.toString() || 
+                    plan.name?.match(/\d+/)?.[0] || 
+                    "30";
+        return {
+          label: `Delivery every ${days} days`,
+          value: `${days} days`,
+          plan: plan
+        };
+      });
+    }
+    // Fallback to default options
+    return [
+      {label: "Delivery every 30 days", value: "30 days"},
+      {label: "Delivery every 90 days", value: "90 days"},
+    ];
+  }, [sellingPlans]);
+
+  // Get selected variant ID
+  const selectedVariantId = selectedVariant?.id || 
+    (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90);
 
   // Handle click outside dropdown to close it
   useEffect(() => {
@@ -101,8 +226,14 @@ export default function HeroAndBuyBox({productImage}) {
     setHighlightedOption(null);
   };
 
-  const selectedVariantId =
-    selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90;
+  // Get selected variant ID - already defined in useMemo above
+  // const selectedVariantId = selectedVariant?.id || 
+  //   (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90);
+
+  // Determine which image to show based on selected size
+  const imageUrl = selectedSize === "30" 
+    ? "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-13.jpg?v=1766006457"
+    : "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-14.jpg?v=1766006457";
 
   return (
     <>
@@ -112,25 +243,13 @@ export default function HeroAndBuyBox({productImage}) {
           <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 max-w-7xl mx-auto">
             {/* Product Image Section */}
             <div className="flex-1 max-w-[636px]">
-              <div className="relative w-full aspect-square mb-4">
-                {productImage ? (
-                  <Image
-                    data={productImage}
-                    alt={
-                      productImage.altText ||
-                      "ThaenaBiotic Postbiotic Supplement bottle"
-                    }
-                    className="w-full h-full object-cover rounded-lg"
-                    sizes="(min-width: 1024px) 636px, 100vw"
-                    loading="eager"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-neutral-warm flex items-center justify-center rounded-lg">
-                    <span className="font-roboto text-slate-dark/50">
-                      Product image loading...
-                    </span>
-                  </div>
-                )}
+              <div className="relative w-[636px] h-[636px] mb-4">
+                <img
+                  src={imageUrl}
+                  alt="ThaenaBiotic Postbiotic Supplement bottle"
+                  className="w-full h-full object-cover rounded-lg"
+                  loading="eager"
+                />
               </div>
               <p className="text-center text-xs text-slate-dark/80 font-normal">
                 Third-party tested • GMP Certified • Made in USA
@@ -254,7 +373,7 @@ export default function HeroAndBuyBox({productImage}) {
                         One-time purchase
                       </span>
                       <span className="text-sm text-slate-dark">
-                        ${pricing[selectedSize].onetime.toFixed(2)}
+                        ${basePrice.toFixed(2)}
                       </span>
                     </div>
                   </button>
@@ -285,7 +404,7 @@ export default function HeroAndBuyBox({productImage}) {
                           Subscribe & Save
                         </span>
                         <span className="text-sm text-slate-dark">
-                          ${pricing[selectedSize].subscribe.toFixed(2)}
+                          ${subscriptionPrice.toFixed(2)}
                         </span>
                       </div>
                     </button>
@@ -388,11 +507,17 @@ export default function HeroAndBuyBox({productImage}) {
                       {
                         merchandiseId: selectedVariantId,
                         quantity,
+                        ...(purchaseType === "subscribe" && selectedSellingPlan?.id
+                          ? {sellingPlanId: selectedSellingPlan.id}
+                          : {}),
                       },
                     ]}
                     onClick={() => {
                       open("cart");
                     }}
+                    productImage={{url: imageUrl}}
+                    productTitle="ThaenaBiotic - Postbiotic Supplement"
+                    size={selectedSize === "30" ? "30 capsules" : "90 capsules"}
                     className="flex-1 bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all"
                   >
                     Add to Cart
@@ -410,52 +535,6 @@ export default function HeroAndBuyBox({productImage}) {
             </div>
           </div>
         </main>
-
-        {/* Login Support Section */}
-        <div className="max-w-[1200px] mx-auto px-8 mb-8">
-          <h3 className="font-roboto text-xl font-light leading-7 text-slate-dark mb-3">
-            Need Login Support?
-          </h3>
-          <p className="font-roboto text-lg font-light leading-7 text-slate-dark mb-2">
-            Trouble logging into your provider account? Call, text, or email us
-            your order anytime and we can submit an order for your account and
-            email you an invoice direct or take payment over the phone. Jessa
-            Lydon is available Mon-Friday 9-4 (PT) and happy to help.
-          </p>
-          <p className="font-roboto text-lg font-light leading-7 text-slate-dark mb-4">
-            Email:{" "}
-            <a href="mailto:Info@Thaena.com" className="underline">
-              Info@Thaena.com
-            </a>{" "}
-            | Phone:{" "}
-            <a href="tel:5035068732" className="underline">
-              (503) 506-8732
-            </a>
-          </p>
-          <button className="px-6 py-[6px] rounded-full bg-slate-dark">
-            <span className="font-roboto-mono text-base font-medium leading-6 text-neutral-light">
-              Login
-            </span>
-          </button>
-        </div>
-
-        {/* Ingredients Section */}
-        <div className="max-w-[1200px] mx-auto px-8 pb-20">
-          <h3 className="font-roboto text-xl font-light leading-7 text-slate-dark mb-3">
-            Ingredients:
-          </h3>
-          <p className="font-roboto text-lg font-light leading-7 text-slate-dark mb-2">
-            Citric acid, ThaenaBiotic®, delayed release vegetarian capsules
-            (vegetable cellulose, purified water)
-          </p>
-          <p className="font-roboto text-lg leading-7 text-slate-dark">
-            <span className="font-normal">May contain trace amounts of:</span>{" "}
-            <span className="font-light">
-              milk, eggs, fish, tree nuts, crustacean shellfish, peanuts,
-              wheat, soybeans, sesame, or other food allergens
-            </span>
-          </p>
-        </div>
       </div>
     </>
   );

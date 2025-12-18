@@ -702,32 +702,32 @@ export default function Homepage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-auto">
               <FlipCard 
                 card={flipCards[0]} 
-                className="lg:col-span-7 lg:row-span-2 min-h-[320px] lg:min-h-[340px]"
+                className="lg:col-span-7 lg:row-span-2 min-h-[160px] lg:min-h-[170px]"
               />
               
               <FlipCard 
                 card={flipCards[1]} 
-                className="lg:col-span-5 lg:row-span-2 min-h-[320px] lg:min-h-[384px]"
+                className="lg:col-span-5 lg:row-span-2 min-h-[160px] lg:min-h-[192px]"
               />
               
               <FlipCard 
                 card={flipCards[2]} 
-                className="lg:col-span-5 lg:row-span-2 min-h-[320px]"
+                className="lg:col-span-5 lg:row-span-2 min-h-[160px]"
               />
               
               <FlipCard 
                 card={flipCards[3]} 
-                className="lg:col-span-7 lg:row-span-2 min-h-[320px] lg:min-h-[340px]"
+                className="lg:col-span-7 lg:row-span-2 min-h-[160px] lg:min-h-[170px]"
               />
               
               <FlipCard 
                 card={flipCards[4]} 
-                className="lg:col-span-6 lg:row-span-2 min-h-[320px]"
+                className="lg:col-span-6 lg:row-span-2 min-h-[160px]"
               />
               
               <FlipCard 
                 card={flipCards[5]} 
-                className="lg:col-span-6 lg:row-span-2 min-h-[320px]"
+                className="lg:col-span-6 lg:row-span-2 min-h-[160px]"
               />
             </div>
           </div>

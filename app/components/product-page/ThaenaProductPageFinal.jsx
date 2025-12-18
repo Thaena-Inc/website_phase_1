@@ -46,7 +46,10 @@ export default function ThaenaProductPage({product}) {
 
   return (
     <>
-      <HeroAndBuyBox productImage={productImage} />
+      <HeroAndBuyBox 
+        productImage={productImage}
+        product={product}
+      />
       <WhatsInThaenaBiotic />
       <IsThaenaForYou />
       <HowToTake />

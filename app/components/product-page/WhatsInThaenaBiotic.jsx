@@ -20,13 +20,9 @@ export default function WhatsInThaenaBiotic() {
             <div className="w-full lg:w-[592px] flex-shrink-0">
               <div className="relative rounded-md overflow-hidden">
                 <img 
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/f75cf48b79dc5ec7bbad5dbea65ad7a76f78ef6e?width=1184"
+                  src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-9.jpg?v=1766006453"
                   alt="Abstract visualization of healthy microbiome metabolites and molecular structures"
                   className="w-full h-auto"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    console.error('Image failed to load. Please update the image URL in WhatsInThaenaBiotic.jsx');
-                  }}
                 />
                 <div className="absolute inset-0 rounded-md shadow-[inset_0_0_0_1px_sage-grey/20]"></div>
               </div>

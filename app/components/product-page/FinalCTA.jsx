@@ -2,19 +2,29 @@ export default function FinalCTA() {
   return (
     <>
     {/* Final CTA Hero Section */}
-    <div
-    className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden"
-    style={{
-      backgroundImage: `linear-gradient(0deg, rgba(167, 179, 167, 0.50) 0%, rgba(167, 179, 167, 0.50) 100%), url('https://api.builder.io/api/v1/image/assets/TEMP/80793d93bdf389f5d69e348e63b2dc293d01eac3?width=2849')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}
-    onError={() => {
-      console.error('Background image failed to load. Please update the image URL in FinalCTA.jsx');
-    }}
-  >
-    <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-10">
+    <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/bharath-kumar-lJZII_3rg0M-unsplash_2.jpg?v=1765998606')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: '0.2'
+        }}
+      />
+      
+      {/* Optional: Gradient Overlay */}
+      <div 
+        className="absolute inset-0 z-10"
+        style={{
+          background: `linear-gradient(0deg, rgba(167, 179, 167, 0.50) 0%, rgba(167, 179, 167, 0.50) 100%)`
+        }}
+      />
+      
+      {/* Content Layer */}
+      <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
       {/* Heading */}
       <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
         One Capsule. Thousands of Nutrients.

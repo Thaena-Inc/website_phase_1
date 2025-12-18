@@ -162,7 +162,7 @@ export default function AffiliatePage() {
             <div className="w-full lg:w-[400px] flex-shrink-0">
               <div className="relative rounded-3xl shadow-[0_8px_32px_-8px_rgba(29,48,41,0.10)] backdrop-blur-[2px] overflow-hidden">
                 <img 
-                  src="https://api.builder.io/api/v1/image/assets/TEMP/c37df0b2f343dfccdc0c15a64717becfd2b205dd?width=1086"
+                  src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-84.jpg?v=1766006455"
                   alt="ThaenaBiotic supplement bottle"
                   className="w-full h-auto object-contain"
                 />
