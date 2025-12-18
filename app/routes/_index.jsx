@@ -110,8 +110,8 @@ function FlipCard({card, className = ""}) {
   );
 }
 
-function ExpandableCard({card}) {
-  const [isExpanded, setIsExpanded] = useState(false);
+function ExpandableCard({card, isExpanded, onToggle}) {
+  const contentId = `expandable-card-content-${card.id}`;
 
   const renderContent = (text, boldWords) => {
     if (!boldWords || boldWords.length === 0) {
@@ -156,8 +156,11 @@ function ExpandableCard({card}) {
         </div>
         
         <button 
-          onClick={() => setIsExpanded(!isExpanded)}
+          type="button"
+          onClick={onToggle}
           className="flex items-center gap-5 w-full mb-4"
+          aria-expanded={isExpanded}
+          aria-controls={contentId}
         >
           <h3 className="flex-1 text-left font-playfair text-[18px] font-semibold leading-[22.5px] text-teal-green">
             {card.title}
@@ -181,6 +184,7 @@ function ExpandableCard({card}) {
         </button>
 
         <div 
+          id={contentId}
           className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
         >
           <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark/80">
@@ -304,6 +308,12 @@ const flipCards = [
 ];
 
 export default function Homepage() {
+  const [activeCardId, setActiveCardId] = useState(null);
+
+  const handleToggleCard = (cardId) => {
+    setActiveCardId((prev) => (prev === cardId ? null : cardId));
+  };
+
   return (
     <div className="min-h-screen">
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -311,7 +321,7 @@ export default function Homepage() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/image_2.png?v=1765998217')`,
+            backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-31.jpg?v=1766006459')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
@@ -342,7 +352,7 @@ export default function Homepage() {
                 Humans Healing Humans.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 ml-0 sm:ml-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-4 ml-0">
                 <Link 
                   to="/thaenabiotic"
                   className="group flex items-center justify-center gap-2 h-[56px] px-[42px] rounded-[12px] border-2 border-deep-purple bg-transparent hover:bg-deep-purple/5 transition-colors w-full sm:w-auto"
@@ -383,12 +393,12 @@ export default function Homepage() {
       </section>
 
       <section className="py-16 md:py-24 px-6" style={{ backgroundColor: "rgba(247, 243, 236, 1)" }}>
-        <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-8">
+        <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-6">
           <div className="flex flex-col items-center w-full">
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center mb-4">
               Why Thaena Works
             </h2>
-            <div className="w-24 h-[1px] bg-sage mb-6"></div>
+            <div className="w-24 h-[1px] bg-sage"></div>
           </div>
 
           <div className="max-w-[850px] min-w-[300px] w-full">
@@ -399,41 +409,45 @@ export default function Homepage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full mt-4">
             {cards.map((card) => (
-              <ExpandableCard key={card.id} card={card} />
+              <ExpandableCard
+                key={card.id}
+                card={card}
+                isExpanded={activeCardId === card.id}
+                onToggle={() => handleToggleCard(card.id)}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 px-6" style={{ backgroundColor: "rgba(109, 79, 44, 0.2)" }}>
+      <section className="py-16 md:py-24 px-6">
+        {/* Background Image Layer */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-23.jpg?v=1766006458')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: 0.8
+          }}
+        />
         <div className="max-w-[1200px] mx-auto flex flex-col items-center gap-12">
-          <div className="flex flex-col items-center gap-3 w-full">
+          <div className="flex flex-col items-center gap-3 w-auto ml-auto">
             <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
               Our PRODUCT
             </p>
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
-              Meet ThaenaBiotic®
+              Meet ThaenaBiotic<sup>®</sup>
             </h2>
             <div className="w-24 h-[1px] bg-sage"></div>
             <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center max-w-[800px] mt-2">
-              ThaenaBiotic® delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human gut.
+              ThaenaBiotic<sup>®</sup> delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human gut.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-center">
-            <div className="flex justify-center lg:justify-end">
-              <img 
-                src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-2-2.jpg?v=1766006457"
-                alt="ThaenaBiotic Product Bottle"
-                className="w-[258px] h-[402px] object-contain"
-                onError={(e) => {
-                  console.error('Product image failed to load. Please update the image URL.');
-                  e.target.style.display = 'none';
-                }}
-              />
-            </div>
-
-            <div className="lg:col-span-2 flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE7DE] p-8 border-2 border-sage">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-end ml-auto">
+            <div className="lg:col-start-2 lg:col-span-2 flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8 border-2 border-sage lg:w-[90%] lg:justify-self-end">
               <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                   <div className="flex flex-col gap-3">
