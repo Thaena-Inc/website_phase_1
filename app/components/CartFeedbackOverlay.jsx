@@ -79,7 +79,7 @@ export function CartFeedbackOverlay() {
       aria-labelledby="cart-feedback-title"
     >
       <div
-        className="bg-[#ede8de] rounded-l-lg shadow-lg w-full max-w-md h-full md:h-auto md:max-h-[90vh] flex flex-col transform transition-all duration-300 ease-in-out animate-slide-in-right overflow-hidden"
+        className="bg-[#ede8de] rounded-l-lg shadow-lg w-full max-w-md h-auto max-h-[40vh] flex flex-col transform transition-all duration-300 ease-in-out animate-slide-in-right overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with close button */}
@@ -108,41 +108,44 @@ export function CartFeedbackOverlay() {
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="flex gap-4">
-            {/* Product Image */}
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={title}
-                className="w-20 h-20 object-cover rounded border border-slate-dark/10 flex-shrink-0"
-              />
-            ) : (
-              <div className="w-20 h-20 bg-slate-dark/5 rounded border border-slate-dark/10 flex-shrink-0 flex items-center justify-center">
-                <span className="text-xs text-slate-dark/50">Image</span>
+          <div className="cart-lines">
+            <div className="flex gap-4">
+              {/* Product Image */}
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={title}
+                  className="w-20 h-20 object-cover rounded border border-slate-dark/10 flex-shrink-0"
+                />
+              ) : (
+                <div className="w-20 h-20 bg-slate-dark/5 rounded border border-slate-dark/10 flex-shrink-0 flex items-center justify-center">
+                  <span className="text-xs text-slate-dark/50">Image</span>
+                </div>
+              )}
+
+              {/* Product Details */}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-roboto font-medium text-slate-dark mb-1">
+                  {title}
+                </p>
+                <p className="text-sm font-roboto text-slate-dark/70">
+                  Size: {sizeDisplay}
+                </p>
               </div>
-            )}
-            
-            {/* Product Details */}
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-roboto font-medium text-slate-dark mb-1">
-                {title}
-              </p>
-              <p className="text-sm font-roboto text-slate-dark/70">
-                Size: {sizeDisplay}
-              </p>
             </div>
           </div>
+
+          <a
+            href="https://thaena.com/cart"
+            className="mt-4 block text-center text-sm font-roboto text-slate-dark hover:text-slate-dark/70 transition-colors"
+            onClick={handleClose}
+          >
+            View my cart ({cartQuantity})
+          </a>
         </div>
 
         {/* Footer with buttons */}
         <div className="p-6 pt-4 border-t border-slate-dark/10 space-y-3">
-          <Link
-            to="/cart"
-            className="block text-center text-sm font-roboto text-slate-dark hover:text-slate-dark/70 transition-colors"
-            onClick={handleClose}
-          >
-            View my cart ({cartQuantity})
-          </Link>
           <Link
             to="/checkout"
             className="block w-full text-center bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all"

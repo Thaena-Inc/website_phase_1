@@ -7,7 +7,6 @@ import {
   AccordionTrigger,
 } from '../ui/accordion';
 import {AddToCartButton} from '~/components/AddToCartButton';
-import {useAside} from '~/components/Aside';
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
@@ -15,7 +14,6 @@ const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
 export default function Index() {
   const [selectedSize, setSelectedSize] = useState('30');
   const [quantity, setQuantity] = useState(1);
-  const {open} = useAside();
 
   const decrementQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -163,9 +161,6 @@ export default function Index() {
                           quantity,   // ← uses your existing state
                         },
                       ]}
-                      onClick={() => {
-                        open('cart');
-                      }}
                       className="w-full h-14 flex items-center justify-center rounded-xl border-2 border-teal-green bg-teal-green">
                         <span className="font-roboto-mono text-base font-medium leading-6 text-neutral-light">Add To Cart</span>
                       </AddToCartButton>
@@ -228,9 +223,6 @@ export default function Index() {
                           quantity,   // ← uses your existing state
                         },
                       ]}
-                      onClick={() => {
-                        open('cart');
-                      }}
                       className="w-full h-14 flex items-center justify-center rounded-xl border-2 border-rust-dark bg-transparent">
                         <span className="font-roboto-mono text-base font-medium leading-6 text-slate-dark">Add To Cart</span>
                       </AddToCartButton>

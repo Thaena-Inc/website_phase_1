@@ -1,7 +1,6 @@
 import {useEffect, useRef, useState, useMemo} from "react";
 import {ChevronDown, Minus, Plus} from "lucide-react";
 import {AddToCartButton} from "~/components/AddToCartButton";
-import {useAside} from "~/components/Aside";
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
@@ -89,7 +88,6 @@ export default function HeroAndBuyBox({productImage, product}) {
   const [isDeliveryDropdownOpen, setIsDeliveryDropdownOpen] = useState(false);
   const [highlightedOption, setHighlightedOption] = useState(null);
   const dropdownRef = useRef(null);
-  const {open} = useAside();
 
   // Extract selling plans from product
   const sellingPlans = useMemo(() => {
@@ -515,9 +513,6 @@ export default function HeroAndBuyBox({productImage, product}) {
                           : {}),
                       },
                     ]}
-                    onClick={() => {
-                      open("cart");
-                    }}
                     productImage={{url: imageUrl}}
                     productTitle="ThaenaBiotic - Postbiotic Supplement"
                     size={selectedSize === "30" ? "30 capsules" : "90 capsules"}

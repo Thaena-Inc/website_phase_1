@@ -127,15 +127,13 @@ function SearchToggle() {
  * @param {{count: number | null}}
  */
 function CartBadge({count}) {
-  const {open} = useAside();
   const {publish, shop, cart, prevCart} = useAnalytics();
 
   return (
-    <a
-      href="/cart"
-      onClick={(e) => {
-        e.preventDefault();
-        open('cart');
+    <NavLink
+      prefetch="intent"
+      to="/cart"
+      onClick={() => {
         publish('cart_viewed', {
           cart,
           prevCart,
@@ -145,7 +143,7 @@ function CartBadge({count}) {
       }}
     >
       Cart {count === null ? <span>&nbsp;</span> : count}
-    </a>
+    </NavLink>
   );
 }
 
