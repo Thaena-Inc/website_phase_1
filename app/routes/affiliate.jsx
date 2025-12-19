@@ -15,13 +15,11 @@ export const meta = () => {
 
 export default function AffiliatePage() {
   const features = [
-    'No colonization required',
-    'No refrigeration',
+    'No colonization required (signals, not organisms)',
+    'No refrigeration (shelf-stable)',
     'No live microbes or bacterial DNA',
     'Designed for sensitive guts',
-    'A sterilized, human-derived postbiotic from rigorously screened donors',
-    'Postbiotic nutrients your body already recognizes',
-    'Full-spectrum molecular diversity',
+    'Full-spectrum postbiotic diversity (13,000+ metabolites)',
   ];
 
   const donors = [
@@ -36,14 +34,14 @@ export default function AffiliatePage() {
       icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/SCFAs-Icons.png?v=1766099676',
       bgColor: 'bg-deep-purple/15',
       title: 'Short-chain fatty acids',
-      description: 'Energy for gut cells',
+      description: 'Fuel for gut cells',
       color: 'text-deep-purple',
     },
     {
       icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Amino-Acids-Icon.png?v=1766099677',
       bgColor: 'bg-rust/15',
-      title: 'Amino acids',
-      description: 'Building blocks of life',
+      title: 'Peptides and amino acids',
+      description: 'Cellular communication and repair',
       color: 'text-rust',
     },
     {
@@ -52,13 +50,6 @@ export default function AffiliatePage() {
       title: 'Indoles',
       description: 'Neurological signaling',
       color: 'text-earth-brown',
-    },
-    {
-      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Peptides-Icon.png?v=1766099676',
-      bgColor: 'bg-slate/20',
-      title: 'Peptides',
-      description: 'Cellular communication',
-      color: 'text-slate',
     },
   ];
 
@@ -136,7 +127,7 @@ export default function AffiliatePage() {
 
         <div className="relative z-10 w-full max-w-[768px] mx-auto flex flex-col items-center gap-6 text-center">
           <div className="inline-block">
-            <span className="absolute px-3 py-1 bg-teal-green/50 rounded-full text-slate font-mono text-xs font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="px-3 py-1 bg-teal-green/50 rounded-full text-[#ede8de] font-mono text-xs font-medium leading-5 tracking-[0.7px] uppercase">
               Welcome to Humans Healing Humans
             </span>
           </div>
@@ -201,10 +192,10 @@ export default function AffiliatePage() {
               It delivers a complete spectrum of postbiotic compounds sourced from healthy human gut ecosystems, then <strong>sterilized and refined into capsules</strong>.
               </p>
 
-              <ul className="list-disc list-inside">
-                <li>No live microbes</li>
-                <li>No bacterial DNA</li>
-                <li>No colonization required</li>
+              <ul className="list-none space-y-[14px]">
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No live microbes</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No bacterial DNA</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No colonization required</li>
               </ul>
 
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
@@ -233,7 +224,7 @@ export default function AffiliatePage() {
 
       {/* Who We Are Section */}
       <section className="py-16 md:py-24 px-6">
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-[1024px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
               Who We Are
@@ -243,14 +234,14 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          <div className="max-w-[849px] mx-auto flex flex-col gap-[23px] mb-12">
+          <div className="mx-auto flex flex-col gap-[23px] mb-12">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               Most gut supplements focus on:
             </p>
 
-            <ul className="list-disc list-inside">
-                <li>Adding strains (probiotics), or</li>
-                <li>Feeding strains (prebiotics)</li>
+            <ul className="list-none">
+              <li className="text-slate font-roboto text-base leading-6 before:content-['-'] before:mr-2">Adding strains (probiotics), or</li>
+              <li className="text-slate font-roboto text-base leading-6 before:content-['-'] before:mr-2">Feeding strains (prebiotics)</li>
             </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
@@ -284,7 +275,7 @@ export default function AffiliatePage() {
 
       {/* Science Section */}
       <section className="py-16 md:py-24 px-6 bg-neutral-warm">
-        <div className="max-w-[1425px] mx-auto flex flex-col gap-6">
+        <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
               The Science
@@ -294,11 +285,12 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          <div className="max-w-[1280px] mx-auto flex flex-col gap-4 mt-6">
+          {/* Donors Content Container */}
+          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-xl leading-7">
-                Most stool banks simply screen for disease.
-                <br/>
-                <strong>We look for patterns of health across the whole system.</strong>
+              Most stool banks simply screen for disease.
+              <br />
+              <strong>We look for patterns of health across the whole system.</strong>
             </p>
 
             <p className="text-slate font-roboto text-xl leading-7">
@@ -310,49 +302,57 @@ export default function AffiliatePage() {
             </p>
 
             <div className="flex flex-col gap-3">
-                {donors.map((donor, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckIcon />
-                    <span className="text-slate font-roboto text-base leading-6">
-                      {donor}
-                    </span>
-                  </div>
-                ))}
+              {donors.map((donor, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">
+                    {donor}
+                  </span>
+                </div>
+              ))}
             </div>
 
-            <div className="flex flex-col gap-[23px]">
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                This allows us to hold a higher standard at the source — and throughout the entire process.
-              </p>
-
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                Every batch of ThaenaBiotic® reflects:
-              </p>
-
-              <ul className="list-disc list-inside">
-                <li>Careful donor selection and ongoing monitoring</li>
-                <li>Sterilization for safety</li>
-                <li>Preservation of postbiotic diversity</li>
-                <li>Third-party testing for purity and consistency</li>
-              </ul>
-
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                <span className="font-bold">
-                  This is Humans Healing Humans™ — with modern safety controls and scientific integrity.
-                </span>
-              </p>
-            </div>
+            <p className="text-slate font-roboto text-lg leading-[29.25px]">
+              This allows us to hold a higher standard at the source — and throughout the entire process.
+            </p>
           </div>
 
-          <div className="flex justify-center my-4">
-            <div className="w-24 h-px bg-[#A7B3A7]" />
+          {/* Safety Content Container */}
+          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
+            <p className="text-slate font-roboto text-lg leading-[29.25px]">
+              Every batch of ThaenaBiotic® reflects:
+            </p>
+
+            <ul className="list-circle list-inside">
+              <li className="text-slate font-roboto text-base leading-6">Careful donor selection and ongoing monitoring</li>
+              <li className="text-slate font-roboto text-base leading-6">Sterilization for safety</li>
+              <li className="text-slate font-roboto text-base leading-6">Preservation of postbiotic diversity</li>
+              <li className="text-slate font-roboto text-base leading-6">Third-party testing for purity and consistency</li>
+            </ul>
+
+            <p className="text-slate font-roboto text-lg leading-[29.25px]">
+              <span className="font-bold">
+                This is Humans Healing Humans™ — with modern safety controls and scientific integrity.
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* What's Inside Section */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+              What's Inside
+            </span>
+            <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
+              What's Inside ThaenaBiotic®
+            </h2>
           </div>
 
           <div className="flex flex-col gap-16">
-            <div className="max-w-[1280px] mx-auto flex flex-col items-center gap-4">
-              <h3 className="text-teal-green font-playfair text-[32px] font-normal leading-[48px] tracking-[-1.2px] text-center">
-                What's Inside ThaenaBiotic®
-              </h3>
+            <div className="max-w-[1024px] mx-auto flex flex-col items-center gap-4">
               <div className="max-w-[1024px]">
                 <p className="text-slate font-roboto text-xl leading-7 text-center">
                   ThaenaBiotic® contains more than <strong>13,000 metabolites</strong> naturally produced inside healthy human gut ecosystems.
@@ -370,8 +370,8 @@ export default function AffiliatePage() {
                   className="flex items-center gap-5 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50"
                 >
                   <div className={`flex w-12 h-11 justify-center items-center rounded-full ${molecule.bgColor} shrink-0`}>
-                    <img 
-                      src={molecule.icon} 
+                    <img
+                      src={molecule.icon}
                       alt={molecule.title}
                       className="w-6 h-6 object-contain"
                     />
@@ -392,19 +392,18 @@ export default function AffiliatePage() {
               <div className="flex flex-col gap-3 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50 md:col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-3 justify-start">
                   <div className="flex w-12 h-11 justify-center items-center rounded-full bg-[#A7B3A7]/30 shrink-0">
-                    <img 
+                    <img
                       src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Additional-Metabolites-Icon.png?v=1766099676"
                       alt="Additional metabolites"
                       className="w-6 h-6 object-contain"
                     />
                   </div>
                   <h4 className="text-teal-green font-playfair text-lg font-medium leading-7 text-left">
-                    + 10,000+ additional metabolites
+                    Thousands more
                   </h4>
                 </div>
                 <p className="text-slate font-roboto text-sm leading-5 text-left">
-                  Science is still mapping them, but your gut already knows what
-                  to do with them.
+                  Still being mapped by science
                 </p>
               </div>
             </div>
@@ -412,24 +411,30 @@ export default function AffiliatePage() {
         </div>
       </section>
 
-      {/* How to Get StartedSection */}
-      <section className="py-16 md:py-24 px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="flex flex-col items-center gap-3 mb-12 text-center">
-            <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
+      {/* How to Get Started Section */}
+      <section className="py-16 md:py-24 px-6 bg-earth-brown/20">
+        <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80">
+          <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
+            {/* Heading */}
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
               How to Get Started
             </h2>
-            <p className="text-slate font-roboto text-xl leading-7 text-center">
-              Most people begin with a simple daily routine.
-            </p>
-            <p className="text-slate font-roboto text-xl leading-7 text-center">
-              ThaenaBiotic® is <strong>non-living and sterilized</strong>, designed to be easy to integrate — no complex protocols, no colonization, no refrigeration.
-            </p>
-          </div>
 
-          <div className="flex justify-center">
-            <button className="h-14 px-8 bg-transparent text-deep-purple font-mono text-base font-medium leading-6 rounded-xl border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
-              Create Your Free Account to Get Your Discount
+            {/* Subheading */}
+            <div className="pb-4">
+              <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
+                Most people begin with a simple daily routine.
+              </p>
+              <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
+                ThaenaBiotic® is <strong>non-living and sterilized</strong>, designed to be easy to integrate — no complex protocols, no colonization, no refrigeration.
+              </p>
+            </div>
+
+            {/* CTA Button */}
+            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-transparent border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
+              <span className="font-roboto text-lg font-medium leading-7 text-deep-purple">
+                Create Your Free Account to Get Your Discount
+              </span>
             </button>
           </div>
         </div>
@@ -475,54 +480,54 @@ export default function AffiliatePage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 md:py-24 px-6">
-      <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
-      {/* Background Image Layer */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/bharath-kumar-lJZII_3rg0M-unsplash_2.jpg?v=1765998606')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          opacity: '0.2'
-        }}
-      />
-      
-      {/* Optional: Gradient Overlay */}
-      <div 
-        className="absolute inset-0 z-10"
-        style={{
-          background: `linear-gradient(0deg, rgba(167, 179, 167, 0.50) 0%, rgba(167, 179, 167, 0.50) 100%)`
-        }}
-      />
-      
-      {/* Content Layer */}
-      <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
-      {/* Heading */}
-      <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
-        Your partner discount is waiting.
-      </h2>
+      <section className="py-16 md:py-24">
+        <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
+          {/* Background Image Layer */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/bharath-kumar-lJZII_3rg0M-unsplash_2.jpg?v=1765998606')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: '0.2',
+            }}
+          />
 
-      {/* Subheading */}
-      <div className="pb-4">
-        <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
-          Create your free Thaena account to unlock discounted pricing and get started.
-        </p>
-      </div>
+          {/* Gradient Overlay */}
+          <div
+            className="absolute inset-0 z-10"
+            style={{
+              background: `linear-gradient(0deg, rgba(167, 179, 167, 0.50) 0%, rgba(167, 179, 167, 0.50) 100%)`,
+            }}
+          />
 
-      {/* CTA Button */}
-      <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
-        <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
-          Create Your Free Account to Get Your Discount
-        </span>
-      </button>
+          {/* Content Layer */}
+          <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
+            {/* Heading */}
+            <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
+              Your partner discount is waiting.
+            </h2>
 
-      <p className="text-slate font-roboto text-xl leading-7 text-center font-light italic">
-            Free to join. Your discount is applied after account creation.
-      </p>
-    </div>
-  </div>
+            {/* Subheading */}
+            <div className="pb-4">
+              <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
+                Create your free Thaena account to unlock discounted pricing and get started.
+              </p>
+            </div>
+
+            {/* CTA Button */}
+            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
+              <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
+                Create Your Free Account to Get Your Discount
+              </span>
+            </button>
+
+            <p className="text-slate font-roboto text-xl leading-7 text-center font-light italic">
+              Free to join. Your discount is applied after account creation.
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );
