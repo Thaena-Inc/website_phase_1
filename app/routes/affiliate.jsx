@@ -1,12 +1,5 @@
 import CheckIcon from '../components/CheckIcon';
 import {
-  ShortChainFattyAcidsIcon,
-  AminoAcidsIcon,
-  IndolesIcon,
-  PeptidesIcon,
-  AdditionalMetabolitesIcon,
-} from '../components/MoleculeIcons';
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -33,25 +26,29 @@ export default function AffiliatePage() {
 
   const molecules = [
     {
-      icon: <ShortChainFattyAcidsIcon />,
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/SCFAs-Icons.png?v=1766099676',
+      bgColor: 'bg-deep-purple/15',
       title: 'Short-chain fatty acids',
       description: 'Energy for gut cells',
       color: 'text-deep-purple',
     },
     {
-      icon: <AminoAcidsIcon />,
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Amino-Acids-Icon.png?v=1766099677',
+      bgColor: 'bg-rust/15',
       title: 'Amino acids',
       description: 'Building blocks of life',
       color: 'text-rust',
     },
     {
-      icon: <IndolesIcon />,
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Indoles-Icon.png?v=1766099676',
+      bgColor: 'bg-earth-brown/20',
       title: 'Indoles',
       description: 'Neurological signaling',
       color: 'text-earth-brown',
     },
     {
-      icon: <PeptidesIcon />,
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Peptides-Icon.png?v=1766099676',
+      bgColor: 'bg-slate/20',
       title: 'Peptides',
       description: 'Cellular communication',
       color: 'text-slate',
@@ -113,8 +110,6 @@ export default function AffiliatePage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `
-              linear-gradient(99deg, rgba(222, 176, 101, 0.00) -0.01%, rgba(222, 176, 101, 0.13) 50%, rgba(222, 176, 101, 0.25) 100.01%),
-              linear-gradient(266deg, rgba(39, 91, 82, 0.12) -0.01%, rgba(39, 91, 82, 0.24) 48.18%, rgba(39, 91, 82, 0.40) 96.36%),
               url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-75.jpg?v=1766006458')
             `,
             backgroundPosition: 'center center',
@@ -122,11 +117,19 @@ export default function AffiliatePage() {
           }}
         />
 
-        <div className="absolute inset-0 backdrop-blur-[5px]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(90deg, rgba(247, 243, 236, 0.7) 0%, rgba(247, 243, 236, 0.7) 50%, rgba(247, 243, 236, 0.7) 100%)
+            `,
+            backgroundPosition: 'center center',
+          }}
+        />
 
         <div className="relative z-10 w-full max-w-[768px] mx-auto flex flex-col items-center gap-6 text-center">
           <div className="inline-block">
-            <span className="text-slate font-mono text-xs font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="absolute px-3 py-1 bg-teal-green/50 rounded-full text-slate font-mono text-xs font-medium leading-5 tracking-[0.7px] uppercase">
               Welcome to Humans Healing Humans
             </span>
           </div>
@@ -138,9 +141,7 @@ export default function AffiliatePage() {
           <div className="w-full max-w-[672px]">
             <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-medium">
             Create your free Thaena account below to access special pricing, courtesy of {'{{affiliate_name}}'}.
-            </p>
-            <p className="text-slate font-roboto text-lg sm:text-xl leading-7 font-normal">
-              This page is only available through their link.
+        This page is only available through their link.
             </p>
           </div>
 
@@ -159,6 +160,13 @@ export default function AffiliatePage() {
         </div>
       </section>
 
+      {/* Form Section */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <p className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">Form Placeholder</p>
+        </div>
+      </section>
+
       {/* Product Section */}
       <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="max-w-[1280px] mx-auto">
@@ -171,7 +179,7 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-12 mb-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-12 mb-12">
             <div className="flex-1 flex flex-col gap-7 max-w-2xl lg:max-w-none">
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
                 ThaenaBiotic® delivers over 13,000 distinct metabolites made by
@@ -200,12 +208,12 @@ export default function AffiliatePage() {
               </p>
             </div>
 
-            <div className="w-full lg:w-[400px] flex-shrink-0">
-              <div className="relative rounded-3xl shadow-[0_8px_32px_-8px_rgba(29,48,41,0.10)] backdrop-blur-[2px] overflow-hidden">
+            <div className="w-full lg:w-[400px] flex-shrink-0 flex">
+              <div className="relative rounded-3xl shadow-[0_8px_32px_-8px_rgba(29,48,41,0.10)] backdrop-blur-[2px] overflow-hidden w-full h-full flex items-center justify-center">
                 <img
                   src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-84.jpg?v=1766006455"
                   alt="ThaenaBiotic supplement bottle"
-                  className="w-full h-auto object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -380,7 +388,13 @@ export default function AffiliatePage() {
                   key={index}
                   className="flex items-center gap-5 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50"
                 >
-                  {molecule.icon}
+                  <div className={`flex w-12 h-11 justify-center items-center rounded-full ${molecule.bgColor} shrink-0`}>
+                    <img 
+                      src={molecule.icon} 
+                      alt={molecule.title}
+                      className="w-6 h-6 object-contain"
+                    />
+                  </div>
                   <div className="flex flex-col">
                     <h4
                       className={`${molecule.color} font-playfair text-lg font-medium leading-7`}
@@ -394,14 +408,20 @@ export default function AffiliatePage() {
                 </div>
               ))}
 
-              <div className="flex flex-col justify-center items-center gap-3 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50 md:col-span-2 lg:col-span-1">
-                <div className="flex items-center gap-3">
-                  <AdditionalMetabolitesIcon />
-                  <h4 className="text-teal-green font-playfair text-lg font-medium leading-7 text-center">
+              <div className="flex flex-col gap-3 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50 md:col-span-2 lg:col-span-1">
+                <div className="flex items-center gap-3 justify-start">
+                  <div className="flex w-12 h-11 justify-center items-center rounded-full bg-[#A7B3A7]/30 shrink-0">
+                    <img 
+                      src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Additional-Metabolites-Icon.png?v=1766099676"
+                      alt="Additional metabolites"
+                      className="w-6 h-6 object-contain"
+                    />
+                  </div>
+                  <h4 className="text-teal-green font-playfair text-lg font-medium leading-7 text-left">
                     + 10,000+ additional metabolites
                   </h4>
                 </div>
-                <p className="text-slate font-roboto text-sm leading-5 text-center">
+                <p className="text-slate font-roboto text-sm leading-5 text-left">
                   Science is still mapping them, but your gut already knows what
                   to do with them.
                 </p>
@@ -453,7 +473,7 @@ export default function AffiliatePage() {
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-3 w-full mx-auto">
+            <div className="flex flex-col items-center gap-3 w-full mx-auto mt-6">
               <p className="text-earth-brown font-playfair text-lg font-medium leading-7">
                 Built by scientists, we raised safety and quality to a new
                 standard — and protected human postbiotic nutrients the industry

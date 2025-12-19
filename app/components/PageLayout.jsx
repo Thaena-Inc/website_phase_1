@@ -34,7 +34,7 @@ export function PageLayout({
         />
       )}
       {/* Main content area - keep layout neutral so Tailwind route styles control spacing */}
-      <main className="min-h-screen">{children}</main>
+      <main>{children}</main>
       <Footer
         footer={footer}
         header={header}
