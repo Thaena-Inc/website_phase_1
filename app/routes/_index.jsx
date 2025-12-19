@@ -468,7 +468,7 @@ export default function Homepage() {
                 
                 <Link 
                   to="/affiliate"
-                  className="flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-warm-brown bg-warm-brown hover:bg-warm-brown/90 transition-colors w-full sm:w-auto"
+                  className="flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-teal-green bg-teal-green hover:bg-teal-green/90 transition-colors w-full sm:w-auto"
                 >
                   <span className="font-mono text-[16px] font-medium leading-[24px] text-light-neutral">
                     Learn More

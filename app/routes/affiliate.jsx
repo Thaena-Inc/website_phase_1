@@ -125,9 +125,7 @@ export default function AffiliatePage() {
         <div
           className="absolute inset-0"
           style={{
-            background: `
-              linear-gradient(90deg, rgba(247, 243, 236, 0.7) 0%, rgba(247, 243, 236, 0.7) 50%, rgba(247, 243, 236, 0.7) 100%)
-            `,
+            background: `linear-gradient(135deg, rgb(222 176 101 / 5%) 0%, rgb(222 176 101 / 25%) 50%, rgb(222 176 101 / 40%) 100%) center center, linear-gradient(315deg, rgb(39 91 82 / 10%) 0%, rgb(39 91 82 / 30%) 50%, rgb(39 91 82 / 50%) 100%) center center, linear-gradient(90deg, rgb(237 232 222 / 60%) 0%, rgb(237 232 222 / 60%) 50%, rgb(237 232 222 / 60%) 100%) center center`,
             backgroundPosition: 'center center',
           }}
         />
@@ -246,9 +244,9 @@ export default function AffiliatePage() {
               Most gut supplements focus on:
             </p>
 
-            <ul className="list-none">
-              <li className="text-slate font-roboto text-base leading-6 before:content-['-'] before:mr-2">Adding strains (probiotics), or</li>
-              <li className="text-slate font-roboto text-base leading-6 before:content-['-'] before:mr-2">Feeding strains (prebiotics)</li>
+            <ul className="list-[circle]">
+              <li className="text-slate font-roboto text-base leading-6">Adding strains (probiotics), or</li>
+              <li className="text-slate font-roboto text-base leading-6">Feeding strains (prebiotics)</li>
             </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
@@ -293,7 +291,7 @@ export default function AffiliatePage() {
           </div>
 
           {/* Donors Content Container */}
-          <div className="mx-auto flex flex-col gap-4 mt-6">
+          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-xl leading-7">
               Most stool banks simply screen for disease.
               <br />
@@ -308,16 +306,13 @@ export default function AffiliatePage() {
               We look for individuals whose bodies demonstrate:
             </p>
 
-            <div className="flex flex-col gap-3">
+            <ul className="list-[circle] flex flex-col gap-3">
               {donors.map((donor, index) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckIcon />
-                  <span className="text-slate font-roboto text-base leading-6">
-                    {donor}
-                  </span>
-                </div>
+                <li key={index} className="text-slate font-roboto text-base leading-6">
+                  {donor}
+                </li>
               ))}
-            </div>
+            </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               This allows us to hold a higher standard at the source — and throughout the entire process.
@@ -325,17 +320,37 @@ export default function AffiliatePage() {
           </div>
 
           {/* Safety Content Container */}
-          <div className="mx-auto flex flex-col gap-4 mt-6">
+          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               Every batch of ThaenaBiotic® reflects:
             </p>
 
-            <ul className="list-circle list-inside">
-              <li className="text-slate font-roboto text-base leading-6">Careful donor selection and ongoing monitoring</li>
-              <li className="text-slate font-roboto text-base leading-6">Sterilization for safety</li>
-              <li className="text-slate font-roboto text-base leading-6">Preservation of postbiotic diversity</li>
-              <li className="text-slate font-roboto text-base leading-6">Third-party testing for purity and consistency</li>
-            </ul>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-start gap-3">
+                <CheckIcon />
+                <span className="text-slate font-roboto text-base leading-6">
+                  Careful donor selection and ongoing monitoring
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckIcon />
+                <span className="text-slate font-roboto text-base leading-6">
+                  Sterilization for safety
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckIcon />
+                <span className="text-slate font-roboto text-base leading-6">
+                  Preservation of postbiotic diversity
+                </span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckIcon />
+                <span className="text-slate font-roboto text-base leading-6">
+                  Third-party testing for purity and consistency
+                </span>
+              </div>
+            </div>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               <span className="font-bold">
@@ -470,7 +485,7 @@ export default function AffiliatePage() {
 
       {/* Final CTA Section */}
       <section>
-        <div className="relative flex items-center justify-center bg-neutral-light overflow-hidden">
+        <div className="relative flex items-center justify-center bg-neutral-light overflow-hidden py-16 md:py-24 px-6">
           {/* Background Image Layer */}
           <div
             className="absolute inset-0 z-0"

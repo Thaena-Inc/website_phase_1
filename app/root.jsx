@@ -63,7 +63,22 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
+    // Add preconnect for Google Fonts to improve font loading
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com',
+    },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossOrigin: 'anonymous',
+    },
     {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    // Load Google Fonts stylesheet before Tailwind CSS
+    {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Roboto+Mono:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
+    },
     // Tailwind CSS loads last to ensure it has precedence over reset.css and app.css
     {rel: 'stylesheet', href: tailwindCss},
   ];
