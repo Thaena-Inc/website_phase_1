@@ -51,6 +51,13 @@ export default function AffiliatePage() {
       description: 'Neurological signaling',
       color: 'text-earth-brown',
     },
+    {
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Additional-Metabolites-Icon.png?v=1766099676',
+      bgColor: 'bg-sage-green/30',
+      title: 'Additional metabolites',
+      description: 'Still being mapped by science',
+      color: 'text-teal-green',
+    },
   ];
 
   const faqs = [
@@ -160,14 +167,14 @@ export default function AffiliatePage() {
 
       {/* Form Section */}
       <section className="py-16 md:py-24 px-6">
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-[1024px] mx-auto">
           <p className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">Form Placeholder</p>
         </div>
       </section>
 
       {/* Product Section */}
       <section className="py-16 md:py-24 px-6 bg-neutral-warm">
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-[1024px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
               Our Product
@@ -286,7 +293,7 @@ export default function AffiliatePage() {
           </div>
 
           {/* Donors Content Container */}
-          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
+          <div className="mx-auto flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-xl leading-7">
               Most stool banks simply screen for disease.
               <br />
@@ -318,7 +325,7 @@ export default function AffiliatePage() {
           </div>
 
           {/* Safety Content Container */}
-          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
+          <div className="mx-auto flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               Every batch of ThaenaBiotic® reflects:
             </p>
@@ -388,24 +395,6 @@ export default function AffiliatePage() {
                   </div>
                 </div>
               ))}
-
-              <div className="flex flex-col gap-3 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50 md:col-span-2 lg:col-span-1">
-                <div className="flex items-center gap-3 justify-start">
-                  <div className="flex w-12 h-11 justify-center items-center rounded-full bg-[#A7B3A7]/30 shrink-0">
-                    <img
-                      src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Additional-Metabolites-Icon.png?v=1766099676"
-                      alt="Additional metabolites"
-                      className="w-6 h-6 object-contain"
-                    />
-                  </div>
-                  <h4 className="text-teal-green font-playfair text-lg font-medium leading-7 text-left">
-                    Thousands more
-                  </h4>
-                </div>
-                <p className="text-slate font-roboto text-sm leading-5 text-left">
-                  Still being mapped by science
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -413,7 +402,7 @@ export default function AffiliatePage() {
 
       {/* How to Get Started Section */}
       <section className="py-16 md:py-24 px-6 bg-earth-brown/20">
-        <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80">
+        <div className="relative flex items-center justify-center">
           <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
             {/* Heading */}
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
@@ -480,8 +469,8 @@ export default function AffiliatePage() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
+      <section>
+        <div className="relative flex items-center justify-center bg-neutral-light overflow-hidden">
           {/* Background Image Layer */}
           <div
             className="absolute inset-0 z-0"
