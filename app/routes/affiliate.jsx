@@ -24,6 +24,13 @@ export default function AffiliatePage() {
     'Full-spectrum molecular diversity',
   ];
 
+  const donors = [
+    'Stable, well-regulated digestion',
+    'Low baseline inflammation',
+    'Balanced immune and metabolic signaling',
+    'Long-term physiological consistency',
+  ];
+
   const molecules = [
     {
       icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/SCFAs-Icons.png?v=1766099676',
@@ -175,36 +182,33 @@ export default function AffiliatePage() {
               Our Product
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
-              ThaenaBiotic®
+              What We Make
             </h2>
           </div>
 
           <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-12 mb-12">
             <div className="flex-1 flex flex-col gap-7 max-w-2xl lg:max-w-none">
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                ThaenaBiotic® delivers over 13,000 distinct metabolites made by
-                healthy microbiomes — not created in a lab, but naturally
-                fermented inside a healthy human gut.
+              You're not just a body. <strong>You're an ecosystem</strong> — and your gut depends on thousands of molecular signals produced by a healthy, diverse microbiome.
+              </p>
+              <p className="text-slate font-roboto text-lg leading-[29.25px]">
+              Modern life can disrupt that ecosystem. When microbial diversity declines, postbiotic signaling declines too.
+              </p>
+              <p className="text-slate font-roboto text-lg leading-[29.25px] font-bold">
+              ThaenaBiotic® is the regenerative bridge.
+              </p>
+              <p className="text-slate font-roboto text-lg leading-[29.25px]">
+              It delivers a complete spectrum of postbiotic compounds sourced from healthy human gut ecosystems, then <strong>sterilized and refined into capsules</strong>.
               </p>
 
-              <h3 className="text-slate font-playfair text-xl font-medium leading-7">
-                What sets it apart:
-              </h3>
+              <ul className="list-disc list-inside">
+                <li>No live microbes</li>
+                <li>No bacterial DNA</li>
+                <li>No colonization required</li>
+              </ul>
 
-              <div className="flex flex-col gap-3">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckIcon />
-                    <span className="text-slate font-roboto text-base leading-6">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              <p className="text-earth-brown font-playfair text-xl font-medium leading-7">
-                ThaenaBiotic® offers a new way to support gut health —
-                function-first, ecosystem-informed, and radically human.
+              <p className="text-slate font-roboto text-lg leading-[29.25px]">
+                Just the signals your body already recognizes.
               </p>
             </div>
 
@@ -232,60 +236,47 @@ export default function AffiliatePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
-              Our Story
+              Who We Are
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
-              Who We Are
+              Why Thaena is Different
             </h2>
           </div>
 
           <div className="max-w-[849px] mx-auto flex flex-col gap-[23px] mb-12">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              Thaena is building a regenerative healing brand rooted in a simple
-              truth: humans are ecosystems, and modern life is eroding the
-              microbial biodiversity that keeps those ecosystems resilient.
+              Most gut supplements focus on:
             </p>
+
+            <ul className="list-disc list-inside">
+                <li>Adding strains (probiotics), or</li>
+                <li>Feeding strains (prebiotics)</li>
+            </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              Thaena was founded by a clinician who saw firsthand the powerful,
-              restorative effects of the human microbiome. Working with patients
-              struggling with chronic illness and gut dysfunction, she witnessed
-              the potential of fecal microbiota transplant (FMT) but also
-              recognized its limitations.
+            <strong>ThaenaBiotic® focuses on something more foundational:</strong><br/>
+            supporting the <i>signaling environment</i> that helps the gut ecosystem function and recover.
             </p>
 
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              That experience sparked a bold idea: could we safely capture the
-              functional benefits of a healthy human microbiome, without the
-              risks or complications of live organisms?
-            </p>
+            <h3 className="text-slate font-playfair text-xl font-medium leading-7">
+              Key differences:
+            </h3>
 
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              What followed was years of research, donor screening, and
-              scientific development, leading to a breakthrough: ThaenaBiotic® —
-              a shelf-stable, sterilized, human-derived postbiotic supplement.
-              Designed to deliver the richness of microbial metabolites from
-              extraordinarily healthy humans, ThaenaBiotic® is a new way to
-              support gut health. Function-first, ecosystem-informed, and
-              radically human.
-            </p>
-
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              But Thaena is more than a single product. We exist to restore
-              human postbiotic signaling for gut and whole-body health. Our work
-              aims to support the body as an ecosystem: resilient, biodiverse,
-              and capable of rebuilding.
-            </p>
-
-            <p className="text-earth-brown font-playfair text-lg font-medium leading-7">
-              At its core, Thaena is guided by one belief: humans can help
-              humans heal.
-            </p>
+            <div className="flex flex-col gap-3">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckIcon />
+                    <span className="text-slate font-roboto text-base leading-6">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+            </div>
           </div>
 
           <div className="flex justify-center">
             <button className="h-14 px-8 bg-transparent text-deep-purple font-mono text-base font-medium leading-6 rounded-xl border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
-              Create Your Free Account
+              Unlock Your Discount — Create Free Account
             </button>
           </div>
         </div>
@@ -296,70 +287,59 @@ export default function AffiliatePage() {
         <div className="max-w-[1425px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
             <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
-              OUR Science
+              The Science
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
-              The Science Behind ThaenaBiotic®
+              Humans Healing Humans™ — from the source
             </h2>
-            <div className="max-w-[1024px]">
-              <p className="text-slate font-roboto text-xl leading-7">
-                Why gut signals matter, what's inside ThaenaBiotic®, and how we
-                ensure uncompromising safety
-              </p>
-            </div>
           </div>
 
           <div className="max-w-[1280px] mx-auto flex flex-col gap-4 mt-6">
-            <h3 className="text-teal-green font-playfair text-[32px] font-normal leading-[48px] tracking-[-1.2px] text-center">
-              Why Gut Signals Matter
-            </h3>
+            <p className="text-slate font-roboto text-xl leading-7">
+                Most stool banks simply screen for disease.
+                <br/>
+                <strong>We look for patterns of health across the whole system.</strong>
+            </p>
+
+            <p className="text-slate font-roboto text-xl leading-7">
+              Thaena operates its own donor program with direct medical oversight. Our donors are not suppliers — they are partners in a regenerative healing ecosystem.
+            </p>
+
+            <p className="text-slate font-roboto text-xl leading-7">
+              We look for individuals whose bodies demonstrate:
+            </p>
+
+            <div className="flex flex-col gap-3">
+                {donors.map((donor, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <CheckIcon />
+                    <span className="text-slate font-roboto text-base leading-6">
+                      {donor}
+                    </span>
+                  </div>
+                ))}
+            </div>
 
             <div className="flex flex-col gap-[23px]">
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                Your microbiome is part of an ecosystem that depends on
-                thousands of small, powerful molecules created as it breaks down
-                food. These{' '}
-                <span className="font-bold">postbiotic nutrients</span> help
-                support energy, mood, immunity, inflammation balance, and the
-                resilience of the gut itself.
+                This allows us to hold a higher standard at the source — and throughout the entire process.
               </p>
 
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                But modern life can starve this ecosystem. Stress, low-fiber
-                diets, antibiotics, and chronic imbalance all decrease its
-                diversity. When diversity drops, postbiotic nutrient production
-                drops, and your body loses one of its core sources of
-                resilience.
+                Every batch of ThaenaBiotic® reflects:
               </p>
+
+              <ul className="list-disc list-inside">
+                <li>Careful donor selection and ongoing monitoring</li>
+                <li>Sterilization for safety</li>
+                <li>Preservation of postbiotic diversity</li>
+                <li>Third-party testing for purity and consistency</li>
+              </ul>
 
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
                 <span className="font-bold">
-                  ThaenaBiotic® is the regenerative bridge.
+                  This is Humans Healing Humans™ — with modern safety controls and scientific integrity.
                 </span>
-              </p>
-
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                A thriving human microbiome produces a wide spectrum of
-                postbiotic molecules, a complexity no plant, probiotic, or
-                lab-grown system can fully replicate. And when your own
-                biodiversity is depleted, it may not be able to generate the
-                signals you need — <span className="font-bold">yet</span>.
-              </p>
-
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                Thaena® sources these postbiotic nutrients from rare, biodiverse
-                human microbiomes. They're sterilized and refined, then
-                delivered to you as regenerative support. It's a bridge that
-                helps{' '}
-                <span className="font-bold">
-                  re-establish healthy signaling
-                </span>{' '}
-                while your ecosystem rebuilds.
-              </p>
-
-              <p className="text-earth-brown font-playfair text-xl font-medium leading-[29.25px]">
-                No live microbes. No DNA. No colonization required—just the
-                signals your body already recognizes.
               </p>
             </div>
           </div>
@@ -371,13 +351,14 @@ export default function AffiliatePage() {
           <div className="flex flex-col gap-16">
             <div className="max-w-[1280px] mx-auto flex flex-col items-center gap-4">
               <h3 className="text-teal-green font-playfair text-[32px] font-normal leading-[48px] tracking-[-1.2px] text-center">
-                Key Postbiotic Molecules
+                What's Inside ThaenaBiotic®
               </h3>
               <div className="max-w-[1024px]">
                 <p className="text-slate font-roboto text-xl leading-7 text-center">
-                  ThaenaBiotic® contains more than 13,000 metabolites. These are
-                  a few of the most well-studied postbiotic categories that play
-                  key roles in supporting gut and whole-body function:
+                  ThaenaBiotic® contains more than <strong>13,000 metabolites</strong> naturally produced inside healthy human gut ecosystems.
+                </p>
+                <p className="text-slate font-roboto text-xl leading-7 text-center">
+                  Some well-studied categories include:
                 </p>
               </div>
             </div>
@@ -428,63 +409,27 @@ export default function AffiliatePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="flex justify-center my-4">
-            <div className="w-24 h-px bg-[#A7B3A7]" />
+      {/* How to Get StartedSection */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="flex flex-col items-center gap-3 mb-12 text-center">
+            <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
+              How to Get Started
+            </h2>
+            <p className="text-slate font-roboto text-xl leading-7 text-center">
+              Most people begin with a simple daily routine.
+            </p>
+            <p className="text-slate font-roboto text-xl leading-7 text-center">
+              ThaenaBiotic® is <strong>non-living and sterilized</strong>, designed to be easy to integrate — no complex protocols, no colonization, no refrigeration.
+            </p>
           </div>
 
-          <div className="max-w-[1280px] mx-auto w-full">
-            <div className="flex flex-col items-center gap-3 w-full">
-              <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
-                Safety Information
-              </p>
-              <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
-                Our Process: Safety You Can Trust
-              </h2>
-              <div className="w-24 h-[1px] bg-sage"></div>
-              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center max-w-[768px] mt-2">
-                Every step is controlled by us, designed for safety first and
-                regenerative integrity always.
-              </p>
-            </div>
-
-            <div className="relative">
-              <div className="absolute top-8 left-0 right-0 h-[1px] bg-sage hidden lg:block"></div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                {processSteps.map((step, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center gap-3 text-center"
-                  >
-                    <div className="w-16 h-16 rounded-full border-2 border-rust-orange flex items-center justify-center bg-cream relative z-10">
-                      <div className="w-8 h-8 rounded-full bg-sage/20"></div>
-                    </div>
-
-                    <h3 className="font-playfair text-[26px] md:text-[30px] leading-[1.2] font-normal tracking-[-0.025em] text-deep-purple">
-                      {step.title}
-                    </h3>
-
-                    <p className="font-roboto text-[14px] md:text-[16px] leading-[1.7] text-brown-text max-w-[260px]">
-                      {step.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-3 w-full mx-auto mt-6">
-              <p className="text-earth-brown font-playfair text-lg font-medium leading-7">
-                Built by scientists, we raised safety and quality to a new
-                standard — and protected human postbiotic nutrients the industry
-                once dismissed as irrelevant.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-8">
-            <button className="h-14 px-8 bg-deep-purple text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-deep-purple/90 transition-colors">
-              Get Started
+          <div className="flex justify-center">
+            <button className="h-14 px-8 bg-transparent text-deep-purple font-mono text-base font-medium leading-6 rounded-xl border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
+              Create Your Free Account to Get Your Discount
             </button>
           </div>
         </div>
@@ -525,14 +470,59 @@ export default function AffiliatePage() {
                 ))}
               </Accordion>
             </div>
-
-            <div className="flex justify-center">
-              <button className="h-14 px-8 bg-transparent text-deep-purple font-mono text-base font-medium leading-6 rounded-xl border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
-                Create Your Free Account
-              </button>
-            </div>
           </div>
         </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-16 md:py-24 px-6">
+      <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/bharath-kumar-lJZII_3rg0M-unsplash_2.jpg?v=1765998606')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: '0.2'
+        }}
+      />
+      
+      {/* Optional: Gradient Overlay */}
+      <div 
+        className="absolute inset-0 z-10"
+        style={{
+          background: `linear-gradient(0deg, rgba(167, 179, 167, 0.50) 0%, rgba(167, 179, 167, 0.50) 100%)`
+        }}
+      />
+      
+      {/* Content Layer */}
+      <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
+      {/* Heading */}
+      <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
+        Your partner discount is waiting.
+      </h2>
+
+      {/* Subheading */}
+      <div className="pb-4">
+        <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
+          Create your free Thaena account to unlock discounted pricing and get started.
+        </p>
+      </div>
+
+      {/* CTA Button */}
+      <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
+        <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
+          Create Your Free Account to Get Your Discount
+        </span>
+      </button>
+
+      <p className="text-slate font-roboto text-xl leading-7 text-center font-light italic">
+            Free to join. Your discount is applied after account creation.
+      </p>
+    </div>
+  </div>
       </section>
     </div>
   );
