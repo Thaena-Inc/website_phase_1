@@ -39,47 +39,42 @@ function CheckIcon() {
 
 function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [collapsedHeight, setCollapsedHeight] = useState(170); // fallback to 170px
   const [expandedHeight, setExpandedHeight] = useState(null);
 
   const shellRef = useRef(null);
   const backInnerRef = useRef(null);
-  const collapsedHeightRef = useRef(null);
+  const hasMeasuredCollapsedHeight = useRef(false);
 
   const useIsomorphicLayoutEffect =
     typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+  // Measure collapsed height once on mount (before any flip)
+  useIsomorphicLayoutEffect(() => {
+    if (!hasMeasuredCollapsedHeight.current && shellRef.current && !isFlipped) {
+      const measured = Math.ceil(shellRef.current.getBoundingClientRect().height);
+      if (measured > 0) {
+        setCollapsedHeight(measured);
+        hasMeasuredCollapsedHeight.current = true;
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const measureExpandedHeight = () => {
     const shellEl = shellRef.current;
     const backEl = backInnerRef.current;
     if (!shellEl || !backEl) return;
 
-    let minHeightPx = 0;
-    if (typeof window !== 'undefined') {
-      const minHeight = window.getComputedStyle(shellEl).minHeight;
-      const parsed = Number.parseFloat(minHeight);
-      if (Number.isFinite(parsed)) minHeightPx = parsed;
-    }
-
-    const collapsedBaseline =
-      (collapsedHeightRef.current ?? 0) > 0 ? collapsedHeightRef.current : 0;
-    const measuredShellHeight = Math.ceil(shellEl.getBoundingClientRect().height);
-
-    // If we're already expanded, the measured height is not a good baseline
-    // (it would prevent shrinking on resize). Prefer min-height / collapsed height.
-    const baselineHeight =
-      expandedHeight != null
-        ? Math.max(minHeightPx, collapsedBaseline)
-        : Math.max(minHeightPx, collapsedBaseline, measuredShellHeight);
     const neededHeight = Math.ceil(backEl.scrollHeight);
-    const next = neededHeight > baselineHeight ? neededHeight : null;
+    const next = neededHeight > collapsedHeight ? neededHeight : null;
     if (next !== expandedHeight) setExpandedHeight(next);
   };
 
-  // When unflipped, clear any explicit height so the default stays unchanged.
+  // When unflipped, clear expanded height to return to collapsed height.
   useIsomorphicLayoutEffect(() => {
     if (!isFlipped) {
       setExpandedHeight(null);
-      collapsedHeightRef.current = null;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFlipped]);
@@ -96,13 +91,23 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     if (typeof window === 'undefined') return;
 
     const onResize = () => {
-      if (isFlipped) measureExpandedHeight();
+      if (isFlipped) {
+        measureExpandedHeight();
+      } else {
+        // Re-measure collapsed height on resize if not flipped
+        if (shellRef.current) {
+          const measured = Math.ceil(shellRef.current.getBoundingClientRect().height);
+          if (measured > 0 && measured !== collapsedHeight) {
+            setCollapsedHeight(measured);
+          }
+        }
+      }
     };
 
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFlipped]);
+  }, [isFlipped, collapsedHeight]);
 
   const renderContent = (text, boldWord) => {
     if (!boldWord) {
@@ -124,12 +129,15 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     );
   };
 
+  // Calculate height: use expandedHeight when flipped, otherwise use collapsedHeight
+  const heightToUse = isFlipped && expandedHeight ? expandedHeight : collapsedHeight;
+
   return (
     <div className={wrapperClassName}>
       <div
         ref={shellRef}
         className={`relative w-full transition-[height] duration-300 ${cardClassName}`}
-        style={expandedHeight ? {height: `${expandedHeight}px`} : undefined}
+        style={{ height: `${heightToUse}px` }}
       >
         <div
           className={`relative w-full h-full transition-opacity duration-300 ${
@@ -137,14 +145,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
           }`}
         >
           <button
-            onClick={() => {
-              if (shellRef.current) {
-                collapsedHeightRef.current = Math.ceil(
-                  shellRef.current.getBoundingClientRect().height,
-                );
-              }
-              setIsFlipped(true);
-            }}
+            onClick={() => setIsFlipped(true)}
             className="w-full h-full flex flex-col items-end justify-between p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-cream/80 text-left"
           >
             <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
@@ -182,11 +183,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
               {renderContent(card.content, card.contentBold)}
             </p>
             <button
-              onClick={() => {
-                setIsFlipped(false);
-                setExpandedHeight(null);
-                collapsedHeightRef.current = null;
-              }}
+              onClick={() => setIsFlipped(false)}
               className="font-roboto text-[12px] font-semibold leading-[16px] tracking-[0.6px] uppercase text-deep-purple hover:text-deep-purple/80 transition-colors self-start mt-4"
             >
               Click to flip back
@@ -805,41 +802,41 @@ export default function Homepage() {
           </div>
 
           <div className="w-full max-w-[1280px] mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-auto items-start">
               <FlipCard 
                 card={flipCards[0]} 
                 wrapperClassName="lg:col-span-7 lg:row-span-2"
-                cardClassName="min-h-[160px] lg:min-h-[170px]"
+                cardClassName="min-h-[170px] h-full"
               />
               
               <FlipCard 
                 card={flipCards[1]} 
                 wrapperClassName="lg:col-span-5 lg:row-span-2"
-                cardClassName="min-h-[160px] lg:min-h-[192px]"
+                cardClassName="min-h-[170px] h-full"
               />
               
               <FlipCard 
                 card={flipCards[2]} 
                 wrapperClassName="lg:col-span-5 lg:row-span-2"
-                cardClassName="min-h-[160px]"
+                cardClassName="min-h-[170px] h-full"
               />
               
               <FlipCard 
                 card={flipCards[3]} 
                 wrapperClassName="lg:col-span-7 lg:row-span-2"
-                cardClassName="min-h-[160px] lg:min-h-[170px]"
+                cardClassName="min-h-[170px] h-full"
               />
               
               <FlipCard 
                 card={flipCards[4]} 
                 wrapperClassName="lg:col-span-6 lg:row-span-2"
-                cardClassName="min-h-[160px]"
+                cardClassName="min-h-[170px] h-full"
               />
               
               <FlipCard 
                 card={flipCards[5]} 
                 wrapperClassName="lg:col-span-6 lg:row-span-2"
-                cardClassName="min-h-[160px]"
+                cardClassName="min-h-[170px] h-full"
               />
             </div>
           </div>

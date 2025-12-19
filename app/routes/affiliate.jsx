@@ -198,9 +198,9 @@ export default function AffiliatePage() {
               </p>
 
               <ul className="list-none space-y-[14px]">
-                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No live microbes</li>
-                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No bacterial DNA</li>
-                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-deep-purple/50">No colonization required</li>
+                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No live microbes</li>
+                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No bacterial DNA</li>
+                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No colonization required</li>
               </ul>
 
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
@@ -244,9 +244,9 @@ export default function AffiliatePage() {
               Most gut supplements focus on:
             </p>
 
-            <ul className="list-[circle]">
-              <li className="text-slate font-roboto text-base leading-6">Adding strains (probiotics), or</li>
-              <li className="text-slate font-roboto text-base leading-6">Feeding strains (prebiotics)</li>
+            <ul className="list-[circle] list-inside">
+              <li className="text-slate font-roboto text-lg leading-6">Adding strains (probiotics), or</li>
+              <li className="text-slate font-roboto text-lg leading-6">Feeding strains (prebiotics)</li>
             </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
@@ -306,9 +306,9 @@ export default function AffiliatePage() {
               We look for individuals whose bodies demonstrate:
             </p>
 
-            <ul className="list-[circle] flex flex-col gap-3">
+            <ul className="list-[circle] list-inside flex flex-col gap-3">
               {donors.map((donor, index) => (
-                <li key={index} className="text-slate font-roboto text-base leading-6">
+                <li key={index} className="text-slate font-roboto text-lg leading-6">
                   {donor}
                 </li>
               ))}
@@ -320,7 +320,7 @@ export default function AffiliatePage() {
           </div>
 
           {/* Safety Content Container */}
-          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
+          <div className="max-w-[1024px] flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               Every batch of ThaenaBiotic® reflects:
             </p>

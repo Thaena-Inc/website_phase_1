@@ -27,7 +27,7 @@ export default function FinalCTA() {
       <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
       {/* Heading */}
       <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
-        One Capsule. Thousands of Nutrients.
+        The Power of the Human Microbiome, In a Capsule.
       </h2>
 
       {/* Subheading */}
