@@ -156,7 +156,7 @@ export default function AffiliatePage() {
           </div>
 
           <div className="mt-2">
-            <button className="h-14 px-8 bg-deep-purple text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-deep-purple/90 transition-colors">
+            <button className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors">
               Create Your Free Account
             </button>
           </div>
@@ -220,7 +220,7 @@ export default function AffiliatePage() {
           </div>
 
           <div className="flex justify-center">
-            <button className="h-14 px-8 bg-deep-purple text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-deep-purple/90 transition-colors">
+            <button className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors">
               Get Started
             </button>
           </div>
@@ -271,7 +271,7 @@ export default function AffiliatePage() {
           </div>
 
           <div className="flex justify-center">
-            <button className="h-14 px-8 bg-transparent text-deep-purple font-mono text-base font-medium leading-6 rounded-xl border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
+            <button className="h-14 px-8 bg-transparent text-slate-dark font-mono text-base font-medium leading-6 rounded-xl border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors">
               Unlock Your Discount — Create Free Account
             </button>
           </div>
@@ -435,8 +435,8 @@ export default function AffiliatePage() {
             </div>
 
             {/* CTA Button */}
-            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-transparent border-2 border-deep-purple hover:bg-deep-purple/5 transition-colors">
-              <span className="font-roboto text-lg font-medium leading-7 text-deep-purple">
+            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-transparent border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors">
+              <span className="font-roboto text-lg font-medium leading-7 text-slate-dark">
                 Create Your Free Account to Get Your Discount
               </span>
             </button>

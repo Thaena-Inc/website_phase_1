@@ -146,7 +146,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
         >
           <button
             onClick={() => setIsFlipped(true)}
-            className="w-full h-full flex flex-col items-end justify-between p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-cream/80 text-left"
+            className="w-full h-full flex flex-col items-end justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-cream/80 text-left"
           >
             <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
               {card.title}
@@ -175,20 +175,31 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
             isFlipped ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         >
-          <div
+          <button
             ref={backInnerRef}
-            className="w-full h-full flex flex-col justify-between p-6 md:p-8 rounded-xl border border-deep-purple/40 shadow-lg bg-cream/50"
+            onClick={() => setIsFlipped(false)}
+            className="w-full h-full flex flex-col items-end justify-between p-6 md:p-8 rounded-xl border border-deep-purple/40 shadow-lg bg-cream/50 text-left"
           >
-            <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark">
+            <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full">
               {renderContent(card.content, card.contentBold)}
             </p>
-            <button
-              onClick={() => setIsFlipped(false)}
-              className="font-roboto text-[12px] font-semibold leading-[16px] tracking-[0.6px] uppercase text-deep-purple hover:text-deep-purple/80 transition-colors self-start mt-4"
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="flex-shrink-0"
             >
-              Click to flip back
-            </button>
-          </div>
+              <path
+                d="M7.5 4.1665L13.3333 9.99984L7.5 15.8332"
+                stroke="#925781"
+                strokeWidth="1.66667"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -256,10 +267,10 @@ function ExpandableCard({card, isExpanded, onToggle}) {
             viewBox="0 0 12 7" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
-            className={`w-[10px] h-[5px] flex-shrink-0 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            className={`w-[10px] h-[5px] flex-shrink-0 transition-transform duration-300 ease-in-out ${isExpanded ? 'rotate-0' : 'rotate-180'}`}
           >
             <path 
-              d={isExpanded ? "M0.833984 0.833374L5.83398 5.83337L10.834 0.833374" : "M10.834 5.83337L5.83398 0.833374L0.833984 5.83337"}
+              d="M0.833984 0.833374L5.83398 5.83337L10.834 0.833374"
               stroke="#275B52" 
               strokeWidth="1.66667" 
               strokeLinecap="round" 
@@ -312,11 +323,10 @@ const cards = [
 ];
 
 const keyFeatures = [
-  "No colonization required",
-  "No refrigeration",
+  "Sterilized & Safe",
+  "No refrigeration needed",
   "No live microbes or bacterial DNA",
   "Designed for sensitive guts",
-  "Subscription available"
 ];
 
 const whatYouGet = [
@@ -440,7 +450,7 @@ export default function Homepage() {
               <div className="flex flex-col sm:flex-row items-center gap-4 ml-0">
                 <Link 
                   to="/thaenabiotic"
-                  className="group flex items-center justify-center gap-2 h-[56px] px-[42px] rounded-[12px] border-2 border-deep-purple bg-deep-purple hover:bg-deep-purple/90 transition-colors w-full sm:w-auto"
+                  className="group flex items-center justify-center gap-2 h-[56px] px-[42px] rounded-[12px] border-2 border-slate-dark bg-slate-dark hover:bg-slate-dark/90 transition-colors w-full sm:w-auto"
                 >
                   <span className="font-mono text-[16px] font-medium leading-[24px] text-light-neutral">
                     Shop Now
@@ -465,9 +475,9 @@ export default function Homepage() {
                 
                 <Link 
                   to="/affiliate"
-                  className="flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-teal-green bg-teal-green hover:bg-teal-green/90 transition-colors w-full sm:w-auto"
+                  className="flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-teal-green hover:bg-teal-green/90 transition-colors w-full sm:w-auto"
                 >
-                  <span className="font-mono text-[16px] font-medium leading-[24px] text-light-neutral">
+                  <span className="font-mono text-[16px] font-medium leading-[24px] text-teal-green">
                     Learn More
                   </span>
                 </Link>
@@ -521,63 +531,34 @@ export default function Homepage() {
             opacity: 0.8
           }}
         />
-        <div className="relative max-w-[1200px] mx-auto flex flex-col items-center gap-12 z-10">
-          <div className="flex flex-col items-center gap-3 w-auto ml-auto min-w-[50%]">
-            <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
-              Our PRODUCT
-            </p>
-            <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
-              Meet ThaenaBiotic<sup>®</sup>
-            </h2>
-            <div className="w-24 h-[1px] bg-sage"></div>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full items-end ml-auto">
-            <div className="lg:col-start-2 lg:col-span-2 flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8 border-2 border-sage lg:w-[90%] lg:justify-self-end">
-            <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center mb-[0.5em]">
-              ThaenaBiotic<sup>®</sup> delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human gut.
-            </p>
-              <div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                  <div className="flex flex-col gap-3">
-                    <h3 className="font-roboto text-[16px] font-bold leading-[20px] text-slate-dark">
-                      Key features:
-                    </h3>
-                    <div className="flex flex-col gap-3">
-                      {keyFeatures.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <CheckIcon />
-                          <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                      <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 flex items-center justify-center rounded-full flex-shrink-0">
-                          <span className="text-[12px] leading-[16px]">💰</span>
-                        </div>
-                        <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1">
-                          30-day money-back guarantee
-                        </span>
-                      </div>
+        <div className="relative max-w-[1200px] mx-auto z-10 overflow-hidden">
+          <div className="float-right w-full lg:w-auto lg:max-w-[600px]">
+            <div className="flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8 border-2 border-sage">
+              <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+                Our PRODUCT
+              </p>
+              <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
+                Meet ThaenaBiotic<sup>®</sup>
+              </h2>
+              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center mb-[0.5em]">
+                A sterilized, human-derived postbiotic supplement that helps restore the signals your microbiome may be missing.
+              </p>
+              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center mb-[0.5em]">
+                13,000+ distinct metabolites — not lab-made, but naturally fermented inside a healthy human gut.
+              </p>
+              <div className="flex flex-col gap-3">
+                <h3 className="font-roboto text-[16px] font-bold leading-[20px] text-slate-dark">
+                  Key features:
+                </h3>
+                <div className="flex flex-col gap-3">
+                  {keyFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-center gap-2">
+                      <CheckIcon />
+                      <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1">
+                        {feature}
+                      </span>
                     </div>
-                  </div>
-
-                  <div className="flex flex-col gap-3">
-                    <h3 className="font-roboto text-[16px] font-bold leading-[20px] text-slate-dark">
-                      What you get:
-                    </h3>
-                    <div className="flex flex-col gap-3">
-                      {whatYouGet.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <CheckIcon />
-                          <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1">
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
               <Link 
@@ -687,7 +668,7 @@ export default function Homepage() {
           </div>
 
           <div className="flex flex-col items-center">
-            <p className="font-roboto text-[20px] md:text-[24px] leading-[1.33] text-slate-dark text-center max-w-[900px]">
+            <p className="font-roboto text-[20px] md:text-[24px] leading-[1.33] text-slate-dark text-center">
               Our donors are not just part of our process — they're the heart of it. And each donor moves the science forward. Their postbiotic profiles help us sharpen our understanding of resilience, balance, and biodiversity in the human gut, advancing microbiome knowledge for everyone.
             </p>
           </div>
@@ -708,10 +689,10 @@ export default function Homepage() {
           <div className="flex justify-center">
             <Link 
               to="/donor"
-              className="flex items-center justify-center gap-2 h-[56px] px-[42px] rounded-xl border-2 border-deep-purple bg-deep-purple hover:bg-deep-purple/90 transition-colors"
+              className="flex items-center justify-center gap-2 h-[56px] px-[42px] rounded-xl border-2 border-slate-dark bg-slate-dark hover:bg-slate-dark/90 transition-colors"
             >
               <span className="font-mono text-[16px] font-medium leading-[24px] text-cream">
-                Meet Our Donors
+                Learn More About Our Donors
               </span>
               <svg 
                 width="11" 
@@ -871,12 +852,12 @@ export default function Homepage() {
           </h2>
           
           <p className="font-roboto text-[22px] md:text-[28px] leading-[1.16] font-normal text-slate-dark">
-            Join the Thaenaverse™ and support your gut's natural intelligence.
+            Everything your gut ecosystem needs to find its way back.
           </p>
           
           <Link 
             to="/thaenabiotic"
-            className="h-[56px] px-8 flex items-center justify-center rounded-[10px] bg-[#A66890] hover:bg-[#A66890]/90 transition-colors shadow-lg"
+            className="h-[56px] px-8 flex items-center justify-center rounded-[10px] bg-slate-dark hover:bg-slate-dark/90 transition-colors shadow-lg"
           >
             <span className="font-roboto text-[18px] font-medium leading-[28px] text-cream">
               Shop ThaenaBiotic® Now

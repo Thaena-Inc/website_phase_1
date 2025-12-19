@@ -27,12 +27,15 @@
    */
   html {
     overflow-x: hidden; /* Prevent horizontal scroll from scaled wrapper */
+    height: auto; /* Allow html to size to content, not force viewport height */
   }
 
   body {
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    height: auto; /* Allow body to size to content */
+    min-height: auto; /* Remove any forced minimum height */
   }
 
   .content-scale-wrapper {
@@ -42,6 +45,7 @@
     position: relative;
     /* Ensure content fills viewport after scaling */
     box-sizing: border-box;
+    height: fit-content; /* Only take up space needed by content */
   }
 
 }
