@@ -7,7 +7,7 @@ export default function HowToTake() {
           {/* Header */}
           <div className="mb-12">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-0.96px] text-teal-green text-center font-normal mb-4">
-              How to Take ThaenaBiotic®
+              How to Take ThaenaBiotic<sup>®</sup>
             </h2>
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
               Flexible dosing for your lifestyle. Take with or without food, morning or evening.

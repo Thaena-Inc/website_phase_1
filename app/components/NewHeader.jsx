@@ -68,11 +68,6 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
 
   const shopPages = [{name: 'ThaenaBiotic', path: '/thaena-biotic'}];
 
-  const imPages = [
-    {name: 'Provider', path: '/provider'},
-    {name: 'Client', path: '/client'},
-  ];
-
   return (
     <header className="h-20 shadow-[0_4px_20px_-4px_rgba(29,41,48,0.08)] bg-neutral-light relative">
       <div className="max-w-[1400px] mx-auto h-full flex items-center justify-between px-4">
@@ -102,7 +97,6 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
           <NavDropdown label="Science" items={sciencePages} />
           <NavDropdown label="Learn" items={learnPages} />
           <NavDropdown label="Shop" items={shopPages} />
-          <NavDropdown label="I'm…" items={imPages} />
         </nav>
 
         {/* Desktop Action Buttons */}
@@ -249,38 +243,6 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                 {expandedMobileMenu === 'shop' && (
                   <div className="bg-gray-100/50 pl-4">
                     {shopPages.map((page) => (
-                      <Link
-                        key={page.path}
-                        to={page.path}
-                        className="block px-3 py-2 text-slate-primary font-playfair text-sm hover:bg-gray-50 rounded-md"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setExpandedMobileMenu(null);
-                        }}
-                      >
-                        {page.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* I'm… Menu */}
-              <div>
-                <button
-                  className="flex items-center justify-between w-full px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md text-left"
-                  onClick={() =>
-                    setExpandedMobileMenu(
-                      expandedMobileMenu === 'im' ? null : 'im',
-                    )
-                  }
-                >
-                  I'm…
-                  <ChevronDownIcon />
-                </button>
-                {expandedMobileMenu === 'im' && (
-                  <div className="bg-gray-100/50 pl-4">
-                    {imPages.map((page) => (
                       <Link
                         key={page.path}
                         to={page.path}

@@ -29,8 +29,8 @@ export default function Footer({
                       and modern life erodes the microbial biodiversity that
                       keeps us resilient. We exist to restore the postbiotic
                       signals that help those ecosystems recover. Our work
-                      begins with ThaenaBiotic®, but our mission reaches far
-                      beyond a single product. This is Humans Healing Humans™.
+                      begins with ThaenaBiotic<sup>®</sup>, but our mission reaches far
+                      beyond a single product. This is Humans Healing Humans<sup>™</sup>.
                     </p>
                   </div>
                   <div className="flex items-center gap-3">

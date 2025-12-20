@@ -37,7 +37,7 @@ export default function Index() {
             <div className="w-24 h-[1px] bg-sage"></div>
             
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center max-w-[768px]">
-              Shop our flagship product, ThaenaBiotic®, the world's first human-derived postbiotic supplement.
+              Shop our flagship product, ThaenaBiotic<sup>®</sup>, the world's first human-derived postbiotic supplement.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export default function Index() {
             {/* Product Details */}
             <div className="flex-1 w-full">
               <h2 className="font-playfair text-3xl md:text-[40px] leading-[1.2] tracking-[-1.2px] text-slate-dark font-normal mb-6">
-                ThaenaBiotic®-  Postbiotic Supplement
+                ThaenaBiotic<sup>®</sup>-  Postbiotic Supplement
               </h2>
 
               {/* Size Selection */}
@@ -254,7 +254,7 @@ export default function Index() {
           <div>
             <h3 className="font-roboto text-xl font-light leading-7 text-slate-dark mb-3">Ingredients:</h3>
             <p className="font-roboto text-lg font-light leading-7 text-slate-dark mb-2">
-              Citric acid, ThaenaBiotic®, delayed release vegetarian capsules (vegetable cellulose, purified water)
+              Citric acid, ThaenaBiotic<sup>®</sup>, delayed release vegetarian capsules (vegetable cellulose, purified water)
             </p>
             <p className="font-roboto text-lg leading-7 text-slate-dark">
               <span className="font-normal">May contain trace amounts of:</span>{' '}
@@ -270,10 +270,10 @@ export default function Index() {
           {/* Header */}
           <div className="max-w-[896px] mx-auto mb-16">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal mb-6">
-              What's in ThaenaBiotic®
+              What's in ThaenaBiotic<sup>®</sup>
             </h2>
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
-              ThaenaBiotic® delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human donor.
+              ThaenaBiotic<sup>®</sup> delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human donor.
             </p>
           </div>
 
@@ -360,7 +360,7 @@ export default function Index() {
           {/* Header */}
           <div className="mb-16 text-center">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-0.96px] text-teal-green font-normal">
-              Is ThaenaBiotic® for You?
+              Is ThaenaBiotic<sup>®</sup> for You?
             </h2>
           </div>
 
@@ -377,10 +377,10 @@ export default function Index() {
                 You've tried probiotics… but you still don't feel right.
               </h3>
               <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-                Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic® delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
+                Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic<sup>®</sup> delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
               </p>
               <button className="flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
-                Learn More About the Difference Between Probiotics + ThaenaBiotic®
+                Learn More About the Difference Between Probiotics + ThaenaBiotic<sup>®</sup>
                 <svg className="w-[9.33px] h-[9.33px] flex-shrink-0" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0.666504 5.33342H9.99984M9.99984 5.33342L5.33317 0.666748M9.99984 5.33342L5.33317 10.0001" stroke="#9F5D3C" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -398,7 +398,7 @@ export default function Index() {
                 You're recovering from antibiotics, illness, or burnout.
               </h3>
               <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-                When your microbiome's been wiped out, your body loses access to key compounds that regulate digestion, energy, and mood. ThaenaBiotic® replenishes those microbial nutrients — safely, without live bacteria — helping your system remember how to balance itself.
+                When your microbiome's been wiped out, your body loses access to key compounds that regulate digestion, energy, and mood. ThaenaBiotic<sup>®</sup> replenishes those microbial nutrients — safely, without live bacteria — helping your system remember how to balance itself.
               </p>
             </div>
 
@@ -413,7 +413,7 @@ export default function Index() {
                 Your diet is limited by sensitivities or fear of flares.
               </h3>
               <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-                If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic® gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
+                If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic<sup>®</sup> gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
               </p>
               <button className="flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
                 🌿 To Help You Build Toward Real Food Freedom — Without Fear
@@ -431,7 +431,7 @@ export default function Index() {
                 You've optimized everything else — now it's time to upgrade your biology.
               </h3>
               <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-                You track sleep. You train recovery. You fine-tune every system — except the one that runs them all: your gut. ThaenaBiotic® delivers the rare, human-native metabolites produced by the healthiest microbiomes on Earth. Think of it as molecular intelligence for high-functioning biology.
+                You track sleep. You train recovery. You fine-tune every system — except the one that runs them all: your gut. ThaenaBiotic<sup>®</sup> delivers the rare, human-native metabolites produced by the healthiest microbiomes on Earth. Think of it as molecular intelligence for high-functioning biology.
               </p>
             </div>
 
@@ -447,7 +447,7 @@ export default function Index() {
                 You just want your gut to work — every day, without thinking about it.
               </h3>
               <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-                ThaenaBiotic® helps regulate rhythm, comfort, and consistency from the inside out. Whether you deal with constipation, loose stools, or unpredictable digestion, our human-derived postbiotics help your body find its natural pace again.
+                ThaenaBiotic<sup>®</sup> helps regulate rhythm, comfort, and consistency from the inside out. Whether you deal with constipation, loose stools, or unpredictable digestion, our human-derived postbiotics help your body find its natural pace again.
               </p>
             </div>
           </div>
@@ -456,7 +456,7 @@ export default function Index() {
           <div className="flex flex-col items-center gap-6">
             <div className="w-16 h-[2px] bg-golden"></div>
             <p className="font-roboto text-lg leading-7 text-slate-dark text-center max-w-2xl">
-              Still not sure? Talk to your healthcare provider about whether ThaenaBiotic® is right for you.
+              Still not sure? Talk to your healthcare provider about whether ThaenaBiotic<sup>®</sup> is right for you.
             </p>
             <button className="h-14 px-11 rounded-xl border-2 border-purple bg-neutral-light hover:opacity-90 transition-opacity">
               <span className="font-roboto-mono text-sm font-medium leading-5 text-purple">Explore the Science</span>
@@ -471,7 +471,7 @@ export default function Index() {
           {/* Header */}
           <div className="mb-12">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-0.96px] text-teal-green text-center font-normal mb-4">
-              How to Take ThaenaBiotic®
+              How to Take ThaenaBiotic<sup>®</sup>
             </h2>
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
               Flexible dosing for your lifestyle. Take with or without food, morning or evening.
@@ -649,7 +649,7 @@ export default function Index() {
             </h2>
             <div className="w-24 h-[1px] bg-sage"></div>
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center max-w-[768px] pt-6">
-              Get answers to the most common questions about ThaenaBiotic® and our microbiome restoration process.
+              Get answers to the most common questions about ThaenaBiotic<sup>®</sup> and our microbiome restoration process.
             </p>
           </div>
 
@@ -664,7 +664,7 @@ export default function Index() {
                 </AccordionTrigger>
                 <AccordionContent className="px-8 pb-6 pt-0">
                   <p className="font-roboto text-base leading-7 text-slate-dark">
-                    ThaenaBiotic® is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
+                    ThaenaBiotic<sup>®</sup> is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -690,7 +690,7 @@ export default function Index() {
                 </AccordionTrigger>
                 <AccordionContent className="px-8 pb-6 pt-0">
                   <p className="font-roboto text-base leading-7 text-slate-dark">
-                    No. ThaenaBiotic® doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
+                    No. ThaenaBiotic<sup>®</sup> doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -703,7 +703,7 @@ export default function Index() {
                 </AccordionTrigger>
                 <AccordionContent className="px-8 pb-6 pt-0">
                   <p className="font-roboto text-base leading-7 text-slate-dark">
-                    ThaenaBiotic® is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
+                    ThaenaBiotic<sup>®</sup> is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -738,7 +738,7 @@ export default function Index() {
           {/* CTA Button */}
           <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
             <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
-              Shop ThaenaBiotic® Now
+              Shop ThaenaBiotic<sup>®</sup> Now
             </span>
           </button>
         </div>

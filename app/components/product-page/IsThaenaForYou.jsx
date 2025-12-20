@@ -7,7 +7,7 @@ export default function IsThaenaForYou() {
       {/* Header */}
       <div className="mb-16 text-center">
         <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-0.96px] text-teal-green font-normal">
-          Is ThaenaBiotic® for You?
+          Is ThaenaBiotic<sup>®</sup> for You?
         </h2>
       </div>
 
@@ -29,11 +29,11 @@ export default function IsThaenaForYou() {
               </div>
             </div>
             <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-              Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic® delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
+              Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic<sup>®</sup> delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
             </p>
           </div>
           <button className="mt-3 flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
-            Learn More About the Difference Between Probiotics + ThaenaBiotic®
+            Learn More About the Difference Between Probiotics + ThaenaBiotic<sup>®</sup>
             <svg className="w-[9.33px] h-[9.33px] flex-shrink-0" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.666504 5.33342H9.99984M9.99984 5.33342L5.33317 0.666748M9.99984 5.33342L5.33317 10.0001" stroke="#9F5D3C" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
@@ -56,7 +56,7 @@ export default function IsThaenaForYou() {
               </div>
             </div>
             <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-              When your microbiome's been wiped out, your body loses access to key compounds that regulate digestion, energy, and mood. ThaenaBiotic® replenishes those microbial nutrients — safely, without live bacteria — helping your system remember how to balance itself.
+              When your microbiome's been wiped out, your body loses access to key compounds that regulate digestion, energy, and mood. ThaenaBiotic<sup>®</sup> replenishes those microbial nutrients — safely, without live bacteria — helping your system remember how to balance itself.
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ export default function IsThaenaForYou() {
               </div>
             </div>
             <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-              If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic® gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
+              If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic<sup>®</sup> gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
             </p>
           </div>
           <button className="mt-3 flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
@@ -101,7 +101,7 @@ export default function IsThaenaForYou() {
               </div>
             </div>
             <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-              You track sleep. You train recovery. You fine-tune every system — except the one that runs them all: your gut. ThaenaBiotic® delivers the rare, human-native metabolites produced by the healthiest microbiomes on Earth. Think of it as molecular intelligence for high-functioning biology.
+              You track sleep. You train recovery. You fine-tune every system — except the one that runs them all: your gut. ThaenaBiotic<sup>®</sup> delivers the rare, human-native metabolites produced by the healthiest microbiomes on Earth. Think of it as molecular intelligence for high-functioning biology.
             </p>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default function IsThaenaForYou() {
               </div>
             </div>
             <p className="font-roboto text-base leading-[26px] text-slate-dark/80">
-              ThaenaBiotic® helps regulate rhythm, comfort, and consistency from the inside out. Whether you deal with constipation, loose stools, or unpredictable digestion, our human-derived postbiotics help your body find its natural pace again.
+              ThaenaBiotic<sup>®</sup> helps regulate rhythm, comfort, and consistency from the inside out. Whether you deal with constipation, loose stools, or unpredictable digestion, our human-derived postbiotics help your body find its natural pace again.
             </p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function IsThaenaForYou() {
       <div className="flex flex-col items-center gap-6">
         <div className="w-16 h-[2px] bg-golden"></div>
         <p className="font-roboto text-lg leading-7 text-slate-dark text-center">
-          Still not sure? Talk to your healthcare provider about whether ThaenaBiotic® is right for you.
+          Still not sure? Talk to your healthcare provider about whether ThaenaBiotic<sup>®</sup> is right for you.
         </p>
         <button className="h-14 px-11 rounded-xl border-2 border-purple bg-neutral-light hover:opacity-90 transition-opacity">
           <span className="font-roboto-mono text-sm font-medium leading-5 text-purple">Explore the Science</span>

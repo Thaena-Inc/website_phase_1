@@ -178,9 +178,9 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
           <button
             ref={backInnerRef}
             onClick={() => setIsFlipped(false)}
-            className="w-full h-full flex flex-col items-end justify-between p-6 md:p-8 rounded-xl border border-deep-purple/40 shadow-lg bg-cream/50 text-left"
+            className="w-full h-full flex flex-col items-end justify-center p-6 md:p-8 rounded-xl border border-deep-purple/40 shadow-lg bg-cream/50 text-left"
           >
-            <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full">
+            <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full mt-2">
               {renderContent(card.content, card.contentBold)}
             </p>
             <svg
@@ -316,7 +316,7 @@ const cards = [
   {
     id: 4,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/postbiotic-blend_png.png?v=1766004524",
-    title: "ThaenaBiotic® is the regenerative bridge.",
+    title: "ThaenaBiotic<sup>®</sup> is the regenerative bridge.",
     content: "We source our postbiotic nutrients from rare, biodiverse human microbiomes. They're sterilized and refined, then delivered to you as regenerative support. It's a bridge that helps re-establish healthy signaling while your ecosystem rebuilds.",
     contentBold: ["re-establish healthy signaling"]
   }
@@ -357,7 +357,7 @@ const processSteps = [
 
 const testimonials = [
   {
-    quote: "\"I am a healthcare provider and have been recommending ThaenaBiotic® to my patients for the past several years. I have been very impressed with the product and recently decided to try it for myself. I love how simple it is, rather than a complex protocol.\"",
+    quote: "\"I am a healthcare provider and have been recommending ThaenaBiotic<sup>®</sup> to my patients for the past several years. I have been very impressed with the product and recently decided to try it for myself. I love how simple it is, rather than a complex protocol.\"",
     author: "Dr. Stephanie Raven, ND",
     title: ""
   },
@@ -372,7 +372,7 @@ const flipCards = [
   {
     id: "sterilized",
     title: "How sterilized postbiotics work",
-    content: "We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.\nThaenaBiotic® captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.\n\nThe signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.",
+    content: "We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.\nThaenaBiotic<sup>®</sup> captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.\n\nThe signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.",
     contentBold: "without colonization"
   },
   {
@@ -383,17 +383,17 @@ const flipCards = [
   {
     id: "probiotic-pairing",
     title: "Do you need a probiotic with this?",
-    content: "ThaenaBiotic® works on its own — no probiotic required. But if you already use a probiotic you trust, they can be a powerful pairing. Think of them as complementary tools."
+    content: "ThaenaBiotic<sup>®</sup> works on its own — no probiotic required. But if you already use a probiotic you trust, they can be a powerful pairing. Think of them as complementary tools."
   },
   {
     id: "medicine",
     title: "Why poop has always been medicine",
-    content: "Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.\nThaenaBiotic® takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans."
+    content: "Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.\nThaenaBiotic<sup>®</sup> takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans."
   },
   {
     id: "infection",
     title: "How do you know there's no risk of infection?",
-    content: "ThaenaBiotic® is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.\nNo live microbes = no live-microbe infection risk."
+    content: "ThaenaBiotic<sup>®</sup> is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.\nNo live microbes = no live-microbe infection risk."
   },
   {
     id: "taste",
@@ -531,30 +531,27 @@ export default function Homepage() {
             opacity: 0.8
           }}
         />
-        <div className="relative max-w-[1200px] mx-auto z-10 overflow-hidden">
-          <div className="float-right w-full lg:w-auto lg:max-w-[600px]">
-            <div className="flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8 border-2 border-sage">
-              <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+        <div className="relative max-w-[1280px] xl:max-w-[1366px] 2xl:max-w-[1440px] mx-auto z-10 overflow-hidden">
+          <div className="float-right w-full lg:w-auto lg:max-w-[520px]">
+            <div className="flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8">
+              <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
                 Our PRODUCT
               </p>
-              <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
+              <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center mb-2">
                 Meet ThaenaBiotic<sup>®</sup>
               </h2>
-              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center mb-[0.5em]">
+              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark">
                 A sterilized, human-derived postbiotic supplement that helps restore the signals your microbiome may be missing.
               </p>
-              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center mb-[0.5em]">
+              <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark font-light">
                 13,000+ distinct metabolites — not lab-made, but naturally fermented inside a healthy human gut.
               </p>
-              <div className="flex flex-col gap-3">
-                <h3 className="font-roboto text-[16px] font-bold leading-[20px] text-slate-dark">
-                  Key features:
-                </h3>
+              <div className="flex flex-col gap-3 mb-4 mt-2">
                 <div className="flex flex-col gap-3">
                   {keyFeatures.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <CheckIcon />
-                      <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1">
+                      <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1 font-light">
                         {feature}
                       </span>
                     </div>
@@ -566,8 +563,24 @@ export default function Homepage() {
                 className="h-[56px] flex items-center justify-center rounded-[12px] border-2 border-teal-green bg-teal-green hover:bg-teal-green/90 transition-colors"
               >
                 <span className="font-mono text-[16px] font-medium leading-[24px] text-cream">
-                  Shop ThaenaBiotic®
+                  Get Started
                 </span>
+                <svg 
+                    width="11" 
+                    height="11" 
+                    viewBox="0 0 11 11" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-[9.33px] h-[9.33px]"
+                  >
+                    <path 
+                      d="M0.666016 5.33335H9.99935M9.99935 5.33335L5.33268 0.666687M9.99935 5.33335L5.33268 10" 
+                      stroke="#f7f3ec" 
+                      strokeWidth="1.33333" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
               </Link>
               <p className="font-roboto text-[14px] leading-[24px] text-slate-dark text-center">
                 <span className="font-medium">Are you a provider or referred by one?</span>
@@ -589,7 +602,7 @@ export default function Homepage() {
       <section className="bg-cream py-16 md:py-24 px-6">
         <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-center gap-3 w-full">
-            <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+            <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
               Safety Information
             </p>
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
@@ -658,7 +671,7 @@ export default function Homepage() {
         {/* Content Layer */}
         <div className="max-w-[1200px] mx-auto flex flex-col gap-12 relative z-20">
           <div className="flex flex-col items-center gap-3 w-full">
-            <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+            <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
               Our Donors
             </p>
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
@@ -715,10 +728,10 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="bg-cream py-16 md:py-24 px-6">
+      <section className="hidden bg-cream py-16 md:py-24 px-6">
         <div className="max-w-[1200px] mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-center gap-4 w-full">
-            <p className="font-mono text-[14px] leading-[20px] tracking-[0.35px] uppercase text-rust-orange text-center">
+            <p className="font-mono text-[16px] leading-[20px] tracking-[0.35px] uppercase text-rust-orange text-center">
               Patient & Provider Voices
             </p>
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
@@ -756,7 +769,7 @@ export default function Homepage() {
 
             <div className="flex flex-col justify-center gap-4 px-0 lg:px-6">
               <p className="font-roboto text-[16px] md:text-[18px] leading-[1.625] text-slate-dark italic">
-                Curious about others' experiences with ThaenaBiotic®?
+                Curious about others' experiences with ThaenaBiotic<sup>®</sup>?
                 <br /><br />
                 You can find public conversations on Google and Reddit where individuals share their personal journeys.
                 <br /><br />
@@ -770,15 +783,15 @@ export default function Homepage() {
       <section className="py-16 md:py-24 px-6" style={{ backgroundColor: "rgba(109, 79, 44, 0.2)" }}>
         <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-center gap-3 w-full">
-            <p className="font-mono text-[14px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
+            <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
               PRODUCT INSIGHTS
             </p>
             <h2 className="font-playfair text-[36px] md:text-[48px] leading-[1] font-normal tracking-[-0.025em] text-teal-green text-center">
-              Inside ThaenaBiotic®
+              Inside ThaenaBiotic<sup>®</sup>
             </h2>
             <div className="w-24 h-[1px] bg-sage"></div>
             <p className="font-roboto text-[18px] md:text-[20px] leading-[1.2] text-slate-dark text-center max-w-[800px] mt-2">
-              Six simple explanations that reveal what sets ThaenaBiotic® apart and how it supports your gut.
+              Six simple explanations that reveal what sets ThaenaBiotic<sup>®</sup> apart and how it supports your gut.
             </p>
           </div>
 
@@ -860,7 +873,7 @@ export default function Homepage() {
             className="h-[56px] px-8 flex items-center justify-center rounded-[10px] bg-slate-dark hover:bg-slate-dark/90 transition-colors shadow-lg"
           >
             <span className="font-roboto text-[18px] font-medium leading-[28px] text-cream">
-              Shop ThaenaBiotic® Now
+              Shop ThaenaBiotic<sup>®</sup> Now
             </span>
           </Link>
         </div>

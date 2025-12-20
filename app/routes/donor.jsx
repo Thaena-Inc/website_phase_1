@@ -43,7 +43,7 @@ export default function DonorPage() {
 
               <div className="flex flex-col items-center gap-2.5 max-w-full pb-3">
                 <p className="font-roboto text-lg sm:text-xl leading-7 font-normal text-slate">
-                  Thaena relies on exceptionally healthy, carefully screened microbiome donors. Every bottle of ThaenaBiotic® starts with our donors, whose rare biology helps us advance microbiome science and create safe, human-derived postbiotics.
+                  Thaena relies on exceptionally healthy, carefully screened microbiome donors. Every bottle of ThaenaBiotic<sup>®</sup> starts with our donors, whose rare biology helps us advance microbiome science and create safe, human-derived postbiotics.
                 </p>
 
                 <p className="font-roboto text-lg sm:text-xl leading-7 font-normal text-slate">

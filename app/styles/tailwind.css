@@ -46,6 +46,7 @@
     /* Ensure content fills viewport after scaling */
     box-sizing: border-box;
     height: fit-content; /* Only take up space needed by content */
+    margin-bottom: -10vh; /* Compensate for extra space created by transform scale */
   }
 
 }

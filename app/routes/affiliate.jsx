@@ -64,27 +64,27 @@ export default function AffiliatePage() {
     {
       question: 'Who is this product for?',
       answer:
-        "ThaenaBiotic® is designed for anyone looking to support their gut health with human-derived postbiotic nutrients. It's especially beneficial for those with sensitive guts, people who have tried probiotics without success, and anyone experiencing the effects of modern lifestyle stress on their microbiome.",
+        "ThaenaBiotic<sup>®</sup> is designed for anyone looking to support their gut health with human-derived postbiotic nutrients. It's especially beneficial for those with sensitive guts, people who have tried probiotics without success, and anyone experiencing the effects of modern lifestyle stress on their microbiome.",
     },
     {
-      question: 'How is ThaenaBiotic® different from probiotics?',
+      question: 'How is ThaenaBiotic<sup>®</sup> different from probiotics?',
       answer:
-        'Unlike probiotics, which deliver live bacteria that need to colonize your gut, ThaenaBiotic® provides postbiotic metabolites—the beneficial compounds that healthy bacteria produce. This means no live organisms, no refrigeration needed, and signals your body already recognizes and can use immediately.',
+        'Unlike probiotics, which deliver live bacteria that need to colonize your gut, ThaenaBiotic<sup>®</sup> provides postbiotic metabolites—the beneficial compounds that healthy bacteria produce. This means no live organisms, no refrigeration needed, and signals your body already recognizes and can use immediately.',
     },
     {
       question: 'Is it safe?',
       answer:
-        'Yes. ThaenaBiotic® undergoes rigorous safety protocols. Every batch is produced under strict GMP conditions, third-party tested for safety and purity, and our patented sterilization process eliminates all live microbes while preserving the functional postbiotic signals. Donors are screened to the highest standards.',
+        'Yes. ThaenaBiotic<sup>®</sup> undergoes rigorous safety protocols. Every batch is produced under strict GMP conditions, third-party tested for safety and purity, and our patented sterilization process eliminates all live microbes while preserving the functional postbiotic signals. Donors are screened to the highest standards.',
     },
     {
       question: 'Does it need refrigeration?',
       answer:
-        "No. One of the key advantages of ThaenaBiotic® is its shelf-stability. Because it contains postbiotic metabolites rather than live organisms, it doesn't require refrigeration and maintains its potency at room temperature.",
+        "No. One of the key advantages of ThaenaBiotic<sup>®</sup> is its shelf-stability. Because it contains postbiotic metabolites rather than live organisms, it doesn't require refrigeration and maintains its potency at room temperature.",
     },
     {
       question: 'How does it taste?',
       answer:
-        "ThaenaBiotic® comes in easy-to-swallow capsules, so there's no taste to worry about. Simply take with water as part of your daily routine.",
+        "ThaenaBiotic<sup>®</sup> comes in easy-to-swallow capsules, so there's no taste to worry about. Simply take with water as part of your daily routine.",
     },
   ];
 
@@ -174,7 +174,7 @@ export default function AffiliatePage() {
       <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="max-w-[1024px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
-            <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               Our Product
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
@@ -191,7 +191,7 @@ export default function AffiliatePage() {
               Modern life can disrupt that ecosystem. When microbial diversity declines, postbiotic signaling declines too.
               </p>
               <p className="text-slate font-roboto text-lg leading-[29.25px] font-bold">
-              ThaenaBiotic® is the regenerative bridge.
+              ThaenaBiotic<sup>®</sup> is the regenerative bridge.
               </p>
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
               It delivers a complete spectrum of postbiotic compounds sourced from healthy human gut ecosystems, then <strong>sterilized and refined into capsules</strong>.
@@ -231,7 +231,7 @@ export default function AffiliatePage() {
       <section className="py-16 md:py-24 px-6">
         <div className="max-w-[1024px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
-            <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               Who We Are
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
@@ -250,7 +250,7 @@ export default function AffiliatePage() {
             </ul>
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
-            <strong>ThaenaBiotic® focuses on something more foundational:</strong><br/>
+            <strong>ThaenaBiotic<sup>®</sup> focuses on something more foundational:</strong><br/>
             supporting the <i>signaling environment</i> that helps the gut ecosystem function and recover.
             </p>
 
@@ -282,11 +282,11 @@ export default function AffiliatePage() {
       <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
-            <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               The Science
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
-              Humans Healing Humans™ — from the source
+              Humans Healing Humans<sup>™</sup> — from the source
             </h2>
           </div>
 
@@ -322,7 +322,7 @@ export default function AffiliatePage() {
           {/* Safety Content Container */}
           <div className="max-w-[1024px] flex flex-col gap-4 mt-6">
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              Every batch of ThaenaBiotic® reflects:
+              Every batch of ThaenaBiotic<sup>®</sup> reflects:
             </p>
 
             <div className="flex flex-col gap-3">
@@ -354,7 +354,7 @@ export default function AffiliatePage() {
 
             <p className="text-slate font-roboto text-lg leading-[29.25px]">
               <span className="font-bold">
-                This is Humans Healing Humans™ — with modern safety controls and scientific integrity.
+                This is Humans Healing Humans<sup>™</sup> — with modern safety controls and scientific integrity.
               </span>
             </p>
           </div>
@@ -365,11 +365,11 @@ export default function AffiliatePage() {
       <section className="py-16 md:py-24 px-6">
         <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
-            <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+            <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               What's Inside
             </span>
             <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">
-              What's Inside ThaenaBiotic®
+              What's Inside ThaenaBiotic<sup>®</sup>
             </h2>
           </div>
 
@@ -377,7 +377,7 @@ export default function AffiliatePage() {
             <div className="max-w-[1024px] mx-auto flex flex-col items-center gap-4">
               <div className="max-w-[1024px]">
                 <p className="text-slate font-roboto text-xl leading-7 text-center">
-                  ThaenaBiotic® contains more than <strong>13,000 metabolites</strong> naturally produced inside healthy human gut ecosystems.
+                  ThaenaBiotic<sup>®</sup> contains more than <strong>13,000 metabolites</strong> naturally produced inside healthy human gut ecosystems.
                 </p>
                 <p className="text-slate font-roboto text-xl leading-7 text-center">
                   Some well-studied categories include:
@@ -430,7 +430,7 @@ export default function AffiliatePage() {
                 Most people begin with a simple daily routine.
               </p>
               <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
-                ThaenaBiotic® is <strong>non-living and sterilized</strong>, designed to be easy to integrate — no complex protocols, no colonization, no refrigeration.
+                ThaenaBiotic<sup>®</sup> is <strong>non-living and sterilized</strong>, designed to be easy to integrate — no complex protocols, no colonization, no refrigeration.
               </p>
             </div>
 
@@ -449,7 +449,7 @@ export default function AffiliatePage() {
         <div className="max-w-[1425px] mx-auto">
           <div className="flex flex-col items-center gap-12">
             <div className="flex flex-col items-center gap-3 text-center">
-              <span className="text-rust font-mono text-sm font-medium leading-5 tracking-[0.7px] uppercase">
+              <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
                 Questions & Answers
               </span>
               <h2 className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">

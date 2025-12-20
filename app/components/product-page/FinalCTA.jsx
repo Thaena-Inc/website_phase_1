@@ -40,7 +40,7 @@ export default function FinalCTA() {
       {/* CTA Button */}
       <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
         <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
-          Shop ThaenaBiotic® Now
+          Shop ThaenaBiotic<sup>®</sup> Now
         </span>
       </button>
     </div>

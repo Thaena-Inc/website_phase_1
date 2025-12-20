@@ -21,7 +21,7 @@ export default function FAQ() {
         </h2>
         <div className="w-24 h-[1px] bg-sage"></div>
         <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center max-w-[768px] pt-6">
-          Get answers to the most common questions about ThaenaBiotic® and our microbiome restoration process.
+          Get answers to the most common questions about ThaenaBiotic<sup>®</sup> and our microbiome restoration process.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="px-8 pb-6 pt-0">
               <p className="font-roboto text-base leading-7 text-slate-dark">
-                ThaenaBiotic® is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
+                ThaenaBiotic<sup>®</sup> is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -62,7 +62,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="px-8 pb-6 pt-0">
               <p className="font-roboto text-base leading-7 text-slate-dark">
-                No. ThaenaBiotic® doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
+                No. ThaenaBiotic<sup>®</sup> doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -75,7 +75,7 @@ export default function FAQ() {
             </AccordionTrigger>
             <AccordionContent className="px-8 pb-6 pt-0">
               <p className="font-roboto text-base leading-7 text-slate-dark">
-                ThaenaBiotic® is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
+                ThaenaBiotic<sup>®</sup> is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
               </p>
             </AccordionContent>
           </AccordionItem>

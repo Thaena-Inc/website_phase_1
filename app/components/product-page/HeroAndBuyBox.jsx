@@ -458,7 +458,7 @@ export default function HeroAndBuyBox({productImage, product}) {
 
               {/* Title */}
               <h1 className="font-playfair text-4xl md:text-5xl leading-tight text-slate-dark">
-                ThaenaBiotic® - Postbiotic Supplement
+                ThaenaBiotic<sup>®</sup> - Postbiotic Supplement
               </h1>
 
               {/* Description */}

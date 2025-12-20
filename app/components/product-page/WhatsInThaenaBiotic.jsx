@@ -7,10 +7,10 @@ export default function WhatsInThaenaBiotic() {
           {/* Header */}
           <div className="max-w-[896px] mx-auto mb-16">
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal mb-6">
-              What's in ThaenaBiotic®
+              What's in ThaenaBiotic<sup>®</sup>
             </h2>
             <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center">
-              ThaenaBiotic® delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human donor.
+              ThaenaBiotic<sup>®</sup> delivers over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human donor.
             </p>
           </div>
 
