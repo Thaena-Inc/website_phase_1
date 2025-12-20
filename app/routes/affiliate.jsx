@@ -183,29 +183,49 @@ export default function AffiliatePage() {
           </div>
 
           <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-12 mb-12">
-            <div className="flex-1 flex flex-col gap-7 max-w-2xl lg:max-w-none">
+            <div className="flex-1 flex flex-col gap-4 max-w-2xl lg:max-w-none">
               <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              You're not just a body. <strong>You're an ecosystem</strong> — and your gut depends on thousands of molecular signals produced by a healthy, diverse microbiome.
+              ThaenaBiotic<sup>®</sup> is a postbiotic supplement delivering over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human gut.
               </p>
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              Modern life can disrupt that ecosystem. When microbial diversity declines, postbiotic signaling declines too.
-              </p>
-              <p className="text-slate font-roboto text-lg leading-[29.25px] font-bold">
-              ThaenaBiotic<sup>®</sup> is the regenerative bridge.
-              </p>
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              It delivers a complete spectrum of postbiotic compounds sourced from healthy human gut ecosystems, then <strong>sterilized and refined into capsules</strong>.
-              </p>
+              <h4 className="text-slate font-playfair text-xl font-medium leading-7">
+              Key features:
+              </h4>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">No colonization required</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">No refrigeration</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">No live microbes or bacterial DNA</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Designed for sensitive guts</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Subscription available</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">30-day money-back guarantee</span>
+                </div>
+              </div>
+              <h4 className="text-slate font-playfair text-xl font-medium leading-7">
+              What you get:
+              </h4>
 
               <ul className="list-none space-y-[14px]">
-                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No live microbes</li>
-                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No bacterial DNA</li>
-                <li className="text-slate font-roboto text-lg leading-6 pl-[10px] border-l border-deep-purple/80">No colonization required</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-teal-green/80">A sterilized, human-derived postbiotic from rigorously screened donors</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-teal-green/80">Postbiotic nutrients your body already recognizes</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-teal-green/80">Full-spectrum molecular diversity</li>
+                <li className="text-slate font-roboto text-base leading-6 pl-[10px] border-l border-teal-green/80">Support for travel, disruption, and daily rhythm</li>
               </ul>
-
-              <p className="text-slate font-roboto text-lg leading-[29.25px]">
-                Just the signals your body already recognizes.
-              </p>
             </div>
 
             <div className="w-full lg:w-[400px] flex-shrink-0 flex">

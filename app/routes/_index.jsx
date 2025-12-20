@@ -533,7 +533,7 @@ export default function Homepage() {
         />
         <div className="relative max-w-[1280px] xl:max-w-[1366px] 2xl:max-w-[1440px] mx-auto z-10 overflow-hidden">
           <div className="float-right w-full lg:w-auto lg:max-w-[520px]">
-            <div className="flex flex-col gap-6 rounded-xl overflow-hidden bg-[#EDE8DE] p-8">
+            <div className="flex flex-col gap-4 rounded-xl overflow-hidden bg-[#EDE8DE] p-8">
               <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">
                 Our PRODUCT
               </p>
@@ -551,7 +551,7 @@ export default function Homepage() {
                   {keyFeatures.map((feature, index) => (
                     <div key={index} className="flex items-center gap-2">
                       <CheckIcon />
-                      <span className="font-roboto text-[14px] leading-[20px] text-slate-dark flex-1 font-light">
+                      <span className="font-roboto text-[16px] leading-[20px] text-slate-dark flex-1 font-light">
                         {feature}
                       </span>
                     </div>
@@ -560,7 +560,7 @@ export default function Homepage() {
               </div>
               <Link 
                 to="/thaenabiotic"
-                className="h-[56px] flex items-center justify-center rounded-[12px] border-2 border-teal-green bg-teal-green hover:bg-teal-green/90 transition-colors"
+                className="h-[56px] flex items-center justify-center rounded-[12px] border-2 border-teal-green bg-teal-green hover:bg-teal-green/90 transition-colors gap-2"
               >
                 <span className="font-mono text-[16px] font-medium leading-[24px] text-cream">
                   Get Started
@@ -576,7 +576,7 @@ export default function Homepage() {
                     <path 
                       d="M0.666016 5.33335H9.99935M9.99935 5.33335L5.33268 0.666687M9.99935 5.33335L5.33268 10" 
                       stroke="#f7f3ec" 
-                      strokeWidth="1.33333" 
+                      strokeWidth="2" 
                       strokeLinecap="round" 
                       strokeLinejoin="round"
                     />
