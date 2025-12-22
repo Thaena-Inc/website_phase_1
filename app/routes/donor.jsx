@@ -38,16 +38,20 @@ export default function DonorPage() {
           <div className="w-full max-w-[1024px] mx-auto">
             <div className="flex flex-col items-center gap-5 text-center">
               <h1 className="font-playfair text-4xl sm:text-5xl lg:text-[60px] font-normal leading-tight lg:leading-[60px] tracking-[-0.025em] lg:tracking-[-1.5px] text-teal-green">
-                Our Donors
+                The Thaena Donor Program
               </h1>
 
               <div className="flex flex-col items-center gap-2.5 max-w-full pb-3">
                 <p className="font-roboto text-lg sm:text-xl leading-7 font-normal text-slate">
-                  Thaena relies on exceptionally healthy, carefully screened microbiome donors. Every bottle of ThaenaBiotic<sup>®</sup> starts with our donors, whose rare biology helps us advance microbiome science and create safe, human-derived postbiotics.
+                  Our donors are not suppliers.
                 </p>
 
                 <p className="font-roboto text-lg sm:text-xl leading-7 font-normal text-slate">
-                  This donor program is built on a simple belief: Humans Healing Humans.
+                  They are <strong>partners</strong> in a regenerative healing ecosystem — individuals whose exceptional microbial balance helps advance science, restore depleted microbiomes, and redefine what thriving human health can look like.
+                </p>
+
+                <p className="font-roboto text-lg sm:text-xl leading-7 font-normal text-slate">
+                  This is <strong>Humans Healing Humans<sup>™</sup></strong>, at scale.
                 </p>
               </div>
 
@@ -67,21 +71,79 @@ export default function DonorPage() {
             <div className="flex flex-col items-center gap-10">
               <div className="w-full max-w-[768px]">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
-                  Why Microbiome Donors Matter
+                  Why We Built Our Own Donor Program
                 </h2>
+                <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center">
+                  Thaena operates its own <strong>independent donor program</strong>.
+                </p>
               </div>
 
-              <div className="flex flex-col gap-6 max-w-[896px] w-full">
+              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
-                  In our modern world of processed foods, antibiotic overuse, and stressors, truly healthy microbiomes are becoming increasingly rare – and incredibly valuable.
+                Unlike conventional donation models, we:
+                </p>
+
+                <ul className="list-[circle] list-inside">
+                  <li className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">Do not outsource donor screening</li>
+                  <li className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">Do not rely on minimum-viability health definitions</li>
+                  <li className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">Do not ignore health and wellness habits like diet and lifestyle</li>
+                </ul>
+
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                  Instead, we curate a living reference for what thriving human biology looks like in practice — and hold every downstream process to that same standard.
                 </p>
 
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
-                  Our donors represent the exceptional few: individuals whose gut ecosystems have remained remarkably balanced and resilient. That's why we rely on them to create safe, human-derived postbiotics that support gut and whole-body health.
+                  This allows us to set a higher bar for:
+                </p>
+
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-normal text-slate pl-[10px] border-l border-teal-green/80">
+                  Safety • Consistency • Postbiotic diversity and composition
                 </p>
 
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
-                  By partnering with these rare individuals, Thaena advances microbiome science while making safe, human-derived postbiotics accessible to those who need them. This is the essence of our &quot;Humans Healing Humans&quot; philosophy — harnessing the wisdom of healthy human biology to support wellness in others.
+                  Because regenerative health starts at the source.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate">
+                  Most stool banks just screen for disease.
+                </p>
+
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate">
+                  We look for patterns of health across the whole system.
+                </p>
+
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                  At Thaena, health is measured by resilience, regulation, and long-term balance — not just lack of disease. We look for individuals whose bodies demonstrate:
+                </p>
+
+                <div className="flex flex-col gap-3">
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Stable, well-regulated digestion</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Low baseline inflammation</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Robust immune and metabolic signaling</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckIcon />
+                  <span className="text-slate font-roboto text-base leading-6">Long-term physiological consistency, not short-term optimization</span>
+                </div>
+              </div>
+
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                  This level of biological coherence is rare.
+                </p>
+
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-normal text-center text-deep-purple">
+                That rarity is exactly why it matters.
                 </p>
               </div>
             </div>
@@ -103,7 +165,11 @@ export default function DonorPage() {
 
               <div className="w-full max-w-[896px]">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
-                  Our donors are uniquely healthy individuals who represent the optimal human microbiome. They are carefully screened and monitored to ensure the highest quality metabolite production.
+                  Eligibility for the Thaena Donor Program reflects <strong>whole-body health across time</strong>, not isolated metrics.
+                </p>
+
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
+                  Candidates must meet strict criteria, including:
                 </p>
               </div>
 
@@ -115,19 +181,19 @@ export default function DonorPage() {
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
-                    <span className="font-roboto text-base leading-[1.625] text-slate">Healthy BMI</span>
+                    <span className="font-roboto text-base leading-[1.625] text-slate">Healthy, stable BMI</span>
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
-                    <span className="font-roboto text-base leading-[1.625] text-slate">Vaginal birth and breastfed as an infant</span>
+                    <span className="font-roboto text-base leading-[1.625] text-slate">Vaginal birth and breastfed in infancy</span>
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
-                    <span className="font-roboto text-base leading-[1.625] text-slate">Healthy, consistent daily bowel movements</span>
+                    <span className="font-roboto text-base leading-[1.625] text-slate">Consistent, high-quality daily bowel movements</span>
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
-                    <span className="font-roboto text-base leading-[1.625] text-slate">High-quality, whole-food diet</span>
+                    <span className="font-roboto text-base leading-[1.625] text-slate">Long-term whole-food dietary patterns</span>
                   </div>
                 </div>
 
@@ -135,13 +201,13 @@ export default function DonorPage() {
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
                     <span className="font-roboto text-base leading-[1.625] text-slate">
-                      No chronic GI, autoimmune, metabolic, or inflammatory conditions
+                      No history of chronic GI, autoimmune, metabolic, mental health, or inflammatory disease
                     </span>
                   </div>
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-slate">•</span>
                     <span className="font-roboto text-base leading-[1.625] text-slate">
-                      Fewer than 5 lifetime rounds of antibiotics
+                      Fewer than six lifetime courses of antibiotics
                     </span>
                   </div>
                   <div className="flex items-baseline gap-4">
@@ -157,13 +223,13 @@ export default function DonorPage() {
 
               <div className="mt-4">
                 <p className="font-roboto text-sm italic font-light text-slate text-center">
-                  Final eligibility is determined through clinical screening and laboratory testing.
+                  Final eligibility is determined through <strong>comprehensive clinical screening and advanced laboratory testing</strong>.
                 </p>
               </div>
 
               <div className="flex flex-col items-center gap-3.5 mt-6 w-full max-w-[896px]">
                 <h3 className="font-playfair text-2xl sm:text-3xl lg:text-[36px] font-normal leading-tight lg:leading-[60px] text-center text-deep-purple">
-                  Only 3% of applicants are accepted.
+                  Fewer than <strong>1% of applicants</strong> qualify.
                 </h3>
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-light text-slate text-center">
                   Our standards are intentionally strict to ensure consistency, safety, and exceptional microbiome quality.
@@ -179,13 +245,13 @@ export default function DonorPage() {
             <div className="flex flex-col items-center gap-6">
               <div className="w-full">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
-                  Screening Process
+                  How the Selection Process Works
                 </h2>
               </div>
 
               <div className="w-full max-w-[896px]">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
-                  Every potential donor undergoes comprehensive evaluation with medical oversight. Our multi-stage process maintains the highest bar for acceptance.
+                  Every potential donor goes through a thoughtful, medically supervised process designed to protect both donors and the people we serve.
                 </p>
               </div>
 
@@ -196,28 +262,28 @@ export default function DonorPage() {
                   {[
                     {
                       step: '1',
-                      title: 'Application Review',
-                      body: 'Brief initial fit check to assess basic eligibility criteria',
+                      title: 'InitialApplication Review',
+                      body: 'A brief survey to ensure basic eligibility',
                     },
                     {
                       step: '2',
                       title: 'Health & Lifestyle Questionnaires',
-                      body: 'Detailed health and lifestyle history, bowel movement tracker, and food diary',
+                      body: ' Detailed history, bowel movement tracking, and food diary',
                     },
                     {
                       step: '3',
                       title: 'Physician Interview',
-                      body: 'One-on-one medical review with our clinical team',
+                      body: 'One-on-one review with our clinical team',
                     },
                     {
                       step: '4',
                       title: 'Clinical Screening & Lab Testing',
-                      body: 'Comprehensive blood, stool, and urine analysis',
+                      body: 'Blood, stool, and urine analysis',
                     },
                     {
                       step: '5',
                       title: 'Ongoing Monitoring',
-                      body: 'Donors remain active only if they continue to meet program standards',
+                      body: 'Continued participation depends on sustained health over time, regular check ins, and follow up lab screenings',
                     },
                   ].map(({step, title, body}) => (
                     <div key={step} className="grid grid-cols-[auto_1fr] gap-3 items-start">
@@ -235,12 +301,18 @@ export default function DonorPage() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2 w-full max-w-[896px] mt-6">
+              <div className="flex flex-col gap-2 w-full max-w-[1024px] mt-6">
+              <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                At Thaena, donor health is not a one-time decision — it's an ongoing relationship. Because the microbiome responds to sleep, stress, diet, environment, and major life events, we monitor donors continuously and pause collection whenever balance may be temporarily disrupted.
+                </p>
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
-                  &quot;We&apos;re not just selecting for lack of disease — we&apos;re selecting for the kind of vibrant wellness that most people have never experienced.&quot;
+                  &quot;Everything affects the microbiome. When one of our donors experienced a significant loss in their family, we paused collection until their system returned to balance.&quot;
                 </p>
                 <p className="font-roboto text-sm italic leading-5 text-slate text-center">
                   Dr. Andrea McBeth, CEO
+                </p>
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                  This approach protects donors, preserves signal integrity, and reflects how seriously we take our responsibility to both sides of the healing relationship.
                 </p>
               </div>
             </div>
@@ -256,80 +328,48 @@ export default function DonorPage() {
             <div className="flex flex-col items-center gap-6">
               <div className="w-full">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
-                  Safety Begins with Donor Selection
+                  From Donor to Postbiotic Signal
                 </h2>
               </div>
 
               <div className="w-full max-w-[896px]">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
-                  Donor screening is the first step in Thaena&apos;s multi-layer safety process. By combining exceptional donor health with rigorous clinical oversight, we ensure the safest possible starting material. From there, our process includes sterilization, postbiotic isolation, and batch-level testing.
+                  Donor screening is only the <strong>first step</strong> in Thaena's broader safety and quality process.
                 </p>
-              </div>
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
+                  From there, every batch undergoes:
+                </p>
+                <div className="relative w-full max-w-[527px] mt-4">
 
-              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-wider text-rust">Step 01</span>
-                    <div className="flex-1 h-px bg-cream" />
+                  <div className="flex flex-col gap-6">
+                    {[
+                      {
+                        step: '1',
+                        body: 'Controlled collection',
+                      },
+                      {
+                        step: '2',
+                        body: 'Patented sterilization for safety',
+                      },
+                      {
+                        step: '3',
+                        body: 'Lyophilization to preserve postbiotic signals',
+                      },
+                      {
+                        step: '4',
+                        body: 'Third-party batch testing for safety, purity, and consistency',
+                      },
+                    ].map(({step, title, body}) => (
+                      <div key={step} className="grid grid-cols-[auto_1fr] gap-3 items-start">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-rust/30 relative z-10 bg-cream">
+                          <span className="font-mono text-sm text-rust">{step}</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-roboto text-sm leading-[1.625] text-slate">{body}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="font-playfair text-lg font-light leading-7 tracking-[-0.025em] text-teal-green">
-                    Donor Screening
-                  </h3>
-                  <p className="font-roboto text-sm leading-[1.625] text-slate">
-                    We vet all donors using our own highly stringent health and biodiversity standards — not outsourced screening.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-wider text-rust">Step 04</span>
-                    <div className="flex-1 h-px bg-cream" />
-                  </div>
-                  <h3 className="font-playfair text-lg font-light leading-7 tracking-[-0.025em] text-teal-green">
-                    Stabilization
-                  </h3>
-                  <p className="font-roboto text-sm leading-[1.625] text-slate">
-                    Freeze-drying protects potency and creates a shelf-stable form suitable for precise encapsulation and reliable dosing.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-wider text-rust">Step 02</span>
-                    <div className="flex-1 h-px bg-cream" />
-                  </div>
-                  <h3 className="font-playfair text-lg font-light leading-7 tracking-[-0.025em] text-teal-green">
-                    Collection
-                  </h3>
-                  <p className="font-roboto text-sm leading-[1.625] text-slate">
-                    We collect donations under controlled conditions to ensure the highest-quality starting material for postbiotic creation.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-wider text-rust">Step 05</span>
-                    <div className="flex-1 h-px bg-cream" />
-                  </div>
-                  <h3 className="font-playfair text-lg font-light leading-7 tracking-[-0.025em] text-teal-green">
-                    Processing & Testing
-                  </h3>
-                  <p className="font-roboto text-sm leading-[1.625] text-slate">
-                    Each batch is produced under strict GMP conditions and verified through third-party testing for safety, purity, and consistency.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs uppercase tracking-wider text-rust">Step 03</span>
-                    <div className="flex-1 h-px bg-cream" />
-                  </div>
-                  <h3 className="font-playfair text-lg font-light leading-7 tracking-[-0.025em] text-teal-green">
-                    Sterilization
-                  </h3>
-                  <p className="font-roboto text-sm leading-[1.625] text-slate">
-                    Our patented autoclaving process eliminates microbes while preserving the postbiotic signals your body intuitively understands.
-                  </p>
                 </div>
               </div>
 
@@ -449,13 +489,13 @@ export default function DonorPage() {
             <div className="flex flex-col items-center justify-center gap-6">
               <div className="w-full">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
-                  Think You Might Be a Good Fit?
+                  Become a Partner in Healing
                 </h2>
               </div>
 
               <div className="w-full">
                 <p className="font-roboto text-xl sm:text-2xl lg:text-[28px] leading-[1.16] font-normal text-slate text-center">
-                  Begin your donor application and learn whether you qualify.
+                  If you carry an unusually resilient, well-regulated microbiome, your biology may help others find their way back to health.
                 </p>
               </div>
 
@@ -465,8 +505,18 @@ export default function DonorPage() {
                 rel="noreferrer"
                 className="inline-flex h-14 px-8 items-center justify-center rounded-[10px] bg-slate-dark hover:bg-slate-dark/90 text-cream font-roboto text-lg font-medium shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)]"
               >
-                Join Our Donor Program
+                Apply to the Thaena Donor Program
               </a>
+
+              <div className="w-full">
+                <p className="font-roboto text-lg sm:text-xl lg:text-[28px] leading-[1.16] font-light text-slate text-center italic">
+                Confidential. Medically supervised. All testing covered.
+                </p>
+
+                <p className="font-roboto text-lg sm:text-xl lg:text-[28px] leading-[1.16] font-light text-slate text-center italic">
+                  Compensation provided.
+                </p>
+              </div>
             </div>
           </div>
         </section>
