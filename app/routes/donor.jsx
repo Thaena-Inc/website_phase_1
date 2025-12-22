@@ -1,3 +1,4 @@
+import CheckIcon from '../components/CheckIcon';
 import {
   Accordion,
   AccordionContent,
