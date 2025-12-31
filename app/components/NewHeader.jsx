@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import {Link, useLocation} from 'react-router';
 import {Search, User, ShoppingBag, Menu, X} from 'lucide-react';
 import {useState} from 'react';
 import {
@@ -27,23 +27,26 @@ const ChevronDownIcon = () => (
   </svg>
 );
 
-const NavDropdown = ({label, items}) => (
+const NavDropdown = ({label, items, currentPathname}) => (
   <DropdownMenu>
-    <DropdownMenuTrigger className="flex items-center gap-1 px-3 py-2 rounded-md text-slate-primary font-playfair text-sm leading-5 hover:bg-gray-50 transition-colors">
+    <DropdownMenuTrigger className="flex items-center gap-2 px-3 py-2 rounded-md text-slate-dark font-playfair text-md leading-5 hover:text-slate-dark/90 transition-colors">
       {label}
       <ChevronDownIcon />
     </DropdownMenuTrigger>
-    <DropdownMenuContent className="bg-neutral-light border-slate-primary/20">
-      {items.map((item) => (
-        <DropdownMenuItem key={item.path} className="cursor-pointer">
-          <Link
-            to={item.path}
-            className="w-full text-slate-primary font-playfair text-sm py-1 px-2 hover:bg-gray-50 rounded"
-          >
-            {item.name}
-          </Link>
-        </DropdownMenuItem>
-      ))}
+    <DropdownMenuContent className="bg-neutral-light border-slate-dark/20">
+      {items.map((item) => {
+        const isActive = currentPathname === item.path;
+        return (
+          <DropdownMenuItem key={item.path} className="cursor-pointer">
+            <Link
+              to={item.path}
+              className={`w-full text-slate-dark font-playfair text-md py-1 px-2 hover:text-slate-dark/90 rounded ${isActive ? 'underline' : ''}`}
+            >
+              {item.name}
+            </Link>
+          </DropdownMenuItem>
+        );
+      })}
     </DropdownMenuContent>
   </DropdownMenu>
 );
@@ -51,6 +54,7 @@ const NavDropdown = ({label, items}) => (
 export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedMobileMenu, setExpandedMobileMenu] = useState(null);
+  const {pathname} = useLocation();
 
   const sciencePages = [
     {name: 'Approach', path: '/approach'},
@@ -66,7 +70,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
     {name: 'Provider Education', path: '/provider-education'},
   ];
 
-  const shopPages = [{name: 'ThaenaBiotic', path: '/thaena-biotic'}];
+  const shopPages = [{name: 'ThaenaBiotic<sup>&reg;</sup>', path: '/thaena-biotic'}];
 
   return (
     <header className="h-20 shadow-[0_4px_20px_-4px_rgba(29,41,48,0.08)] bg-neutral-light relative">
@@ -84,48 +88,48 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
         <nav className="hidden lg:flex items-center gap-1 ml-auto">
           <Link
             to="/"
-            className="px-3 py-2 rounded-md text-slate-primary font-playfair text-sm leading-5 hover:bg-gray-50 transition-colors"
+            className="px-3 py-2 rounded-md text-slate-dark font-playfair text-md leading-5 hover:text-slate-dark/90 transition-colors"
           >
             Home
           </Link>
           <Link
             to="/who-we-are"
-            className="px-3 py-2 rounded-md text-slate-primary font-playfair text-sm leading-5 hover:bg-gray-50 transition-colors"
+            className="px-3 py-2 rounded-md text-slate-dark font-playfair text-md leading-5 hover:text-slate-dark/90 transition-colors"
           >
             Who We Are
           </Link>
-          <NavDropdown label="Science" items={sciencePages} />
-          <NavDropdown label="Learn" items={learnPages} />
-          <NavDropdown label="Shop" items={shopPages} />
+          <NavDropdown label="Science" items={sciencePages} currentPathname={pathname} />
+          <NavDropdown label="Learn" items={learnPages} currentPathname={pathname} />
+          <NavDropdown label="Shop" items={shopPages} currentPathname={pathname} />
         </nav>
 
         {/* Desktop Action Buttons */}
         <div className="hidden lg:flex items-center gap-1 ml-[25px]">
           <button
-            className="p-2.5 rounded-md hover:bg-gray-50 transition-colors"
+            className="p-2.5 rounded-md transition-colors"
             aria-label="Search"
           >
             <Search
-              className="w-[15px] h-[15px] text-slate-primary"
+              className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
               strokeWidth={1.33}
             />
           </button>
           <button
-            className="p-2.5 rounded-md hover:bg-gray-50 transition-colors"
+            className="p-2.5 rounded-md transition-colors"
             aria-label="Login"
           >
             <User
-              className="w-[15px] h-[15px] text-slate-primary"
+              className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
               strokeWidth={1.33}
             />
           </button>
           <a
             href="https://thaena.com/cart"
-            className="p-2.5 rounded-md hover:bg-gray-50 transition-colors"
+            className="p-2.5 rounded-md transition-colors"
             aria-label="Shopping cart"
           >
             <ShoppingBag
-              className="w-[15px] h-[15px] text-slate-primary"
+              className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
               strokeWidth={1.33}
             />
           </a>
@@ -138,9 +142,9 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
-            <X className="w-6 h-6 text-slate-primary" />
+            <X className="w-6 h-6 text-slate-dark" />
           ) : (
-            <Menu className="w-6 h-6 text-slate-primary" />
+            <Menu className="w-6 h-6 text-slate-dark" />
           )}
         </button>
 
@@ -150,14 +154,14 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
             <nav className="flex flex-col p-4">
               <Link
                 to="/"
-                className="px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md"
+                className="px-3 py-3 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 to="/who-we-are"
-                className="px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md"
+                className="px-3 py-3 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Who We Are
@@ -166,7 +170,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               {/* Science Menu */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md text-left"
+                  className="flex items-center justify-between w-full px-3 py-3 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md text-left"
                   onClick={() =>
                     setExpandedMobileMenu(
                       expandedMobileMenu === 'science' ? null : 'science',
@@ -178,19 +182,22 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                 </button>
                 {expandedMobileMenu === 'science' && (
                   <div className="bg-gray-100/50 pl-4">
-                    {sciencePages.map((page) => (
-                      <Link
-                        key={page.path}
-                        to={page.path}
-                        className="block px-3 py-2 text-slate-primary font-playfair text-sm hover:bg-gray-50 rounded-md"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setExpandedMobileMenu(null);
-                        }}
-                      >
-                        {page.name}
-                      </Link>
-                    ))}
+                    {sciencePages.map((page) => {
+                      const isActive = pathname === page.path;
+                      return (
+                        <Link
+                          key={page.path}
+                          to={page.path}
+                          className={`block px-3 py-2 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md ${isActive ? 'underline' : ''}`}
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            setExpandedMobileMenu(null);
+                          }}
+                        >
+                          {page.name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -198,7 +205,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               {/* Learn Menu */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md text-left"
+                  className="flex items-center justify-between w-full px-3 py-3 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md text-left"
                   onClick={() =>
                     setExpandedMobileMenu(
                       expandedMobileMenu === 'learn' ? null : 'learn',
@@ -210,19 +217,22 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                 </button>
                 {expandedMobileMenu === 'learn' && (
                   <div className="bg-gray-100/50 pl-4">
-                    {learnPages.map((page) => (
-                      <Link
-                        key={page.path}
-                        to={page.path}
-                        className="block px-3 py-2 text-slate-primary font-playfair text-sm hover:bg-gray-50 rounded-md"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setExpandedMobileMenu(null);
-                        }}
-                      >
-                        {page.name}
-                      </Link>
-                    ))}
+                    {learnPages.map((page) => {
+                      const isActive = pathname === page.path;
+                      return (
+                        <Link
+                          key={page.path}
+                          to={page.path}
+                          className={`block px-3 py-2 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md ${isActive ? 'underline' : ''}`}
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            setExpandedMobileMenu(null);
+                          }}
+                        >
+                          {page.name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -230,7 +240,7 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
               {/* Shop Menu */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full px-3 py-3 text-slate-primary font-playfair text-base hover:bg-gray-50 rounded-md text-left"
+                  className="flex items-center justify-between w-full px-3 py-3 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md text-left"
                   onClick={() =>
                     setExpandedMobileMenu(
                       expandedMobileMenu === 'shop' ? null : 'shop',
@@ -242,49 +252,52 @@ export default function Header({header, isLoggedIn, cart, publicStoreDomain}) {
                 </button>
                 {expandedMobileMenu === 'shop' && (
                   <div className="bg-gray-100/50 pl-4">
-                    {shopPages.map((page) => (
-                      <Link
-                        key={page.path}
-                        to={page.path}
-                        className="block px-3 py-2 text-slate-primary font-playfair text-sm hover:bg-gray-50 rounded-md"
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          setExpandedMobileMenu(null);
-                        }}
-                      >
-                        {page.name}
-                      </Link>
-                    ))}
+                    {shopPages.map((page) => {
+                      const isActive = pathname === page.path;
+                      return (
+                        <Link
+                          key={page.path}
+                          to={page.path}
+                          className={`block px-3 py-2 text-slate-dark font-playfair text-md hover:text-slate-dark/90 rounded-md ${isActive ? 'underline' : ''}`}
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            setExpandedMobileMenu(null);
+                          }}
+                        >
+                          {page.name}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
 
               <div className="flex items-center gap-4 px-3 py-3 mt-4 border-t">
                 <button
-                  className="p-2 hover:bg-gray-50 rounded-md"
+                  className="p-2 rounded-md"
                   aria-label="Search"
                 >
                   <Search
-                    className="w-5 h-5 text-slate-primary"
+                    className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
                     strokeWidth={1.33}
                   />
                 </button>
                 <button
-                  className="p-2 hover:bg-gray-50 rounded-md"
+                  className="p-2 rounded-md"
                   aria-label="Login"
                 >
                   <User
-                    className="w-5 h-5 text-slate-primary"
+                    className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
                     strokeWidth={1.33}
                   />
                 </button>
                 <a
                   href="https://thaena.com/cart"
-                  className="p-2 hover:bg-gray-50 rounded-md"
+                  className="p-2 rounded-md"
                   aria-label="Shopping cart"
                 >
                   <ShoppingBag
-                    className="w-5 h-5 text-slate-primary"
+                    className="w-[18px] h-[18px] text-slate-dark hover:text-slate-dark/90"
                     strokeWidth={1.33}
                   />
                 </a>

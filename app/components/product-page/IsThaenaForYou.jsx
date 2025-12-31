@@ -107,7 +107,7 @@ export default function IsThaenaForYou() {
         </div>
 
         {/* Card 5: Just want it to work */}
-        <div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-sage-grey/30 border-r-sage-grey/30 border-b-sage-grey/30 border-l-sage-grey shadow-sm p-8 flex flex-col">
+        {/*<div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-sage-grey/30 border-r-sage-grey/30 border-b-sage-grey/30 border-l-sage-grey shadow-sm p-8 flex flex-col">
           <div className="flex flex-col gap-2.5">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-full bg-sage-grey/10 flex items-center justify-center flex-shrink-0">
@@ -126,17 +126,17 @@ export default function IsThaenaForYou() {
               ThaenaBiotic<sup>®</sup> helps regulate rhythm, comfort, and consistency from the inside out. Whether you deal with constipation, loose stools, or unpredictable digestion, our human-derived postbiotics help your body find its natural pace again.
             </p>
           </div>
-        </div>
+        </div>*/}
       </div>
 
       {/* Bottom CTA */}
       <div className="flex flex-col items-center gap-6">
-        <div className="w-16 h-[2px] bg-golden"></div>
+        <div className="w-16 h-[2px] bg-sage"></div>
         <p className="font-roboto text-lg leading-7 text-slate-dark text-center">
           Still not sure? Talk to your healthcare provider about whether ThaenaBiotic<sup>®</sup> is right for you.
         </p>
-        <button className="h-14 px-11 rounded-xl border-2 border-purple bg-neutral-light hover:opacity-90 transition-opacity">
-          <span className="font-roboto-mono text-sm font-medium leading-5 text-purple">Explore the Science</span>
+        <button className="h-14 px-11 rounded-xl border-2 border-slate-dark bg-neutral-light hover:opacity-75 transition-opacity">
+          <span className="font-roboto-mono text-sm font-medium leading-5 text-slate-dark">Explore the Science</span>
         </button>
       </div>
     </div>

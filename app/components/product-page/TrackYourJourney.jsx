@@ -83,8 +83,8 @@ export default function TrackYourJourney() {
 
       {/* Download Button */}
       <div className="flex justify-center">
-        <button className="h-14 px-11 rounded-xl border-2 border-purple hover:opacity-90 transition-opacity">
-          <span className="font-roboto-mono text-base font-medium leading-6 text-purple">Enroll in our CHLOE Study</span>
+        <button className="h-14 px-11 rounded-xl border-2 border-slate-dark hover:opacity-75 transition-opacity">
+          <span className="font-roboto-mono text-base font-medium leading-6 text-slate-dark">Enroll in our CHLOE Study</span>
         </button>
       </div>
     </div>

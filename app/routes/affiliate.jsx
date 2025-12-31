@@ -541,8 +541,8 @@ export default function AffiliatePage() {
             </div>
 
             {/* CTA Button */}
-            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-mauve shadow-lg hover:opacity-90 transition-opacity">
-              <span className="font-roboto text-lg font-medium leading-7 text-[#F9F5F1]">
+            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-slate-dark shadow-lg hover:opacity-90 transition-opacity">
+              <span className="font-roboto text-lg font-medium leading-7 text-light-neutral">
                 Create Your Free Account to Get Your Discount
               </span>
             </button>
