@@ -407,8 +407,8 @@ export default function HeroAndBuyBox({productImage, product}) {
         <main className="container mx-auto px-4 py-8 md:py-12">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto">
             {/* Product Image Section */}
-            <div className="flex-1 max-w-[700px]">
-              <div className="flex gap-2 items-start">
+            <div className="flex-1 max-w-[700px] flex h-full">
+              <div className="flex gap-2 items-start h-full">
                 {/* Thumbnail Gallery */}
                 <div className="flex flex-col gap-2 flex-shrink-0 pt-0">
                   {thumbnailImages.map((thumbUrl, index) => (
@@ -437,11 +437,13 @@ export default function HeroAndBuyBox({productImage, product}) {
 
                 {/* Main Image */}
                 <div className="flex-1 min-w-0">
-                  <div className="relative w-full max-w-[700px] h-[700px]">
+                  <div className="relative w-full max-w-[700px] h-full">
                     <img
                       src={imageUrl}
                       alt="ThaenaBiotic Postbiotic Supplement bottle"
-                      className="w-full h-full object-cover rounded-lg"
+                      className={`w-full h-full rounded-lg ${
+                        selectedImageIndex === 2 ? 'object-contain' : 'object-cover'
+                      }`}
                       loading="eager"
                     />
                   </div>
@@ -452,7 +454,7 @@ export default function HeroAndBuyBox({productImage, product}) {
             {/* Product Details Section */}
             <div className="flex-1 max-w-[636px] flex flex-col gap-2">
               {/* Category */}
-              <p className="text-rust text-xs font-roboto-mono uppercase tracking-wider">
+              <p className="text-rust-dark text-sm font-roboto-mono uppercase tracking-[0.35px] leading-5">
                 Daily Wellness
               </p>
 
@@ -463,12 +465,12 @@ export default function HeroAndBuyBox({productImage, product}) {
 
               {/* Description */}
               <div className="flex flex-col gap-2">
-                <p className="text-slate-dark text-base leading-relaxed">
+                <p className="text-slate-dark text-base leading-relaxed font-roboto">
                   Because it all comes from humans — not lab beakers — you get
                   the real-world diversity and complexity that can only come
                   from a human gut.
                 </p>
-                <p className="text-slate-dark/80 text-sm font-light leading-7">
+                <p className="text-slate-dark/80 text-sm font-light leading-7 font-roboto">
                   Sterilized & safe • No refrigeration needed • No live
                   bacteria
                 </p>
@@ -476,7 +478,7 @@ export default function HeroAndBuyBox({productImage, product}) {
 
               {/* Size Selection */}
               <div className="flex flex-col gap-3 mt-2">
-                <label className="text-slate-dark/80 text-xs font-roboto-mono uppercase tracking-wider">
+                <label className="text-slate-dark/80 text-sm font-roboto-mono uppercase tracking-wider">
                   Select Size
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -493,12 +495,12 @@ export default function HeroAndBuyBox({productImage, product}) {
                       <h3 className="font-playfair text-2xl text-slate-dark">
                         30 capsules
                       </h3>
-                      <p className="text-xs text-slate-dark/80">
+                      <p className="text-sm text-slate-dark/80 font-roboto">
                         1 month supply
                       </p>
-                      <p className="text-slate-dark/80 text-xs font-light">
+                      <p className="text-slate-dark/80 text-sm font-light font-roboto">
                         <a 
-                          href="https://thaena.com/pages/chloe-app" 
+                          href="https://thaena.com/pages/guarantee" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="underline hover:text-teal-green transition-colors"
@@ -509,7 +511,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                       </p>
                     </div>
                     {selectedSize === "30" && (
-                      <span className="absolute -top-2 left-4 px-3 py-1 bg-teal-green text-neutral-light text-[10px] uppercase tracking-wider rounded-full">
+                      <span className="absolute -top-2 left-4 px-3 py-1 bg-teal-green text-neutral-light text-[10px] uppercase tracking-wider rounded-full font-roboto-mono">
                         Most Popular
                       </span>
                     )}
@@ -528,12 +530,12 @@ export default function HeroAndBuyBox({productImage, product}) {
                       <h3 className="font-playfair text-2xl text-slate-dark">
                         90 capsules
                       </h3>
-                      <p className="text-xs text-slate-dark/80">
+                      <p className="text-sm text-slate-dark/80 font-roboto">
                         3 months supply
                       </p>
                     </div>
                     {selectedSize === "90" && (
-                      <span className="absolute -top-2 left-4 px-3 py-1 bg-rust text-neutral-light text-[10px] uppercase tracking-wider rounded-full">
+                      <span className="absolute -top-2 left-4 px-3 py-1 bg-rust-dark text-neutral-light text-[10px] uppercase tracking-wider rounded-full font-roboto-mono">
                         Best Value
                       </span>
                     )}
@@ -573,10 +575,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                       )}
                     </div>
                     <div className="flex-1 flex justify-between items-center">
-                      <span className="text-sm text-slate-dark">
+                      <span className="text-sm text-slate-dark font-roboto">
                         One-time purchase
                       </span>
-                      <span className="text-sm text-slate-dark">
+                      <span className="text-sm text-slate-dark font-roboto">
                         ${basePrice.toFixed(2)}
                       </span>
                     </div>
@@ -604,10 +606,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                         )}
                       </div>
                       <div className="flex-1 flex justify-between items-center">
-                        <span className="text-sm text-slate-dark">
+                        <span className="text-sm text-slate-dark font-roboto">
                           Subscribe & Save
                         </span>
-                        <span className="text-sm text-slate-dark">
+                        <span className="text-sm text-slate-dark font-roboto">
                           ${subscriptionPrice.toFixed(2)}
                         </span>
                       </div>
@@ -621,11 +623,11 @@ export default function HeroAndBuyBox({productImage, product}) {
                             setIsDeliveryDropdownOpen(!isDeliveryDropdownOpen)
                           }
                           onKeyDown={handleDropdownKeyDown}
-                          className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-dark/30 hover:border-slate-dark/50 transition-all bg-white"
+                          className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-dark/30 hover:border-slate-dark/50 transition-all bg-neutral-light"
                           aria-haspopup="listbox"
                           aria-expanded={isDeliveryDropdownOpen}
                         >
-                          <span className="text-sm text-slate-dark">
+                          <span className="text-sm text-slate-dark font-roboto">
                             {deliveryOptions.find(opt => opt.value === deliveryFrequency)?.label || `Delivery every ${deliveryFrequency}`}
                           </span>
                           <ChevronDown
@@ -637,7 +639,7 @@ export default function HeroAndBuyBox({productImage, product}) {
 
                         {/* Dropdown Menu */}
                         {isDeliveryDropdownOpen && (
-                          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-dark/30 rounded-xl shadow-lg z-10">
+                          <div className="absolute top-full left-0 right-0 mt-1 bg-neutral-light border border-slate-dark/30 rounded-xl shadow-lg z-10">
                             {deliveryOptions.map((option) => {
                               const isHighlighted =
                                 highlightedOption ===
@@ -656,8 +658,8 @@ export default function HeroAndBuyBox({productImage, product}) {
                                   }
                                   className={`w-full px-4 py-3 text-left text-sm transition-colors first:rounded-t-xl last:rounded-b-xl ${
                                     isHighlighted
-                                      ? "bg-slate-dark/10 text-slate-dark"
-                                      : "bg-white text-slate-dark hover:bg-slate-dark/5"
+                                      ? "bg-teal-green/15 text-slate-dark"
+                                      : "bg-neutral-light text-slate-dark hover:bg-teal-green/10"
                                   }`}
                                   role="option"
                                   aria-selected={
@@ -678,7 +680,7 @@ export default function HeroAndBuyBox({productImage, product}) {
 
               {/* Quantity and Add to Cart */}
               <div className="flex flex-col gap-2 mt-2">
-                <label className="text-slate-dark/80 text-xs font-roboto-mono uppercase tracking-wider">
+                <label className="text-slate-dark/80 text-sm font-roboto-mono uppercase tracking-wider">
                   Quantity
                 </label>
                 <div className="flex gap-6 items-stretch">
@@ -692,7 +694,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                       <Minus className="w-4 h-4 text-slate-dark" />
                     </button>
                     <div className="w-12 flex items-center justify-center">
-                      <span className="text-base font-semibold text-slate-dark">
+                      <span className="text-base font-semibold text-slate-dark font-roboto">
                         {quantity}
                       </span>
                     </div>

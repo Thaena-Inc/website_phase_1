@@ -60,7 +60,7 @@ export default function HowToTake() {
                 3-4 capsules
               </p>
               <p className="font-roboto text-sm leading-[22.75px] text-slate-dark">
-                During stress, illness recovery, or disruption
+                Recovering from microbiome disruption, stress, or burnout
               </p>
             </div>
 

@@ -475,9 +475,9 @@ export default function Homepage() {
                 
                 <Link 
                   to="/affiliate"
-                  className="flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-teal-green hover:bg-teal-green/90 transition-colors w-full sm:w-auto"
+                  className="group flex items-center justify-center h-[56px] px-[42px] rounded-[12px] border-2 border-teal-green hover:bg-teal-green/90 transition-colors w-full sm:w-auto"
                 >
-                  <span className="font-mono text-[16px] font-medium leading-[24px] text-teal-green hover:text-neutral-warm/90 transition-colors">
+                  <span className="font-mono text-[16px] font-medium leading-[24px] text-teal-green group-hover:text-neutral-warm/90 transition-colors">
                     Learn More
                   </span>
                 </Link>
