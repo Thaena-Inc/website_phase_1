@@ -110,7 +110,7 @@ export default function AffiliatePage() {
   return (
     <div className="min-h-screen bg-light-neutral">
       {/* Hero Section */}
-      <section className="relative min-h-[540px] flex items-center justify-center px-6 py-16 md:py-24 lg:py-32">
+      <section className="relative min-h-[540px] flex items-center justify-center px-6 py-16 md:py-16 lg:py-16">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -156,15 +156,15 @@ export default function AffiliatePage() {
           </div>
 
           <div className="mt-2">
-            <button className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors">
+            <a href="#affiliateForm" className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors inline-flex items-center justify-center">
               Create Your Free Account
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Form Section */}
-      <section className="py-16 md:py-24 px-6">
+      <section id="affiliateForm" className="py-16 md:py-24 px-6">
         <div className="max-w-[1024px] mx-auto">
           <p className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">Form Placeholder</p>
         </div>
@@ -240,16 +240,16 @@ export default function AffiliatePage() {
           </div>
 
           <div className="flex justify-center">
-            <button className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors">
+            <a href="#affiliateForm" className="h-14 px-8 bg-slate-dark text-light-neutral font-mono text-base font-medium leading-6 rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] hover:bg-slate-dark/90 transition-colors inline-flex items-center justify-center">
               Get Started
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Who We Are Section */}
-      <section className="py-16 md:py-24 px-6">
-        <div className="max-w-[1024px] mx-auto">
+      <section className="pt-[72px] px-[18px] pb-[84px]">
+        <div className="max-w-[1080px] mx-auto">
           <div className="flex flex-col items-center gap-3 mb-12 text-center">
             <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               Who We Are
@@ -259,48 +259,57 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          <div className="mx-auto flex flex-col gap-[23px] mb-12">
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              Most gut supplements focus on:
-            </p>
-
-            <ul className="list-[circle] list-inside">
-              <li className="text-slate font-roboto text-lg leading-6">Adding strains (probiotics), or</li>
-              <li className="text-slate font-roboto text-lg leading-6">Feeding strains (prebiotics)</li>
-            </ul>
-
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-            <strong>ThaenaBiotic<sup>®</sup> focuses on something more foundational:</strong><br/>
-            supporting the <i>signaling environment</i> that helps the gut ecosystem function and recover.
-            </p>
-
-            <h3 className="text-slate font-playfair text-xl font-medium leading-7">
-              Key differences:
-            </h3>
-
-            <div className="flex flex-col gap-3">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <CheckIcon />
-                    <span className="text-slate font-roboto text-base leading-6">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
+          <div className="max-w-[720px] mx-auto mb-[42px] text-center">
+            <div className="text-sm text-slate-dark font-semibold">
+              Most gut supplements focus on: <strong>Adding strains (probiotics)</strong>, or <strong>Feeding strains (prebiotics)</strong>
             </div>
           </div>
 
+          <div className="max-w-[760px] mx-auto mb-[34px] p-[22px_24px_24px] bg-neutral-light border border-sage rounded-xl text-center">
+            <div className="text-sm text-slate-dark mb-3">
+              <strong>ThaenaBiotic<sup>®</sup> focuses on something more foundational:</strong>
+            </div>
+            <div className="font-playfair text-[22px] leading-[1.35] text-slate-dark">
+              supporting the <i>signaling environment</i> that helps the gut ecosystem function and recover.
+            </div>
+          </div>
+
+          <div className="max-w-[760px] mx-auto grid grid-cols-3 gap-[10px]" aria-label="Key differences">
+            {features.map((feature, index) => {
+              // Parse feature text to extract main text and subtext
+              const match = feature.match(/^(.+?)\s*\((.+?)\)$/);
+              const mainText = match ? match[1].trim() : feature;
+              const subText = match ? match[2].trim() : null;
+
+              return (
+                <div key={index} className="py-3">
+                  <div className="text-sm leading-[1.5] text-slate-dark/80 font-semibold border-l-2 border-sage pl-[14px]">
+                    {mainText}
+                    {subText && (
+                      <>
+                        <br />
+                        <span className="font-medium text-slate-dark/60 ml-1.5">
+                          ({subText})
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
           <div className="flex justify-center">
-            <button className="h-14 px-8 bg-transparent text-slate-dark font-mono text-base font-medium leading-6 rounded-xl border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors">
+            <a href="#affiliateForm" className="h-14 px-8 bg-transparent text-slate-dark font-mono text-base font-medium leading-6 rounded-xl border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors inline-flex items-center justify-center">
               Unlock Your Discount — Create Free Account
-            </button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Science Section */}
-      <section className="py-16 md:py-24 px-6 bg-neutral-warm">
-        <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
+      <section className="pt-[78px] px-[18px] pb-[92px] bg-neutral-warm">
+        <div className="max-w-[1080px] mx-auto flex flex-col gap-6">
           <div className="flex flex-col items-center gap-3 text-center">
             <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               The Science
@@ -310,72 +319,87 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          {/* Donors Content Container */}
-          <div className="max-w-[1024px] mx-auto flex flex-col gap-4 mt-6">
-            <p className="text-slate font-roboto text-xl leading-7">
+          {/* Group 1: Baseline */}
+          <div className="max-w-[920px] mx-auto py-[10px]">
+            <p className="m-0 text-[14.5px] leading-[1.75] text-slate-dark font-light font-roboto">
               Most stool banks simply screen for disease.
-              <br />
+            </p>
+            <p className="m-0 text-[14.5px] leading-[1.75] text-[rgba(31,42,46,0.9)] font-semibold font-roboto">
               <strong>We look for patterns of health across the whole system.</strong>
             </p>
+          </div>
 
-            <p className="text-slate font-roboto text-xl leading-7">
+          <div className="hhh5-divider" aria-hidden="true"></div>
+
+          {/* Group 2: Donor philosophy (spotlight) */}
+          <div className="max-w-[920px] mx-auto relative py-4">
+            <p className="m-0 relative z-10 text-lg leading-[1.55] text-slate-dark max-w-[68ch] font-roboto">
               Thaena operates its own donor program with direct medical oversight. Our donors are not suppliers — they are partners in a regenerative healing ecosystem.
             </p>
+          </div>
 
-            <p className="text-slate font-roboto text-xl leading-7">
+          <div className="hhh5-divider" aria-hidden="true"></div>
+
+          {/* Group 3: Donor criteria */}
+          <div className="max-w-[920px] mx-auto py-[10px]">
+            <p className="m-0 text-[14.5px] leading-[1.75] text-slate-dark font-semibold mb-3 font-roboto">
               We look for individuals whose bodies demonstrate:
             </p>
 
-            <ul className="list-[circle] list-inside flex flex-col gap-3">
+            <ul className="grid grid-cols-2 md:grid-cols-1 gap-[10px_18px] font-roboto" role="list" aria-label="Donor criteria">
               {donors.map((donor, index) => (
-                <li key={index} className="text-slate font-roboto text-lg leading-6">
+                <li key={index} className="pl-[14px] relative text-slate-dark/80 text-sm leading-[1.55] hhh5-crit" role="listitem">
                   {donor}
                 </li>
               ))}
             </ul>
+          </div>
 
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
+          {/* Group 4: Hinge */}
+          <div className="max-w-[920px] mx-auto py-[10px] pl-[14px] border-l-2 border-rust-dark">
+            <p className="m-0 text-[14.5px] leading-[1.75] text-slate-dark font-semibold font-roboto">
               This allows us to hold a higher standard at the source — and throughout the entire process.
             </p>
           </div>
 
-          {/* Safety Content Container */}
-          <div className="max-w-[1024px] flex flex-col gap-4 mt-6">
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
+          {/* Group 5: Safety outcomes (box) */}
+          <div className="max-w-[920px] mx-auto py-[10px] border border-sage rounded-xl bg-neutral-light p-[18px]">
+            <p className="m-0 text-[14.5px] leading-[1.75] text-slate-dark font-semibold mb-3 font-roboto">
               Every batch of ThaenaBiotic<sup>®</sup> reflects:
             </p>
 
-            <div className="flex flex-col gap-3">
-              <div className="flex items-start gap-3">
+            <ul className="list-none p-0 mt-1.5 grid gap-[10px]" aria-label="Batch reflections">
+              <li className="flex gap-[10px] text-slate-dark text-sm leading-[1.5] items-start">
                 <CheckIcon />
-                <span className="text-slate font-roboto text-base leading-6">
+                <span className="font-roboto">
                   Careful donor selection and ongoing monitoring
                 </span>
-              </div>
-              <div className="flex items-start gap-3">
+              </li>
+              <li className="flex gap-[10px] text-slate-dark text-sm leading-[1.5] items-start">
                 <CheckIcon />
-                <span className="text-slate font-roboto text-base leading-6">
+                <span className="font-roboto">
                   Sterilization for safety
                 </span>
-              </div>
-              <div className="flex items-start gap-3">
+              </li>
+              <li className="flex gap-[10px] text-slate-dark text-sm leading-[1.5] items-start">
                 <CheckIcon />
-                <span className="text-slate font-roboto text-base leading-6">
+                <span className="font-roboto">
                   Preservation of postbiotic diversity
                 </span>
-              </div>
-              <div className="flex items-start gap-3">
+              </li>
+              <li className="flex gap-[10px] text-slate-dark text-sm leading-[1.5] items-start">
                 <CheckIcon />
-                <span className="text-slate font-roboto text-base leading-6">
+                <span className="font-roboto">
                   Third-party testing for purity and consistency
                 </span>
-              </div>
-            </div>
+              </li>
+            </ul>
+          </div>
 
-            <p className="text-slate font-roboto text-lg leading-[29.25px]">
-              <span className="font-bold">
-                This is Humans Healing Humans<sup>™</sup> — with modern safety controls and scientific integrity.
-              </span>
+          {/* Group 6: Seal */}
+          <div className="max-w-[920px] mx-auto py-[10px]">
+            <p className="m-0 text-[14.5px] leading-[1.75] text-slate-dark font-bold tracking-[0.01em] font-roboto">
+              This is Humans Healing Humans<sup>™</sup> — with modern safety controls and scientific integrity.
             </p>
           </div>
         </div>
@@ -455,11 +479,11 @@ export default function AffiliatePage() {
             </div>
 
             {/* CTA Button */}
-            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-transparent border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors">
+            <a href="#affiliateForm" className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-transparent border-2 border-slate-dark hover:bg-slate-dark/5 transition-colors">
               <span className="font-roboto text-lg font-medium leading-7 text-slate-dark">
                 Create Your Free Account to Get Your Discount
               </span>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -541,11 +565,11 @@ export default function AffiliatePage() {
             </div>
 
             {/* CTA Button */}
-            <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-slate-dark shadow-lg hover:opacity-90 transition-opacity">
+            <a href="#affiliateForm" className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-slate-dark shadow-lg hover:opacity-90 transition-opacity">
               <span className="font-roboto text-lg font-medium leading-7 text-light-neutral">
                 Create Your Free Account to Get Your Discount
               </span>
-            </button>
+            </a>
 
             <p className="text-slate font-roboto text-xl leading-7 text-center font-light italic">
               Free to join. Your discount is applied after account creation.

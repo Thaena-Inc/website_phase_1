@@ -574,3 +574,27 @@ button.reset:hover:not(:has(> *)) {
   gap: 0.75rem;
   flex-wrap: wrap;
 }
+
+/* Science Section Styles */
+.hhh5-divider {
+  max-width: 520px;
+  margin: 8px auto;
+  height: 1px;
+  width: 58%;
+  background: linear-gradient(to right,
+    rgba(167,179,167,0) 0%,
+    rgba(167,179,167,0.75) 50%,
+    rgba(167,179,167,0) 100%
+  );
+}
+
+.hhh5-crit::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 7px;
+  height: 2px;
+  background: #a7b3a7; /* sage color */
+  border-radius: 2px;
+}
