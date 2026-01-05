@@ -28,6 +28,7 @@
   html {
     overflow-x: hidden; /* Prevent horizontal scroll from scaled wrapper */
     height: auto; /* Allow html to size to content, not force viewport height */
+    overflow-y: auto; /* Allow vertical scroll when needed */
   }
 
   body {
@@ -44,10 +45,12 @@
     transform: scale(0.9);
     transform-origin: top left;
     position: relative;
-    /* Ensure content fills viewport after scaling */
     box-sizing: border-box;
-    height: fit-content; /* Only take up space needed by content */
-    overflow: hidden; /* Clip any extra space below */
+    height: fit-content;
+    overflow: hidden; /* Clip overflow */
+    /* Solution C: Attempt to compensate - CSS limitations prevent perfect solution */
+    /* The transform creates 10% extra space, but CSS can't calculate height-based margins */
+    display: block;
   }
 
 }
