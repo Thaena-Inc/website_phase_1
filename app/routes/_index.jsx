@@ -1,4 +1,4 @@
-import {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Link} from 'react-router';
 
 /**
@@ -109,24 +109,54 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFlipped, collapsedHeight]);
 
-  const renderContent = (text, boldWord) => {
+  // Helper function to process JSX and wrap matching text in <strong>
+  const processJSXForBold = (content, boldWord) => {
+    if (!boldWord || !content) return content;
+
+    // Recursively process JSX elements
+    const processElement = (element, key = 0) => {
+      if (typeof element === 'string') {
+        // If it's a string, check if it contains the bold word
+        const index = element.indexOf(boldWord);
+        if (index !== -1) {
+          const before = element.substring(0, index);
+          const after = element.substring(index + boldWord.length);
+          return (
+            <>{before}<strong>{boldWord}</strong>{after}</>
+          );
+        }
+        return element;
+      }
+
+      if (Array.isArray(element)) {
+        return element.map((item, i) => (
+          <>{processElement(item, i)}</>
+        ));
+      }
+
+      if (element && typeof element === 'object' && element.props && React.isValidElement(element)) {
+        // It's a React element - clone with processed children
+        if (element.props.children) {
+          return React.cloneElement(element, {
+            children: processElement(element.props.children)
+          });
+        }
+        return element;
+      }
+
+      return element;
+    };
+
+    return processElement(content);
+  };
+
+  const renderContent = (content, boldWord) => {
+    // Content is now JSX, so we don't need to split by newlines
     if (!boldWord) {
-      return text.split('\n').map((line, i) => (
-        <span key={i}>
-          {line}
-          {i < text.split('\n').length - 1 && <><br /><br /></>}
-        </span>
-      ));
+      return content;
     }
 
-    const parts = text.split(boldWord);
-    return (
-      <>
-        {parts[0]}
-        <strong>{boldWord}</strong>
-        {parts[1]}
-      </>
-    );
+    return processJSXForBold(content, boldWord);
   };
 
   // Calculate height: use expandedHeight when flipped, otherwise use collapsedHeight
@@ -146,7 +176,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
         >
           <button
             onClick={() => setIsFlipped(true)}
-            className="w-full h-full flex flex-col items-end justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-cream/80 text-left"
+            className="w-full h-full flex flex-col items-center justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-earth-brown/20 text-left"
           >
             <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
               {card.title}
@@ -157,7 +187,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="flex-shrink-0"
+              className="flex-shrink-0 self-end"
             >
               <path
                 d="M7.5 4.1665L13.3333 9.99984L7.5 15.8332"
@@ -178,7 +208,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
           <button
             ref={backInnerRef}
             onClick={() => setIsFlipped(false)}
-            className="w-full h-full flex flex-col items-end justify-center p-6 md:p-8 rounded-xl border border-deep-purple/40 shadow-lg bg-cream/50 text-left"
+            className="w-full h-full flex flex-col items-end justify-center px-6 md:px-8 pt-[calc(1.5rem+1em)] md:pt-[calc(2rem+1em)] pb-[calc(1.5rem+1em)] md:pb-[calc(2rem+1em)] rounded-xl border border-deep-purple/40 shadow-lg bg-earth-brown/20 text-left"
           >
             <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full mt-2">
               {renderContent(card.content, card.contentBold)}
@@ -209,31 +239,67 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
 function ExpandableCard({card, isExpanded, onToggle}) {
   const contentId = `expandable-card-content-${card.id}`;
 
-  const renderContent = (text, boldWords) => {
-    if (!boldWords || boldWords.length === 0) {
-      return text;
-    }
+  // Helper function to process JSX and wrap matching text in <strong> for multiple bold words
+  const processJSXForBoldWords = (content, boldWords) => {
+    if (!boldWords || boldWords.length === 0 || !content) return content;
 
-    const parts = [];
-    let remaining = text;
-    let key = 0;
-
+    // Process each bold word sequentially
+    let processed = content;
     boldWords.forEach(boldWord => {
-      const index = remaining.indexOf(boldWord);
-      if (index !== -1) {
-        if (index > 0) {
-          parts.push(remaining.substring(0, index));
-        }
-        parts.push(<strong key={key++}>{boldWord}</strong>);
-        remaining = remaining.substring(index + boldWord.length);
-      }
+      processed = processJSXForBold(processed, boldWord);
     });
 
-    if (remaining) {
-      parts.push(remaining);
+    return processed;
+  };
+
+  // Helper function to process JSX and wrap matching text in <strong>
+  const processJSXForBold = (content, boldWord) => {
+    if (!boldWord || !content) return content;
+
+    // Recursively process JSX elements
+    const processElement = (element) => {
+      if (typeof element === 'string') {
+        // If it's a string, check if it contains the bold word
+        const index = element.indexOf(boldWord);
+        if (index !== -1) {
+          const before = element.substring(0, index);
+          const after = element.substring(index + boldWord.length);
+          return (
+            <>{before}<strong>{boldWord}</strong>{after}</>
+          );
+        }
+        return element;
+      }
+
+      if (Array.isArray(element)) {
+        return element.map((item, i) => (
+          <>{processElement(item)}</>
+        ));
+      }
+
+      if (element && typeof element === 'object' && element.props && React.isValidElement(element)) {
+        // It's a React element - clone with processed children
+        if (element.props.children) {
+          return React.cloneElement(element, {
+            children: processElement(element.props.children)
+          });
+        }
+        return element;
+      }
+
+      return element;
+    };
+
+    return processElement(content);
+  };
+
+  const renderContent = (content, boldWords) => {
+    // Content is now JSX
+    if (!boldWords || boldWords.length === 0) {
+      return content;
     }
 
-    return parts;
+    return processJSXForBoldWords(content, boldWords);
   };
 
   return (
@@ -296,28 +362,28 @@ const cards = [
   {
     id: 1,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/microbiome-signals_png.png?v=1766004524",
-    title: "You're an ecosystem, and your microbiome is central to that.",
-    content: "You carry more living microbes than human cells. When that living ecosystem breaks down food, it produces thousands of powerful molecules — the postbiotic nutrients that help fuel cellular energy, support immune balance, and influence mood.",
+    title: <>You're an ecosystem, and your microbiome is central to that.</>,
+    content: <>You carry more living microbes than human cells. When that living ecosystem breaks down food, it produces thousands of powerful molecules — the postbiotic nutrients that help fuel cellular energy, support immune balance, and influence mood.</>,
     contentBold: ["postbiotic nutrients"]
   },
   {
     id: 2,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/quieted-signals_png.png?v=1766004524",
-    title: "Modern living can starve this ecosystem.",
-    content: "You inherit your microbiome at birth, but low-fiber diets, antibiotics, ultra-processed food, infection, stress, and chronic imbalance can decrease its diversity. When diversity drops, postbiotic nutrient production drops, and your body loses one of its core sources of resilience."
+    title: <>Modern living can starve this ecosystem.</>,
+    content: <>You inherit your microbiome at birth, but low-fiber diets, antibiotics, ultra-processed food, infection, stress, and chronic imbalance can decrease its diversity. When diversity drops, postbiotic nutrient production drops, and your body loses one of its core sources of resilience.</>
   },
   {
     id: 3,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/question-signals_png.png?v=1766004524",
-    title: "You can't fake human biodiversity.",
-    content: "A thriving human microbiome produces a wide spectrum of postbiotic molecules. No plant, probiotic, or lab-grown system can replicate that full complex ecology. And when your own biodiversity is depleted, it may not be able to generate the signals you need — yet.",
+    title: <>You can't fake human biodiversity.</>,
+    content: <>A thriving human microbiome produces a wide spectrum of postbiotic molecules. No plant, probiotic, or lab-grown system can replicate that full complex ecology. And when your own biodiversity is depleted, it may not be able to generate the signals you need — yet.</>,
     contentBold: ["yet."]
   },
   {
     id: 4,
     image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/postbiotic-blend_png.png?v=1766004524",
-    title: "ThaenaBiotic<sup>®</sup> is the regenerative bridge.",
-    content: "We source our postbiotic nutrients from rare, biodiverse human microbiomes. They're sterilized and refined, then delivered to you as regenerative support. It's a bridge that helps re-establish healthy signaling while your ecosystem rebuilds.",
+    title: <>ThaenaBiotic<sup>®</sup> is the regenerative bridge.</>,
+    content: <>We source our postbiotic nutrients from rare, biodiverse human microbiomes. They're sterilized and refined, then delivered to you as regenerative support. It's a bridge that helps re-establish healthy signaling while your ecosystem rebuilds.</>,
     contentBold: ["re-establish healthy signaling"]
   }
 ];
@@ -371,34 +437,54 @@ const testimonials = [
 const flipCards = [
   {
     id: "sterilized",
-    title: "How sterilized postbiotics work",
-    content: "We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.\nThaenaBiotic<sup>®</sup> captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.\n\nThe signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.",
+    title: <>How sterilized postbiotics work</>,
+    content: (
+      <>
+        We define postbiotics as the full suite of bioactive compounds and microbial nutrients left after heat-killing the stool of a healthy human gut ecosystem. This includes short-chain fatty acids (SCFAs), polyphenol metabolites, tryptophan derivatives, bioactive peptides, and countless other microbial signaling compounds.
+        <br /><br />
+        ThaenaBiotic<sup>®</sup> captures these postbiotic molecules from exceptionally healthy human guts, then preserves them through a patented autoclave and freeze-dry process that removes all live bacteria, viruses, and DNA while protecting the postbiotics.
+        <br /><br />
+        The signalling molecules in these postbiotics help your gut support balance, resilience, and recovery, without colonization or the risks of live microbes.
+      </>
+    ),
     contentBold: "without colonization"
   },
   {
     id: "probiotics",
-    title: "Why postbiotics ≠ probiotics",
-    content: "Probiotics contain only a few microbial strains that are able to be cultured in a lab. Postbiotics, on the other hand, give your gut the signals about what probiotic microbes it should be making — without any live bacteria. It's the difference between adding a single seed to the soil and enriching that soil with all the nutrients that help the whole ecosystem thrive. You're feeding the soil with everything it needs to flourish."
+    title: <>Why postbiotics ≠ probiotics</>,
+    content: <>Probiotics contain only a few microbial strains that are able to be cultured in a lab. Postbiotics, on the other hand, give your gut the signals about what probiotic microbes it should be making — without any live bacteria. It's the difference between adding a single seed to the soil and enriching that soil with all the nutrients that help the whole ecosystem thrive. You're feeding the soil with everything it needs to flourish.</>
   },
   {
     id: "probiotic-pairing",
-    title: "Do you need a probiotic with this?",
-    content: "ThaenaBiotic<sup>®</sup> works on its own — no probiotic required. But if you already use a probiotic you trust, they can be a powerful pairing. Think of them as complementary tools."
+    title: <>Do you need a probiotic with this?</>,
+    content: <>ThaenaBiotic<sup>®</sup> works on its own — no probiotic required. But if you already use a probiotic you trust, they can be a powerful pairing. Think of them as complementary tools.</>
   },
   {
     id: "medicine",
-    title: "Why poop has always been medicine",
-    content: "Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.\nThaenaBiotic<sup>®</sup> takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans."
+    title: <>Why poop has always been medicine</>,
+    content: (
+      <>
+        Across history — from early traditional medicine, veterinary medicine, to today's FDA-regulated fecal microbiota transplants — human stool has been used to restore gut function.
+        <br />
+        ThaenaBiotic<sup>®</sup> takes that ancient concept and updates it with modern safety, sterilization, and science: no microbes, no DNA, just the microbial postbiotic nutrients created inside exceptionally healthy humans.
+      </>
+    )
   },
   {
     id: "infection",
-    title: "How do you know there's no risk of infection?",
-    content: "ThaenaBiotic<sup>®</sup> is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.\nNo live microbes = no live-microbe infection risk."
+    title: <>How do you know there's no risk of infection?</>,
+    content: (
+      <>
+        ThaenaBiotic<sup>®</sup> is sterilized, not live. Our patented autoclave process heat-kills all organisms, eliminating viability while preserving postbiotic signals. Every batch then undergoes third-party sterility testing for harmful bacteria and heavy metals, and is only released for sale once it passes a full safety panel.
+        <br />
+        No live microbes = no live-microbe infection risk.
+      </>
+    )
   },
   {
     id: "taste",
-    title: "What does it taste/smell like?",
-    content: "There's no taste, and most of our customers either say there's no scent, or a faint earthy scent. Most customers describe it as mild and easy to take."
+    title: <>What does it taste/smell like?</>,
+    content: <>There's no taste, and most of our customers either say there's no scent, or a faint earthy scent. Most customers describe it as mild and easy to take.</>
   }
 ];
 
@@ -780,7 +866,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 px-6" style={{ backgroundColor: "rgba(109, 79, 44, 0.2)" }}>
+      <section className="py-16 md:py-24 px-6 bg-cream">
         <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-center gap-3 w-full">
             <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">

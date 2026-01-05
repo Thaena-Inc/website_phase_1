@@ -20,9 +20,6 @@ export default function FAQ() {
           Frequently Asked Questions
         </h2>
         <div className="w-24 h-[1px] bg-sage"></div>
-        <p className="font-roboto text-lg md:text-xl leading-7 text-slate-dark text-center max-w-[768px] pt-6">
-          Get answers to the most common questions about ThaenaBiotic<sup>®</sup> and our microbiome restoration process.
-        </p>
       </div>
 
       {/* FAQ Accordion */}

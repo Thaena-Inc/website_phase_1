@@ -2,7 +2,7 @@ export default function FinalCTA() {
   return (
     <>
     {/* Final CTA Hero Section */}
-    <div className="relative flex items-center justify-center py-24 md:py-32 lg:py-40 px-6 md:px-16 lg:px-80 bg-neutral-light overflow-hidden">
+    <div className="relative flex items-center justify-center py-16 md:py-24 lg:py-24 px-6 md:px-16 lg:px-40 bg-neutral-light overflow-hidden">
       {/* Background Image Layer */}
       <div 
         className="absolute inset-0 z-0"

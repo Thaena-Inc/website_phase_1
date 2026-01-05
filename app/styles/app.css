@@ -578,7 +578,7 @@ button.reset:hover:not(:has(> *)) {
 /* Science Section Styles */
 .hhh5-divider {
   max-width: 520px;
-  margin: 8px auto;
+  margin: 1em auto 0 auto;
   height: 1px;
   width: 58%;
   background: linear-gradient(to right,
