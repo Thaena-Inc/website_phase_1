@@ -1,5 +1,6 @@
 import {Analytics, getShopAnalytics, useNonce} from '@shopify/hydrogen';
 import {CartProvider} from '@shopify/hydrogen-react';
+import {useRef, useEffect, useLayoutEffect} from 'react';
 import {
   Outlet,
   useRouteError,
@@ -9,6 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useRouteLoaderData,
+  useLocation,
 } from 'react-router';
 import favicon from '~/assets/favicon.svg';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
@@ -194,10 +196,47 @@ export function Layout({children}) {
 export default function App() {
   /** @type {RootLoader} */
   const data = useRouteLoaderData('root');
+  const wrapperRef = useRef(null);
+  const location = useLocation();
+
+  // Calculate and apply negative margin to compensate for transform scale
+  const adjustWrapperMargin = () => {
+    if (!wrapperRef.current) return;
+    
+    // Get the actual height of the wrapper (before transform)
+    const height = wrapperRef.current.offsetHeight;
+    
+    // Calculate 10% of the height (the extra space created by scale(0.9))
+    const negativeMargin = height * 0.1;
+    
+    // Apply as negative margin-bottom
+    wrapperRef.current.style.marginBottom = `-${negativeMargin}px`;
+  };
+
+  // Use useLayoutEffect to run before paint for smoother rendering
+  useLayoutEffect(() => {
+    adjustWrapperMargin();
+  }, [location.pathname]); // Recalculate on route change
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      adjustWrapperMargin();
+    };
+
+    window.addEventListener('resize', handleResize);
+    // Also recalculate after a short delay to catch any async content loading
+    const timeoutId = setTimeout(adjustWrapperMargin, 100);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, [location.pathname]);
 
   if (!data) {
     return (
-      <div className="content-scale-wrapper">
+      <div ref={wrapperRef} className="content-scale-wrapper">
         <Outlet />
       </div>
     );
@@ -211,7 +250,7 @@ export default function App() {
     >
       <CartProvider cart={data.cart}>
         <CartFeedbackOverlay />
-        <div className="content-scale-wrapper">
+        <div ref={wrapperRef} className="content-scale-wrapper">
           <PageLayout {...data}>
             <Outlet />
           </PageLayout>

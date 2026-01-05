@@ -47,10 +47,8 @@
     position: relative;
     box-sizing: border-box;
     height: fit-content;
-    overflow: hidden; /* Clip overflow */
-    /* Solution C: Attempt to compensate - CSS limitations prevent perfect solution */
-    /* The transform creates 10% extra space, but CSS can't calculate height-based margins */
     display: block;
+    /* Negative margin-bottom applied via JavaScript to compensate for transform scale */
   }
 
 }
