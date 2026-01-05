@@ -66,7 +66,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     const backEl = backInnerRef.current;
     if (!shellEl || !backEl) return;
 
-    const neededHeight = Math.ceil(backEl.scrollHeight);
+    const neededHeight = Math.ceil(backEl.getBoundingClientRect().height);
     const next = neededHeight > collapsedHeight ? neededHeight : null;
     if (next !== expandedHeight) setExpandedHeight(next);
   };
@@ -176,7 +176,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
         >
           <button
             onClick={() => setIsFlipped(true)}
-            className="w-full h-full flex flex-col items-center justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-earth-brown/20 text-left"
+            className="w-full h-full flex flex-col items-center justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-earth-brown/10 text-left"
           >
             <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
               {card.title}
@@ -187,7 +187,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="flex-shrink-0 self-end"
+              className="flex-shrink-0 self-end mt-auto"
             >
               <path
                 d="M7.5 4.1665L13.3333 9.99984L7.5 15.8332"
@@ -208,7 +208,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
           <button
             ref={backInnerRef}
             onClick={() => setIsFlipped(false)}
-            className="w-full h-full flex flex-col items-end justify-center px-6 md:px-8 pt-[calc(1.5rem+1em)] md:pt-[calc(2rem+1em)] pb-[calc(1.5rem+1em)] md:pb-[calc(2rem+1em)] rounded-xl border border-deep-purple/40 shadow-lg bg-earth-brown/20 text-left"
+            className="w-full h-full flex flex-col items-end justify-center px-6 md:px-8 pt-[calc(1.5rem+1em)] md:pt-[calc(2rem+1em)] pb-[calc(1.5rem+1em)] md:pb-[calc(2rem+1em)] rounded-xl border border-deep-purple/40 shadow-lg bg-earth-brown/10 text-left"
           >
             <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full mt-2">
               {renderContent(card.content, card.contentBold)}

@@ -34,6 +34,7 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-y: auto; /* Allow vertical scroll when needed */
     height: auto; /* Allow body to size to content */
     min-height: auto; /* Remove any forced minimum height */
   }
@@ -46,7 +47,7 @@
     /* Ensure content fills viewport after scaling */
     box-sizing: border-box;
     height: fit-content; /* Only take up space needed by content */
-    margin-bottom: -10vh; /* Compensate for extra space created by transform scale */
+    overflow: hidden; /* Clip any extra space below */
   }
 
 }
