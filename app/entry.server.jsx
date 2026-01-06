@@ -35,6 +35,7 @@ export default async function handleRequest(
     // Allow Customer Fields script
     scriptSrc: [
       "'self'",
+      'https://cdn.shopify.com',
       'https://static.customerfields.com',
       'https://cdn.customerfields.com',
     ],
