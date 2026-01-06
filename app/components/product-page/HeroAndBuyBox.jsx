@@ -477,7 +477,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {/* 7 Capsules */}
                   <button
-                    onClick={() => setSelectedSize("7")}
+                    onClick={() => {
+                      console.log('Setting size to 7');
+                      setSelectedSize("7");
+                    }}
                     className={`relative p-4 rounded-xl border-2 transition-all text-left ${
                       selectedSize === "7"
                         ? "border-deep-purple bg-deep-purple/5"
@@ -501,7 +504,10 @@ export default function HeroAndBuyBox({productImage, product}) {
 
                   {/* 30 Capsules */}
                   <button
-                    onClick={() => setSelectedSize("30")}
+                    onClick={() => {
+                      console.log('Setting size to 30');
+                      setSelectedSize("30");
+                    }}
                     className={`relative p-4 rounded-xl border-2 transition-all text-left ${
                       selectedSize === "30"
                         ? "border-teal-green bg-teal-green/5"
@@ -536,7 +542,10 @@ export default function HeroAndBuyBox({productImage, product}) {
 
                   {/* 90 Capsules */}
                   <button
-                    onClick={() => setSelectedSize("90")}
+                    onClick={() => {
+                      console.log('Setting size to 90');
+                      setSelectedSize("90");
+                    }}
                     className={`relative p-4 rounded-xl border-2 transition-all text-left ${
                       selectedSize === "90"
                         ? "border-rust bg-rust/5"
@@ -574,7 +583,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                   <div className="flex-1 flex flex-col gap-2 w-full">
                   {/* One-time Purchase */}
                   <button
-                    onClick={() => setPurchaseType("onetime")}
+                    onClick={() => {
+                      console.log('Setting purchase type to onetime');
+                      setPurchaseType("onetime");
+                    }}
                     className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                       purchaseType === "onetime"
                         ? selectedSize === "90"
@@ -617,7 +629,10 @@ export default function HeroAndBuyBox({productImage, product}) {
                   {/* Subscribe & Save */}
                   <div className="flex flex-col gap-0">
                     <button
-                      onClick={() => setPurchaseType("subscribe")}
+                      onClick={() => {
+                        console.log('Setting purchase type to subscribe');
+                        setPurchaseType("subscribe");
+                      }}
                       className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                         purchaseType === "subscribe"
                           ? selectedSize === "90"

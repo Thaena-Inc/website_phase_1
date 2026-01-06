@@ -35,11 +35,13 @@ export default async function handleRequest(
     // Allow Customer Fields script
     scriptSrc: [
       "'self'",
+      'https://static.customerfields.com',
       'https://cdn.customerfields.com',
     ],
     // Allow API connections to Customer Fields
     connectSrc: [
       "'self'",
+      'https://static.customerfields.com',
       'https://cdn.customerfields.com',
     ],
   });

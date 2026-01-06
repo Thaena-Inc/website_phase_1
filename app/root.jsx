@@ -185,7 +185,7 @@ export function Layout({children}) {
         <Links />
         {/* Manually load Customer Fields script for Helium forms */}
         <script
-          src="https://cdn.customerfields.com/scripts/customer-fields.js"
+          src="https://static.customerfields.com/releases/5.1.2/customer-fields.js"
           nonce={nonce}
           async
         />
