@@ -32,6 +32,16 @@ export default async function handleRequest(
       "'self'",
       'https://fonts.gstatic.com',
     ],
+    // Allow Customer Fields script
+    scriptSrc: [
+      "'self'",
+      'https://cdn.customerfields.com',
+    ],
+    // Allow API connections to Customer Fields
+    connectSrc: [
+      "'self'",
+      'https://cdn.customerfields.com',
+    ],
   });
 
   const body = await renderToReadableStream(

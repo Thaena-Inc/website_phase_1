@@ -183,6 +183,12 @@ export function Layout({children}) {
         <link rel="stylesheet" href={appStyles}></link>
         <Meta />
         <Links />
+        {/* Manually load Customer Fields script for Helium forms */}
+        <script
+          src="https://cdn.customerfields.com/scripts/customer-fields.js"
+          nonce={nonce}
+          async
+        />
       </head>
       <body>
         {children}

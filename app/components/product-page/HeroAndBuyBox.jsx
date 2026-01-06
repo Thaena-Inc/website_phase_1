@@ -436,6 +436,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                       className={`w-full h-full rounded-lg ${
                         selectedImageIndex === 2 ? 'object-contain' : 'object-cover'
                       }`}
+                      style={selectedSize === "7" ? { minHeight: '540px' } : {}}
                       loading="eager"
                     />
                   </div>
@@ -560,17 +561,17 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Pricing and Purchase Options */}
-              {selectedSize !== "7" && (
-                <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
-                {/* Price */}
+              <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
+                {/* Price - Always visible */}
                 <div className="flex-shrink-0">
                   <p className="font-playfair text-3xl text-slate-dark">
                     ${currentPrice.toFixed(2)}
                   </p>
                 </div>
 
-                {/* Purchase Options */}
-                <div className="flex-1 flex flex-col gap-2 w-full">
+                {/* Purchase Options - Hidden when size 7 */}
+                {selectedSize !== "7" && (
+                  <div className="flex-1 flex flex-col gap-2 w-full">
                   {/* One-time Purchase */}
                   <button
                     onClick={() => setPurchaseType("onetime")}
@@ -733,8 +734,8 @@ export default function HeroAndBuyBox({productImage, product}) {
                     )}
                   </div>
                 </div>
+                )}
               </div>
-              )}
 
               {/* Quantity and Add to Cart */}
               <div className="flex flex-col gap-2 mt-2">
