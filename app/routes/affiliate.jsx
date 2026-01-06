@@ -200,7 +200,11 @@ export default function AffiliatePage() {
       {/* Form Section */}
       <section id="affiliateForm" className="py-16 md:py-24 px-6">
         <div className="max-w-[1024px] mx-auto">
-          <p className="font-playfair text-teal-green text-4xl md:text-[48px] font-normal leading-tight md:leading-[48px]">Form Placeholder</p>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: '<form data-cf-form="NPtl6j"></form>',
+            }}
+          />
         </div>
       </section>
 

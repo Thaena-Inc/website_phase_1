@@ -5,6 +5,7 @@ import {useAside} from "~/components/Aside";
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
+const VARIANT_ID_7 = "gid://shopify/ProductVariant/50560592937265";
 
 /**
  * Calculate the subscription price for a variant based on selling plan
@@ -136,12 +137,12 @@ export default function HeroAndBuyBox({productImage, product}) {
     return product?.variants?.nodes || [];
   }, [product]);
 
-  // Find variant by size (30 or 90)
+  // Find variant by size (30, 90, or 7)
   const selectedVariant = useMemo(() => {
-    const sizeMatch = selectedSize === "30" ? "30" : "90";
+    const sizeMatch = selectedSize === "30" ? "30" : selectedSize === "90" ? "90" : selectedSize === "7" ? "7" : "30";
     return variants.find(v => 
       v.title?.includes(sizeMatch) || 
-      v.id === (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90)
+      v.id === (selectedSize === "30" ? VARIANT_ID_30 : selectedSize === "90" ? VARIANT_ID_90 : selectedSize === "7" ? VARIANT_ID_7 : VARIANT_ID_30)
     ) || variants[0];
   }, [variants, selectedSize]);
 
@@ -151,7 +152,9 @@ export default function HeroAndBuyBox({productImage, product}) {
       return parseFloat(selectedVariant.price.amount);
     }
     // Fallback to hardcoded prices if variant data not available
-    return selectedSize === "30" ? 199.0 : 499.0;
+    if (selectedSize === "30") return 199.0;
+    if (selectedSize === "90") return 499.0;
+    return 50.0; // 7 capsule size
   }, [selectedVariant, selectedSize]);
 
   // Build delivery options - always show both 30 and 90 day options
@@ -302,7 +305,7 @@ export default function HeroAndBuyBox({productImage, product}) {
 
   // Get selected variant ID
   const selectedVariantId = selectedVariant?.id || 
-    (selectedSize === "30" ? VARIANT_ID_30 : VARIANT_ID_90);
+    (selectedSize === "30" ? VARIANT_ID_30 : selectedSize === "90" ? VARIANT_ID_90 : selectedSize === "7" ? VARIANT_ID_7 : VARIANT_ID_30);
 
   // Handle click outside dropdown to close it
   useEffect(() => {
@@ -374,22 +377,11 @@ export default function HeroAndBuyBox({productImage, product}) {
   const thumbnailImages = useMemo(() => {
     const size30Image = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-13.jpg?v=1766006457";
     const size90Image = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-14.jpg?v=1766006457";
-    const galleryImage1 = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Screenshot_2025-12-17_at_2.34.55_PM.png?v=1766010941";
+    const size7Image = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-5.jpg?v=1766006456";
     const galleryImage2 = "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Screenshot_2025-12-17_at_2.35.10_PM.png?v=1766010941";
     
-    if (selectedSize === "30") {
-      return [
-        size30Image, // Top thumbnail - selected size image (30 cap)
-        galleryImage1, // Middle thumbnail - gallery image 1
-        galleryImage2, // Bottom thumbnail - gallery image 2
-      ];
-    } else {
-      return [
-        size90Image, // Top thumbnail - selected size image (90 cap)
-        galleryImage1, // Middle thumbnail - gallery image 1
-        galleryImage2, // Bottom thumbnail - gallery image 2
-      ];
-    }
+    const selectedSizeImage = selectedSize === "30" ? size30Image : selectedSize === "90" ? size90Image : selectedSize === "7" ? size7Image : size30Image;
+    return [selectedSizeImage, galleryImage2];
   }, [selectedSize]);
 
   // Determine which image to show based on selected thumbnail
@@ -481,7 +473,31 @@ export default function HeroAndBuyBox({productImage, product}) {
                 <label className="text-slate-dark/80 text-sm font-roboto-mono uppercase tracking-wider">
                   Select Size
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* 7 Capsules */}
+                  <button
+                    onClick={() => setSelectedSize("7")}
+                    className={`relative p-4 rounded-xl border-2 transition-all text-left ${
+                      selectedSize === "7"
+                        ? "border-deep-purple bg-deep-purple/5"
+                        : "border-slate-dark/20 hover:border-deep-purple/50"
+                    }`}
+                  >
+                    <div className="flex flex-col gap-1">
+                      <h3 className="font-playfair text-2xl text-slate-dark">
+                        7 capsules
+                      </h3>
+                      <p className="text-sm text-slate-dark/80 font-roboto">
+                        1 week supply
+                      </p>
+                    </div>
+                    {selectedSize === "7" && (
+                      <span className="absolute -top-2 left-4 px-3 py-1 bg-deep-purple text-neutral-light text-[10px] uppercase tracking-wider rounded-full font-roboto-mono">
+                        Sample Pack
+                      </span>
+                    )}
+                  </button>
+
                   {/* 30 Capsules */}
                   <button
                     onClick={() => setSelectedSize("30")}
@@ -544,7 +560,8 @@ export default function HeroAndBuyBox({productImage, product}) {
               </div>
 
               {/* Pricing and Purchase Options */}
-              <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
+              {selectedSize !== "7" && (
+                <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
                 {/* Price */}
                 <div className="flex-shrink-0">
                   <p className="font-playfair text-3xl text-slate-dark">
@@ -559,19 +576,31 @@ export default function HeroAndBuyBox({productImage, product}) {
                     onClick={() => setPurchaseType("onetime")}
                     className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                       purchaseType === "onetime"
-                        ? "border-teal-green bg-teal-green/5"
+                        ? selectedSize === "90"
+                          ? "border-rust bg-rust/5"
+                          : selectedSize === "7"
+                            ? "border-deep-purple bg-deep-purple/5"
+                            : "border-teal-green bg-teal-green/5"
                         : "border-slate-dark/30 hover:border-slate-dark/50"
                     }`}
                     >
                     <div
                       className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
                         purchaseType === "onetime"
-                          ? "border-teal-green"
+                          ? selectedSize === "90"
+                            ? "border-rust"
+                            : selectedSize === "7"
+                              ? "border-deep-purple"
+                              : "border-teal-green"
                           : "border-slate-dark/80"
                       }`}
                     >
                       {purchaseType === "onetime" && (
-                        <div className="w-2 h-2 rounded-full bg-teal-green" />
+                        <div className={`w-2 h-2 rounded-full ${
+                          selectedSize === "90" ? "bg-rust" : 
+                          selectedSize === "7" ? "bg-deep-purple" : 
+                          "bg-teal-green"
+                        }`} />
                       )}
                     </div>
                     <div className="flex-1 flex justify-between items-center">
@@ -585,24 +614,36 @@ export default function HeroAndBuyBox({productImage, product}) {
                   </button>
 
                   {/* Subscribe & Save */}
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-0">
                     <button
                       onClick={() => setPurchaseType("subscribe")}
                       className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
                         purchaseType === "subscribe"
-                          ? "border-teal-green bg-teal-green/5"
+                          ? selectedSize === "90"
+                            ? "border-rust bg-rust/5"
+                            : selectedSize === "7"
+                              ? "border-deep-purple bg-deep-purple/5"
+                              : "border-teal-green bg-teal-green/5"
                           : "border-slate-dark/30 hover:border-slate-dark/50"
                       }`}
                     >
                       <div
                         className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
                           purchaseType === "subscribe"
-                            ? "border-teal-green"
+                            ? selectedSize === "90"
+                              ? "border-rust"
+                              : selectedSize === "7"
+                                ? "border-deep-purple"
+                                : "border-teal-green"
                             : "border-slate-dark/80"
                         }`}
                       >
                         {purchaseType === "subscribe" && (
-                          <div className="w-2 h-2 rounded-full bg-teal-green" />
+                          <div className={`w-2 h-2 rounded-full ${
+                            selectedSize === "90" ? "bg-rust" : 
+                            selectedSize === "7" ? "bg-deep-purple" : 
+                            "bg-teal-green"
+                          }`} />
                         )}
                       </div>
                       <div className="flex-1 flex justify-between items-center">
@@ -617,13 +658,21 @@ export default function HeroAndBuyBox({productImage, product}) {
 
                     {/* Delivery Frequency Dropdown */}
                     {purchaseType === "subscribe" && (
-                      <div className="relative" ref={dropdownRef}>
+                      <div className="relative ml-20" ref={dropdownRef}>
                         <button
                           onClick={() =>
                             setIsDeliveryDropdownOpen(!isDeliveryDropdownOpen)
                           }
                           onKeyDown={handleDropdownKeyDown}
-                          className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-dark/30 hover:border-slate-dark/50 transition-all bg-neutral-light"
+                          className={`w-full flex items-center justify-between p-3 rounded-xl border transition-all ${
+                            purchaseType === "subscribe"
+                              ? selectedSize === "90"
+                                ? "border-rust bg-rust/5"
+                                : selectedSize === "7"
+                                  ? "border-deep-purple bg-deep-purple/5"
+                                  : "border-teal-green bg-teal-green/5"
+                              : "border-slate-dark/30 hover:border-slate-dark/50 bg-neutral-light"
+                          }`}
                           aria-haspopup="listbox"
                           aria-expanded={isDeliveryDropdownOpen}
                         >
@@ -658,8 +707,16 @@ export default function HeroAndBuyBox({productImage, product}) {
                                   }
                                   className={`w-full px-4 py-3 text-left text-sm transition-colors first:rounded-t-xl last:rounded-b-xl ${
                                     isHighlighted
-                                      ? "bg-teal-green/15 text-slate-dark"
-                                      : "bg-neutral-light text-slate-dark hover:bg-teal-green/10"
+                                      ? selectedSize === "90"
+                                        ? "bg-rust/15 text-slate-dark"
+                                        : selectedSize === "7"
+                                          ? "bg-deep-purple/15 text-slate-dark"
+                                          : "bg-teal-green/15 text-slate-dark"
+                                      : selectedSize === "90"
+                                        ? "bg-neutral-light text-slate-dark hover:bg-rust/10"
+                                        : selectedSize === "7"
+                                          ? "bg-neutral-light text-slate-dark hover:bg-deep-purple/10"
+                                          : "bg-neutral-light text-slate-dark hover:bg-teal-green/10"
                                   }`}
                                   role="option"
                                   aria-selected={
@@ -677,6 +734,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                   </div>
                 </div>
               </div>
+              )}
 
               {/* Quantity and Add to Cart */}
               <div className="flex flex-col gap-2 mt-2">
@@ -724,7 +782,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                       }}
                       productImage={{url: imageUrl}}
                       productTitle="ThaenaBiotic - Postbiotic Supplement"
-                      size={selectedSize === "30" ? "30 capsules" : "90 capsules"}
+                      size={selectedSize === "30" ? "30 capsules" : selectedSize === "90" ? "90 capsules" : selectedSize === "7" ? "7 capsules" : "30 capsules"}
                       className="w-full bg-slate-dark hover:bg-slate-dark/90 text-neutral-light font-roboto-mono text-base font-medium py-4 px-6 rounded-xl transition-all"
                     >
                       Add to Cart
