@@ -21,10 +21,10 @@ export default function HowToTake() {
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-sage self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">EVERYDAY</span>
               </div>
-              <h3 className="font-cormorant text-xl font-semibold leading-7 tracking-[-0.4px] text-slate-dark">
+              <h3 className="font-roboto text-md font-medium leading-7 tracking-[-0.4px] text-slate-dark">
                 Daily Maintenance
               </h3>
-              <p className="font-roboto text-2xl font-bold leading-9 text-purple">
+              <p className="font-playfair text-2xl font-bold leading-9 text-purple">
                 1-2 capsules
               </p>
               <p className="font-roboto text-sm leading-[22.75px] text-slate-dark">
@@ -37,10 +37,10 @@ export default function HowToTake() {
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-sepia self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">ON THE GO</span>
               </div>
-              <h3 className="font-cormorant text-xl font-semibold leading-7 tracking-[-0.4px] text-slate-dark">
+              <h3 className="font-roboto text-md font-medium leading-7 tracking-[-0.4px] text-slate-dark">
                 Travel Support
               </h3>
-              <p className="font-roboto text-2xl font-bold leading-9 text-purple">
+              <p className="font-playfair text-2xl font-bold leading-9 text-purple">
                 2-3 capsules
               </p>
               <p className="font-roboto text-sm leading-[22.75px] text-slate-dark">
@@ -53,10 +53,10 @@ export default function HowToTake() {
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-teal-green self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">INTENSIVE</span>
               </div>
-              <h3 className="font-cormorant text-xl font-semibold leading-7 tracking-[-0.4px] text-slate-dark">
+              <h3 className="font-roboto text-md font-medium leading-7 tracking-[-0.4px] text-slate-dark">
                 Acute Support
               </h3>
-              <p className="font-roboto text-2xl font-bold leading-9 text-purple">
+              <p className="font-playfair text-2xl font-bold leading-9 text-purple">
                 3-4 capsules
               </p>
               <p className="font-roboto text-sm leading-[22.75px] text-slate-dark">
@@ -69,10 +69,10 @@ export default function HowToTake() {
               <div className="inline-flex items-center px-3 py-[2.667px] rounded-full bg-golden self-start">
                 <span className="font-roboto-mono text-xs font-bold leading-4 text-white">PERSONALIZED</span>
               </div>
-              <h3 className="font-cormorant text-xl font-semibold leading-7 tracking-[-0.4px] text-slate-dark">
+              <h3 className="font-roboto text-md font-medium leading-7 tracking-[-0.4px] text-slate-dark">
                 Professional Guidance
               </h3>
-              <p className="font-roboto text-2xl font-bold leading-9 text-purple">
+              <p className="font-playfair text-2xl font-bold leading-9 text-purple">
                 As directed
               </p>
               <p className="font-roboto text-sm leading-[22.75px] text-slate-dark">

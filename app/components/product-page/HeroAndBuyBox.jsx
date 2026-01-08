@@ -284,7 +284,12 @@ export default function HeroAndBuyBox({productImage, product}) {
   }, [basePrice, selectedSellingPlan, selectedVariant]);
 
   // Current price based on purchase type
-  const currentPrice = purchaseType === "subscribe" ? subscriptionPrice : basePrice;
+  // 7 capsule size should always show base price (no subscription discount)
+  const currentPrice = selectedSize === "7" 
+    ? basePrice 
+    : purchaseType === "subscribe" 
+      ? subscriptionPrice 
+      : basePrice;
 
   // Ensure deliveryFrequency matches an available option with a plan when switching to subscribe
   useEffect(() => {

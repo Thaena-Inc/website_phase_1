@@ -52,23 +52,23 @@ export default function AffiliatePage() {
       color: 'text-earth-brown',
     },
     {
-      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/SCFAs-Icons.png?v=1766099676',
-      bgColor: 'bg-slate-dark/15',
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Bile-Acids-Icon.png?v=1767817105',
+      bgColor: 'bg-golden/20',
       title: 'Bile acids',
       description: 'Digestive signaling and balance',
-      color: 'text-slate-dark',
+      color: 'text-rust',
     },
     {
-      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Amino-Acids-Icon.png?v=1766099677',
-      bgColor: 'bg-sage/30',
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Ceramides-Icon.png?v=1767817106',
+      bgColor: 'bg-slate-dark/15',
       title: 'Ceramides',
       description: 'Cellular barrier support and repair',
-      color: 'text-teal-green',
+      color: 'text-slate-dark',
       descriptionColor: 'text-slate-dark',
     },
     {
       icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Additional-Metabolites-Icon.png?v=1766099676',
-      bgColor: 'bg-sage-green/30',
+      bgColor: 'bg-sage/30',
       title: 'Additional metabolites',
       description: 'Still being mapped by science',
       color: 'text-teal-green',
@@ -80,19 +80,19 @@ export default function AffiliatePage() {
       question: <>Who is this product for?</>,
       answer: (
         <>
-          ThaenaBiotic<sup>®</sup> is designed for anyone looking to support their gut health with human-derived postbiotic nutrients. It's especially beneficial for those with sensitive guts, people who have tried probiotics without success, and anyone experiencing the effects of modern lifestyle stress on their microbiome.
+          Anyone seeking a gentle, science-backed way to support gut balance, resilience, and overall well-being.
         </>
       ),
     },
     {
       question: (
         <>
-          How is ThaenaBiotic<sup>®</sup> different from probiotics?
+          How is ThaenaBiotic® different from probiotics?
         </>
       ),
       answer: (
         <>
-          Unlike probiotics, which deliver live bacteria that need to colonize your gut, ThaenaBiotic<sup>®</sup> provides postbiotic metabolites—the beneficial compounds that healthy bacteria produce. This means no live organisms, no refrigeration needed, and signals your body already recognizes and can use immediately.
+          Probiotics supply a few live strains. ThaenaBiotic<sup>®</sup> delivers the microbial nutrients (postbiotics) those strains produce—without introducing any live microbes.
         </>
       ),
     },
@@ -100,7 +100,7 @@ export default function AffiliatePage() {
       question: <>Is it safe?</>,
       answer: (
         <>
-          Yes. ThaenaBiotic<sup>®</sup> undergoes rigorous safety protocols. Every batch is produced under strict GMP conditions, third-party tested for safety and purity, and our patented sterilization process eliminates all live microbes while preserving the functional postbiotic signals. Donors are screened to the highest standards.
+          Yes. Every batch is sterilized through a patented autoclaving process and tested for microbes and heavy metals.
         </>
       ),
     },
@@ -108,7 +108,7 @@ export default function AffiliatePage() {
       question: <>Does it need refrigeration?</>,
       answer: (
         <>
-          No. One of the key advantages of ThaenaBiotic<sup>®</sup> is its shelf-stability. Because it contains postbiotic metabolites rather than live organisms, it doesn't require refrigeration and maintains its potency at room temperature.
+          No. ThaenaBiotic<sup>®</sup> is shelf-stable.
         </>
       ),
     },
@@ -116,7 +116,7 @@ export default function AffiliatePage() {
       question: <>How does it taste?</>,
       answer: (
         <>
-          ThaenaBiotic<sup>®</sup> comes in easy-to-swallow capsules, so there's no taste to worry about. Simply take with water as part of your daily routine.
+          Nearly neutral—most users describe it as odorless and easy to take.
         </>
       ),
     },
@@ -220,42 +220,42 @@ export default function AffiliatePage() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-[1.1fr_0.9fr] gap-[34px] items-start md:grid-cols-1">
+          <div className="grid grid-cols-[1.1fr_0.9fr] gap-[34px] items-start mb-[3rem]">
             <div>
               <p className="text-base leading-[1.65] text-slate-dark m-0 mb-[18px] max-w-[62ch] font-roboto">
               ThaenaBiotic<sup>®</sup> is a postbiotic supplement delivering over 13,000 distinct metabolites made by healthy microbiomes — not created in a lab, but naturally fermented inside a healthy human gut.
               </p>
 
-              <div className="grid grid-cols-2 gap-[14px] my-[6px] mb-[18px] sm:grid-cols-1" role="list" aria-label="Product highlights">
-                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)]" role="listitem">
+              <div className="grid grid-cols-2 gap-[14px] my-[6px] mb-[18px] sm:grid-cols-1 md:grid-cols-2" role="list" aria-label="Product highlights">
+                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
                   <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">No colonization required</div>
                   <div className="text-sm text-slate-dark/80 leading-[1.4]">No live microbes or bacterial DNA</div>
                 </div>
 
-                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)]" role="listitem">
+                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
                   <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">Designed for sensitive guts</div>
                   <div className="text-sm text-slate-dark/80 leading-[1.4]">Full-spectrum molecular diversity</div>
                 </div>
 
-                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)]" role="listitem">
+                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
                   <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">No refrigeration</div>
                   <div className="text-sm text-slate-dark/80 leading-[1.4]">Support for travel, disruption, and daily rhythm</div>
                 </div>
 
-                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)]" role="listitem">
+                <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
                   <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">Subscription available</div>
                   <div className="text-sm text-slate-dark/80 leading-[1.4]">30-day money-back guarantee</div>
                 </div>
               </div>
 
-              <div className="border-l-2 border-rust-dark/50 pl-[14px] py-[10px] my-[6px] mb-[22px]">
+              <div className="border-l-2 border-rust-dark pl-[14px] py-[10px] my-[6px] mb-[22px]">
                 <div className="text-base leading-[1.55] text-slate-dark font-roboto">
                   A sterilized, human-derived postbiotic from rigorously screened donors — delivering postbiotic nutrients your body already recognizes.
                 </div>
               </div>
             </div>
 
-            <div className="w-full lg:w-[400px] flex-shrink-0 flex">
+            <div className="w-full h-full flex-shrink-0 flex">
               <div className="relative rounded-3xl shadow-[0_8px_32px_-8px_rgba(29,48,41,0.10)] backdrop-blur-[2px] overflow-hidden w-full h-full flex items-center justify-center">
                 <img
                   src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Thaena_December_Finals_2025_1-84.jpg?v=1766006455"
@@ -287,13 +287,13 @@ export default function AffiliatePage() {
           </div>
 
           <div className="max-w-[1024px] mx-auto mb-[42px] text-center">
-            <div className="text-sm text-slate-dark font-semibold">
-              Most gut supplements focus on: <span className="font-semibold">Adding strains (probiotics)</span>, or <span className="font-semibold">Feeding strains (prebiotics)</span>
+            <div className="text-base text-slate-dark font-semibold">
+              Most gut supplements focus on: <span className="font-bold">Adding strains (probiotics)</span>, or <span className="font-bold">Feeding strains (prebiotics)</span>
             </div>
           </div>
 
-          <div className="max-w-[1024px] mx-auto mb-[34px] p-[22px_24px_24px] border border-sage rounded-xl text-center">
-            <div className="text-sm text-slate-dark mb-3 font-semibold">
+          <div className="max-w-[1024px] w-fit mx-auto mb-[34px] p-[22px_24px_24px] border border-sage rounded-xl text-center">
+            <div className="text-base text-slate-dark mb-3 font-semibold">
               ThaenaBiotic<sup>®</sup> focuses on something more foundational:
             </div>
             <div className="font-playfair text-[22px] leading-[1.35] text-slate-dark">
@@ -310,7 +310,7 @@ export default function AffiliatePage() {
 
               return (
                 <div key={index} className="py-2">
-                  <div className="text-sm leading-[1.5] text-slate-dark/80 font-semibold border-l-2 border-sage pl-[14px]">
+                  <div className="text-base leading-[1.5] text-slate-dark/80 font-semibold border-l-2 border-sage pl-[14px]">
                     {mainText}
                     {subText && (
                       <>
@@ -335,8 +335,8 @@ export default function AffiliatePage() {
       </section>
 
       {/* Science Section */}
-      <section className="pt-[78px] px-[18px] pb-[92px] bg-neutral-warm">
-        <div className="max-w-[1024px] mx-auto flex flex-col gap-6">
+      <section className="pt-[72px] px-[18px] pb-[84px] bg-earth-brown/10">
+        <div className="max-w-[1024px] mx-auto flex flex-col gap-5">
           <div className="flex flex-col items-center gap-3 text-center">
             <span className="text-rust font-mono text-base font-medium leading-5 tracking-[0.7px] uppercase">
               The Science
@@ -347,29 +347,30 @@ export default function AffiliatePage() {
           </div>
 
           {/* Group 1: Baseline */}
-          <div className="max-w-[720px] mx-auto py-[10px] ml-[11.5rem]">
-            <p className="m-0 text-base leading-[1.75] text-slate-dark font-light font-roboto">
-              Most stool banks simply screen for disease. <span className="font-semibold">We look for patterns of health across the whole system.</span>
+          <div className="max-w-[720px] mx-auto py-[10px]">
+            <p className="m-0 text-base leading-[1.75] text-slate-dark font-normal font-roboto">
+              Most stool banks simply screen for disease. <span className="font-medium">We look for patterns of health across the whole system.</span>
             </p>
           </div>
 
           {/* Group 2: Donor philosophy (spotlight) */}
-          <div className="max-w-[720px] mx-auto relative py-4 pb-0 w-full">
-            <p className="m-0 relative z-10 text-lg leading-[1.55] text-slate-dark font-playfair text-center">
+          <div className="max-w-[720px] mx-auto relative py-1 pb-0 w-full pt-[0.8rem] pb-[0.6rem]">
+          <div className="hhh5-divider mb-[2rem] ml-auto mr-auto" aria-hidden="true"></div>
+            <p className="m-0 relative z-10 text-lg leading-[1.55] text-slate-dark font-playfair font-medium text-center">
               Thaena operates its own donor program with direct medical oversight. Our donors are not suppliers — they are partners in a regenerative healing ecosystem.
             </p>
-            <div className="hhh5-divider" aria-hidden="true"></div>
+            <div className="hhh5-divider mt-[2rem] ml-auto mr-auto" aria-hidden="true"></div>
           </div>
 
           {/* Group 3: Donor criteria */}
-          <div className="max-w-[720px] mx-auto py-[10px] ml-[11.5rem]">
-            <p className="m-0 text-base leading-[1.75] text-slate-dark font-semibold mb-3 font-roboto">
+          <div className="max-w-[720px] mx-auto py-[10px]">
+            <p className="m-0 text-base leading-[1.75] text-slate-dark font-normal mb-3 font-roboto">
               We look for individuals whose bodies demonstrate:
             </p>
 
             <ul className="grid grid-cols-2 gap-[10px_20px] font-roboto w-full" role="list" aria-label="Donor criteria">
               {donors.map((donor, index) => (
-                <li key={index} className="pl-[14px] relative text-slate-dark/80 text-base leading-[1.55] hhh5-crit" role="listitem">
+                <li key={index} className="pl-[14px] relative text-slate-dark text-base leading-[1.55] hhh5-crit" role="listitem">
                   {donor}
                 </li>
               ))}
@@ -377,15 +378,15 @@ export default function AffiliatePage() {
           </div>
 
           {/* Group 4: Hinge */}
-          <div className="max-w-[720px] mx-auto py-[10px] pl-[14px] border-l-2 border-rust-dark ml-[11.5rem]">
+          <div className="max-w-[720px] mx-auto py-[10px]">
             <p className="m-0 text-base leading-[1.75] text-slate-dark font-semibold font-roboto">
               This allows us to hold a higher standard at the source — and throughout the entire process.
             </p>
           </div>
 
           {/* Group 5: Safety outcomes (box) */}
-          <div className="max-w-[720px] mx-auto py-[10px] border border-sage rounded-xl bg-neutral-light p-[18px] w-full">
-            <p className="m-0 text-base leading-[1.75] text-slate-dark font-semibold mb-3 font-roboto">
+          <div className="mx-auto py-[10px] border border-sage rounded-xl p-[18px] w-fit">
+            <p className="m-0 text-base leading-[1.75] text-slate-dark font-medium mb-3 font-roboto">
               Every batch of ThaenaBiotic<sup>®</sup> reflects:
             </p>
 
@@ -419,7 +420,7 @@ export default function AffiliatePage() {
 
           {/* Group 6: Seal */}
           <div className="max-w-[720px] mx-auto py-[10px]">
-            <p className="m-0 text-base leading-[1.75] text-slate-dark font-bold tracking-[0.01em] font-roboto">
+            <p className="m-0 text-base leading-[1.75] text-slate-dark font-medium tracking-[0.01em] font-roboto">
               This is Humans Healing Humans<sup>™</sup> — with modern safety controls and scientific integrity.
             </p>
           </div>
@@ -481,9 +482,9 @@ export default function AffiliatePage() {
       </section>
 
       {/* How to Get Started Section */}
-      <section className="py-16 md:py-24 px-6 bg-earth-brown/20">
+      <section className="py-16 md:py-24 px-6 bg-neutral-warm">
         <div className="relative flex items-center justify-center">
-          <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
+          <div className="max-w-[896px] flex flex-col justify-center items-center gap-6 relative z-20">
             {/* Heading */}
             <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
               How to Get Started
@@ -491,7 +492,7 @@ export default function AffiliatePage() {
 
             {/* Subheading */}
             <div className="pb-4">
-              <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">
+              <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center mb-[1rem]">
                 Most people begin with a simple daily routine.
               </p>
               <p className="font-roboto text-xl md:text-2xl lg:text-[28px] leading-[32.5px] text-slate-dark text-center">

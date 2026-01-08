@@ -67,19 +67,34 @@ export default function DonorPage() {
         </section>
 
         {/* Why Microbiome Donors Matter */}
-        <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 bg-cream">
-          <div className="w-full max-w-[1024px] mx-auto">
+        <section className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 overflow-hidden bg-cream">
+          {/* Background Image Layer */}
+          <div 
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url('https://cdn.shopify.com/s/files/1/0602/5281/5555/files/natalia-blauth-bV1baW0DBbo-unsplash_-_cap_hand.jpg?v=1767824532')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              opacity: 0.45
+            }}
+          />
+          
+          <div className="relative z-10 w-full max-w-[1024px] mx-auto">
             <div className="flex flex-col items-center gap-10">
               <div className="w-full max-w-[768px]">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
                   Why We Built Our Own Donor Program
                 </h2>
+              </div>
+
+              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
                 <p className="font-roboto text-[18px] md:text-[20px] leading-[28px] text-slate-dark text-center">
                   Thaena operates its own <strong>independent donor program</strong>.
                 </p>
               </div>
 
-              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
+              <div className="flex flex-col gap-2 max-w-[1024px] w-full">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
                 Unlike conventional donation models, we:
                 </p>
@@ -89,25 +104,29 @@ export default function DonorPage() {
                   <li className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">Do not rely on minimum-viability health definitions</li>
                   <li className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">Do not ignore health and wellness habits like diet and lifestyle</li>
                 </ul>
+              </div>
 
+              <div className="flex flex-col gap-4 max-w-[1024px] w-full">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
                   Instead, we curate a living reference for what thriving human biology looks like in practice — and hold every downstream process to that same standard.
                 </p>
 
-                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                <div className="flex flex-col gap-2 max-w-[1024px] w-full pl-[10px] border-l border-teal-green/80">
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-light text-slate">
                   This allows us to set a higher bar for:
                 </p>
 
-                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-normal text-slate pl-[10px] border-l border-teal-green/80">
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-medium text-slate">
                   Safety • Consistency • Postbiotic diversity and composition
                 </p>
 
-                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-light font-italic text-slate">
                   Because regenerative health starts at the source.
                 </p>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
+              <div className="flex flex-col gap-2 max-w-[1024px] w-full mt-[0.5rem] mb-[0.5rem]">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate">
                   Most stool banks just screen for disease.
                 </p>
@@ -115,7 +134,9 @@ export default function DonorPage() {
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate">
                   We look for patterns of health across the whole system.
                 </p>
-
+              </div>
+              
+              <div className="flex flex-col gap-6 max-w-[1024px] w-full">
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
                   At Thaena, health is measured by resilience, regulation, and long-term balance — not just lack of disease. We look for individuals whose bodies demonstrate:
                 </p>
@@ -137,15 +158,17 @@ export default function DonorPage() {
                   <CheckIcon />
                   <span className="text-slate font-roboto text-base leading-6">Long-term physiological consistency, not short-term optimization</span>
                 </div>
-              </div>
+                </div>
 
-                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate">
+              <div className="gap-2 flex flex-col max-w-[1024px] w-full">
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-medium text-deep-purple">
                   This level of biological coherence is rare.
                 </p>
 
-                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-normal text-center text-deep-purple">
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-medium text-deep-purple">
                 That rarity is exactly why it matters.
                 </p>
+              </div>
               </div>
             </div>
           </div>
@@ -337,41 +360,59 @@ export default function DonorPage() {
                 <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
                   Donor screening is only the <strong>first step</strong> in Thaena's broader safety and quality process.
                 </p>
-                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
-                  From there, every batch undergoes:
-                </p>
-                <div className="relative w-full max-w-[527px] mt-4">
+              </div>
+              <div className="w-full max-w-[896px] mx-auto flex flex-row items-center gap-6">
+                <div className="flex flex-col flex-1">
+                  <p className="font-roboto text-base sm:text-lg leading-[1.625] font-normal text-slate text-center">
+                    From there, every batch undergoes:
+                  </p>
+                  <div className="relative w-full max-w-[527px] mt-4 mx-auto">
 
-                  <div className="flex flex-col gap-6">
-                    {[
-                      {
-                        step: '1',
-                        body: 'Controlled collection',
-                      },
-                      {
-                        step: '2',
-                        body: 'Patented sterilization for safety',
-                      },
-                      {
-                        step: '3',
-                        body: 'Lyophilization to preserve postbiotic signals',
-                      },
-                      {
-                        step: '4',
-                        body: 'Third-party batch testing for safety, purity, and consistency',
-                      },
-                    ].map(({step, title, body}) => (
-                      <div key={step} className="grid grid-cols-[auto_1fr] gap-3 items-start">
-                        <div className="flex items-center justify-center w-10 h-10 rounded-full border border-rust/30 relative z-10 bg-cream">
-                          <span className="font-mono text-sm text-rust">{step}</span>
+                    <div className="flex flex-col gap-6">
+                      {[
+                        {
+                          step: '1',
+                          body: 'Controlled collection',
+                        },
+                        {
+                          step: '2',
+                          body: 'Patented sterilization for safety',
+                        },
+                        {
+                          step: '3',
+                          body: 'Lyophilization to preserve postbiotic signals',
+                        },
+                        {
+                          step: '4',
+                          body: 'Third-party batch testing for safety, purity, and consistency',
+                        },
+                      ].map(({step, title, body}) => (
+                        <div key={step} className="grid grid-cols-[auto_1fr] gap-3 items-center">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-full border border-rust/30 relative z-10 bg-cream">
+                            <span className="font-mono text-sm text-rust">{step}</span>
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <p className="font-roboto text-sm leading-[1.625] text-slate">{body}</p>
+                          </div>
                         </div>
-                        <div className="flex flex-col gap-1">
-                          <p className="font-roboto text-sm leading-[1.625] text-slate">{body}</p>
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/natalia-blauth-5iRGXjSHhs4-unsplash_-_cap_tattoo_hand.jpg?v=1767824532"
+                  alt=""
+                  className="flex-shrink-0"
+                  style={{
+                    height: '100%',
+                    maxWidth: '300px',
+                    borderRadius: '12px',
+                    backdropFilter: 'blur(2px)',
+                    boxShadow: '0 8px 32px -8px rgba(29, 48, 41, 0.1)',
+                    objectFit: 'cover',
+                    objectPosition: 'left',
+                  }}
+                />
               </div>
 
               <div className="mt-6">
@@ -486,7 +527,7 @@ export default function DonorPage() {
           />
           
           {/* Content Layer */}
-          <div className="relative z-20 w-full max-w-[786px] mx-auto">
+          <div className="relative z-20 w-full max-w-[896px] mx-auto">
             <div className="flex flex-col items-center justify-center gap-6">
               <div className="w-full">
                 <h2 className="font-playfair text-3xl sm:text-4xl lg:text-[48px] font-normal leading-tight lg:leading-[48px] tracking-[-0.025em] lg:tracking-[-1.2px] text-teal-green text-center">
@@ -510,11 +551,11 @@ export default function DonorPage() {
               </a>
 
               <div className="w-full">
-                <p className="font-roboto text-lg sm:text-xl lg:text-[28px] leading-[1.16] font-light text-slate text-center italic">
+                <p className="font-roboto text-base sm:text-lg lg:text-[22px] leading-[1.16] font-light text-slate text-center italic">
                 Confidential. Medically supervised. All testing covered.
                 </p>
 
-                <p className="font-roboto text-lg sm:text-xl lg:text-[28px] leading-[1.16] font-light text-slate text-center italic">
+                <p className="font-roboto text-base sm:text-lg lg:text-[22px] leading-[1.16] font-light text-slate text-center italic">
                   Compensation provided.
                 </p>
               </div>
