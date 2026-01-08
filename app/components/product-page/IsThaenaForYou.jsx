@@ -14,7 +14,7 @@ export default function IsThaenaForYou() {
       {/* Cards Grid */}
       <div className="flex flex-wrap gap-6 mb-16">
         {/* Card 1: Tried probiotics */}
-        <div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-sepia/30 border-r-sepia/30 border-b-sepia/30 border-l-sepia shadow-sm p-8 flex flex-col">
+        <div className="w-full lg:w-[calc(50%-12px)] bg-[rgba(255,255,255,0.5)] rounded-md border-t border-r border-b border-l-4 border-t-sepia/30 border-r-sepia/30 border-b-sepia/30 border-l-sepia shadow-sm p-8 flex flex-col">
           <div className="flex flex-col gap-2.5">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-full bg-sepia/10 flex items-center justify-center flex-shrink-0">
@@ -41,7 +41,7 @@ export default function IsThaenaForYou() {
         </div>
 
         {/* Card 2: Recovering from antibiotics */}
-        <div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-teal-green/30 border-r-teal-green/30 border-b-teal-green/30 border-l-teal-dark shadow-sm p-8 flex flex-col">
+        <div className="w-full lg:w-[calc(50%-12px)] bg-[rgba(255,255,255,0.5)] rounded-md border-t border-r border-b border-l-4 border-t-teal-green/30 border-r-teal-green/30 border-b-teal-green/30 border-l-teal-dark shadow-sm p-8 flex flex-col">
           <div className="flex flex-col gap-2.5">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-full bg-teal-green/10 flex items-center justify-center flex-shrink-0">
@@ -62,7 +62,7 @@ export default function IsThaenaForYou() {
         </div>
 
         {/* Card 3: Diet limited */}
-        <div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-purple/30 border-r-purple/30 border-b-purple/30 border-l-purple shadow-sm p-8 flex flex-col">
+        <div className="w-full lg:w-[calc(50%-12px)] bg-[rgba(255,255,255,0.5)] rounded-md border-t border-r border-b border-l-4 border-t-purple/30 border-r-purple/30 border-b-purple/30 border-l-purple shadow-sm p-8 flex flex-col">
           <div className="flex flex-col gap-2.5">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-full bg-purple/10 flex items-center justify-center flex-shrink-0">
@@ -86,7 +86,7 @@ export default function IsThaenaForYou() {
         </div>
 
         {/* Card 4: Optimized everything */}
-        <div className="w-full lg:w-[calc(50%-12px)] bg-white rounded-md border-t border-r border-b border-l-4 border-t-earth-brown/30 border-r-earth-brown/30 border-b-earth-brown/30 border-l-earth-brown shadow-sm p-8 flex flex-col">
+        <div className="w-full lg:w-[calc(50%-12px)] bg-[rgba(255,255,255,0.5)] rounded-md border-t border-r border-b border-l-4 border-t-earth-brown/30 border-r-earth-brown/30 border-b-earth-brown/30 border-l-earth-brown shadow-sm p-8 flex flex-col">
           <div className="flex flex-col gap-2.5">
             <div className="flex items-start gap-4">
               <div className="w-14 h-14 rounded-full bg-earth-brown/10 flex items-center justify-center flex-shrink-0">

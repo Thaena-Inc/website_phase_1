@@ -23,57 +23,41 @@ export default function FAQ() {
       </div>
 
       {/* FAQ Accordion */}
-      <div className="max-w-[896px] mx-auto">
+      <div className="max-w-[768px] mx-auto">
         <Accordion type="single" collapsible className="flex flex-col gap-4">
-          <AccordionItem value="item-1" className="bg-neutral-light rounded-xl border-none">
-            <AccordionTrigger className="px-8 py-6 hover:no-underline" chevronColor="text-teal-green">
-              <span className="font-playfair text-lg font-medium leading-7 tracking-[-0.4px] text-teal-green text-left">
-                Why poop?
-              </span>
+          <AccordionItem value="item-1" className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-neutral-light border-none px-6 py-4">
+            <AccordionTrigger className="text-slate font-playfair text-lg font-normal leading-7 hover:no-underline text-left">
+              Why poop?
             </AccordionTrigger>
-            <AccordionContent className="px-8 pb-6 pt-0">
-              <p className="font-roboto text-base leading-7 text-slate-dark">
-                ThaenaBiotic<sup>®</sup> is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
-              </p>
+            <AccordionContent className="text-slate font-roboto text-base leading-6 pt-2">
+              ThaenaBiotic<sup>®</sup> is derived from human stool because that's where the most diverse and beneficial postbiotic metabolites are found. Unlike lab-grown alternatives, our human-derived approach captures the full spectrum of compounds your gut actually recognizes and uses.
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-2" className="bg-neutral-light rounded-xl border-none">
-            <AccordionTrigger className="px-8 py-6 hover:no-underline" chevronColor="text-teal-green">
-              <span className="font-playfair text-lg font-medium leading-7 tracking-[-0.4px] text-teal-green text-left">
-                Are the molecules still viable?
-              </span>
+          <AccordionItem value="item-2" className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-neutral-light border-none px-6 py-4">
+            <AccordionTrigger className="text-slate font-playfair text-lg font-normal leading-7 hover:no-underline text-left">
+              Are the molecules still viable?
             </AccordionTrigger>
-            <AccordionContent className="px-8 pb-6 pt-0">
-              <p className="font-roboto text-base leading-7 text-slate-dark">
-                Yes. Our proprietary sterilization and preservation process maintains the structural integrity of the metabolites while eliminating all live bacteria. The postbiotic compounds remain bioactive and ready to signal your gut.
-              </p>
+            <AccordionContent className="text-slate font-roboto text-base leading-6 pt-2">
+              Yes. Our proprietary sterilization and preservation process maintains the structural integrity of the metabolites while eliminating all live bacteria. The postbiotic compounds remain bioactive and ready to signal your gut.
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-3" className="bg-neutral-light rounded-xl border-none">
-            <AccordionTrigger className="px-8 py-6 hover:no-underline" chevronColor="text-teal-green">
-              <span className="font-playfair text-lg font-medium leading-7 tracking-[-0.4px] text-teal-green text-left">
-                Don't I need "matching" bacteria?
-              </span>
+          <AccordionItem value="item-3" className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-neutral-light border-none px-6 py-4">
+            <AccordionTrigger className="text-slate font-playfair text-lg font-normal leading-7 hover:no-underline text-left">
+              Don't I need "matching" bacteria?
             </AccordionTrigger>
-            <AccordionContent className="px-8 pb-6 pt-0">
-              <p className="font-roboto text-base leading-7 text-slate-dark">
-                No. ThaenaBiotic<sup>®</sup> doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
-              </p>
+            <AccordionContent className="text-slate font-roboto text-base leading-6 pt-2">
+              No. ThaenaBiotic<sup>®</sup> doesn't add bacteria—it delivers the metabolites (postbiotics) that bacteria produce. Your existing microbiome can recognize and respond to these signals regardless of your individual bacterial strains.
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-4" className="bg-neutral-light rounded-xl border-none">
-            <AccordionTrigger className="px-8 py-6 hover:no-underline" chevronColor="text-teal-green">
-              <span className="font-playfair text-lg font-medium leading-7 tracking-[-0.4px] text-teal-green text-left">
-                Can I take it in tandem with my other medications?
-              </span>
+          <AccordionItem value="item-4" className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-neutral-light border-none px-6 py-4">
+            <AccordionTrigger className="text-slate font-playfair text-lg font-normal leading-7 hover:no-underline text-left">
+              Can I take it in tandem with my other medications?
             </AccordionTrigger>
-            <AccordionContent className="px-8 pb-6 pt-0">
-              <p className="font-roboto text-base leading-7 text-slate-dark">
-                ThaenaBiotic<sup>®</sup> is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
-              </p>
+            <AccordionContent className="text-slate font-roboto text-base leading-6 pt-2">
+              ThaenaBiotic<sup>®</sup> is generally safe to take alongside most medications. However, we always recommend consulting with your healthcare provider before starting any new supplement, especially if you're on prescription medications or have specific health conditions.
             </AccordionContent>
           </AccordionItem>
         </Accordion>

@@ -59,7 +59,7 @@ export default function AffiliatePage() {
       color: 'text-rust',
     },
     {
-      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Ceramides-Icon.png?v=1767817106',
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Peptides-Icon.png?v=1766099676',
       bgColor: 'bg-slate-dark/15',
       title: 'Ceramides',
       description: 'Cellular barrier support and repair',
@@ -355,7 +355,7 @@ export default function AffiliatePage() {
 
           {/* Group 2: Donor philosophy (spotlight) */}
           <div className="max-w-[720px] mx-auto relative py-1 pb-0 w-full pt-[0.8rem] pb-[0.6rem]">
-          <div className="hhh5-divider mb-[2rem] ml-auto mr-auto" aria-hidden="true"></div>
+            <div className="hhh5-divider mb-[2rem] ml-auto mr-auto" aria-hidden="true"></div>
             <p className="m-0 relative z-10 text-lg leading-[1.55] text-slate-dark font-playfair font-medium text-center">
               Thaena operates its own donor program with direct medical oversight. Our donors are not suppliers — they are partners in a regenerative healing ecosystem.
             </p>
@@ -455,7 +455,7 @@ export default function AffiliatePage() {
               {molecules.map((molecule, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-5 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50"
+                  className="flex items-center gap-5 p-4 rounded-2xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-[rgba(255,255,255,0.33)]"
                 >
                   <div className={`flex w-12 h-11 justify-center items-center rounded-full ${molecule.bgColor} shrink-0`}>
                     <img
@@ -533,7 +533,7 @@ export default function AffiliatePage() {
                   <AccordionItem
                     key={index}
                     value={`item-${index}`}
-                    className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-white/50 border-none px-6 py-4"
+                    className="rounded-xl shadow-[0_4px_20px_-4px_rgba(29,48,41,0.08)] backdrop-blur-[2px] bg-[rgba(255,255,255,0.33)] border-none px-6 py-4"
                   >
                     <AccordionTrigger className="text-slate font-playfair text-lg font-normal leading-7 hover:no-underline text-left">
                       {faq.question}
