@@ -60,8 +60,10 @@ export default function AffiliatePage() {
           entrypoints: window.CF.entrypoints.length,
           hasEnvironment: !!window.CF.environment,
           environmentKeys: Object.keys(window.CF.environment || {}),
+          hasMountForm: typeof window.CF.mountForm === 'function',
           hasInitEmbed: typeof window.CF.initEmbed === 'function',
-          hasVersion: !!window.CF.version
+          hasVersion: !!window.CF.version,
+          availableMethods: Object.keys(window.CF).filter(key => typeof window.CF[key] === 'function')
         });
 
         // Find form element
@@ -91,62 +93,29 @@ export default function AffiliatePage() {
           console.log('[Helium] React target container found:', reactTarget);
         }
 
-        // Check if entrypoint already exists for this form
-        const existingEntrypoint = window.CF.entrypoints.find(
-          ep => ep.$form === formElement || ep.form?.id === 'NPtl6j'
-        );
-
-        if (existingEntrypoint) {
-          console.log('[Helium] Entrypoint already exists for this form:', existingEntrypoint);
-          initialized = true;
-          return;
-        }
-
-        // Create enhanced entrypoint for this form
-        const finalReactTarget = formElement.querySelector('.cf-react-target');
-        const entrypoint = {
-          $form: formElement,
-          reactTarget: finalReactTarget,
-          form: { 
-            id: 'NPtl6j'
-          },
-          restore: false
-        };
-
-        window.CF.entrypoints.push(entrypoint);
-        console.log('[Helium] Entrypoint added:', {
-          entrypoint,
-          totalEntrypoints: window.CF.entrypoints.length,
-          allEntrypoints: window.CF.entrypoints
-        });
-        initialized = true;
-
-        // Dispatch entrypoints ready event to trigger script initialization
-        console.log('[Helium] Dispatching cf:entrypoints_ready event...');
-        const event = new CustomEvent('cf:entrypoints_ready', {
-          detail: { entrypoints: window.CF.entrypoints },
-          bubbles: true,
-          cancelable: true
-        });
-        const dispatched = document.dispatchEvent(event);
-        console.log('[Helium] Event dispatched:', {
-          success: dispatched,
-          entrypointsCount: window.CF.entrypoints.length
-        });
-
-        // If initEmbed function exists, try calling it
-        if (typeof window.CF.initEmbed === 'function') {
-          console.log('[Helium] Calling initEmbed function...');
+        // Use mountForm method to initialize the form directly
+        if (typeof window.CF.mountForm === 'function') {
+          console.log('[Helium] Calling mountForm with form element...');
           try {
-            window.CF.initEmbed();
-            console.log('[Helium] initEmbed called successfully');
+            window.CF.mountForm(formElement);
+            console.log('[Helium] mountForm called successfully');
+            initialized = true;
           } catch (error) {
-            console.error('[Helium] ERROR calling initEmbed:', error);
+            console.error('[Helium] ERROR calling mountForm:', error);
             console.error('[Helium] Error stack:', error.stack);
+            console.error('[Helium] Error details:', {
+              message: error.message,
+              name: error.name,
+              formElement: formElement,
+              formId: formElement.getAttribute('data-cf-form')
+            });
+            return;
           }
         } else {
-          console.log('[Helium] initEmbed function not found. Script may initialize automatically.');
-          console.log('[Helium] Available window.CF methods:', Object.keys(window.CF).filter(key => typeof window.CF[key] === 'function'));
+          console.error('[Helium] ERROR: mountForm function not found');
+          console.error('[Helium] Available window.CF methods:', Object.keys(window.CF).filter(key => typeof window.CF[key] === 'function'));
+          console.error('[Helium] window.CF object:', window.CF);
+          return;
         }
 
         // Check for any errors in the console after a short delay
@@ -174,12 +143,14 @@ export default function AffiliatePage() {
     const checkAndInitialize = () => {
       if (initialized) return;
 
-      // Check if script is loaded
+      // Check if script is loaded and mountForm is available
       const scriptTag = document.querySelector('script[src*="customer-fields.js"]');
       const scriptLoaded = scriptTag && (scriptTag.complete || scriptTag.readyState === 'complete');
       
-      // Check if window.CF exists (should be initialized by inline script)
-      const cfReady = typeof window !== 'undefined' && window.CF && Array.isArray(window.CF.entrypoints);
+      // Check if window.CF exists and mountForm is available
+      const cfReady = typeof window !== 'undefined' && 
+        window.CF && 
+        typeof window.CF.mountForm === 'function';
 
       if (scriptLoaded && cfReady) {
         // Small delay to ensure React hydration is complete
@@ -200,12 +171,14 @@ export default function AffiliatePage() {
           cfReady,
           windowCF: typeof window !== 'undefined' ? {
             exists: !!window.CF,
-            hasEntrypoints: !!window.CF?.entrypoints,
-            entrypointsLength: window.CF?.entrypoints?.length,
-            hasEnvironment: !!window.CF?.environment,
-            environmentKeys: window.CF?.environment ? Object.keys(window.CF.environment) : [],
-            hasInitEmbed: typeof window.CF?.initEmbed === 'function',
-            allKeys: window.CF ? Object.keys(window.CF) : []
+          hasEntrypoints: !!window.CF?.entrypoints,
+          entrypointsLength: window.CF?.entrypoints?.length,
+          hasEnvironment: !!window.CF?.environment,
+          environmentKeys: window.CF?.environment ? Object.keys(window.CF.environment) : [],
+          hasMountForm: typeof window.CF?.mountForm === 'function',
+          hasInitEmbed: typeof window.CF?.initEmbed === 'function',
+          allKeys: window.CF ? Object.keys(window.CF) : [],
+          availableMethods: window.CF ? Object.keys(window.CF).filter(key => typeof window.CF[key] === 'function') : []
           } : 'window undefined',
           formElement: !!document.querySelector('form[data-cf-form="NPtl6j"]'),
           retryCount,

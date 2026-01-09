@@ -244,7 +244,7 @@ export function Layout({children}) {
                     version: '5.1.2',
                     appEmbedEnabled: false,
                     localeRootPath: '/',
-                    countryOptionTags: ''
+                    countryOptionTags: '<option value="US">United States</option><option value="CA">Canada</option>'
                   };
                   
                   console.log('[Helium] window.CF initialized before script load', {

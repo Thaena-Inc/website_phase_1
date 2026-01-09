@@ -598,3 +598,74 @@ button.reset:hover:not(:has(> *)) {
   background: #a7b3a7; /* sage color */
   border-radius: 2px;
 }
+
+
+/* cart styling */
+
+.cart__note label {
+  display: flex;
+  align-items: flex-end;
+  line-height: 1;
+  height: 1.8rem;
+  margin-bottom: 0px;
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.cart__note p {font-size:13px;}
+
+.cart__note .text-area {
+min-height:0;
+resize: none;
+border: 1px solid #000;
+border-radius: 5px;
+background-color:#fff;
+}
+
+.wcp-discounts-wrapper {display:flex;}
+
+
+
+.cart__blocks .wcp-cart-total {padding-right:0;}
+
+.wcp-messages {display:block; margin-top:20px;}
+
+/* Map totals__subtotal-value to cart-subtotal dd */
+.cart-subtotal dd,
+.totals__subtotal-value {
+  text-align:right;
+  margin-bottom:20px;
+  font-size:18px;
+}
+
+/* Map totals to cart summary containers */
+.cart-summary-page,
+.cart-summary-aside,
+.totals {
+  flex-direction: column;
+}
+
+#wcp-discount-item  {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.wcp-discounts-wrapper {display:block; float:right !important;}
+
+#wcp-discount-code {margin-right:0 !important;
+padding:10px;}
+
+#apply-wcp-discount  {
+  border: 0;
+  background-color: #484554;
+  color: #efefef;
+  padding:13px 10px;
+}
+
+/* Map totals__subtotal to cart-subtotal */
+.cart-subtotal,
+.totals__subtotal {
+  margin-bottom: 20px !important;
+  font-size: 21px !important;
+}

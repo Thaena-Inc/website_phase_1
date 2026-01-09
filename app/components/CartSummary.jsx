@@ -10,11 +10,11 @@ export function CartSummary({cart, layout}) {
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
 
   return (
-    <div aria-labelledby="cart-summary" className={className}>
+    <div aria-labelledby="cart-summary" className={`${className} totals`}>
       <h4>Totals</h4>
       <dl className="cart-subtotal">
         <dt>Subtotal</dt>
-        <dd>
+        <dd className="totals__subtotal-value">
           {cart?.cost?.subtotalAmount?.amount ? (
             <Money data={cart?.cost?.subtotalAmount} />
           ) : (
@@ -60,7 +60,7 @@ function CartDiscounts({discountCodes}) {
     <div>
       {/* Have existing discount, display it with a remove option */}
       <dl hidden={!codes.length}>
-        <div>
+        <div id="wcp-discount-item">
           <dt>Discount(s)</dt>
           <UpdateDiscountForm>
             <div className="cart-discount">
@@ -74,10 +74,15 @@ function CartDiscounts({discountCodes}) {
 
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
-        <div>
-          <input type="text" name="discountCode" placeholder="Discount code" />
+        <div className="wcp-discounts-wrapper">
+          <input 
+            type="text" 
+            name="discountCode" 
+            id="wcp-discount-code"
+            placeholder="Discount code" 
+          />
           &nbsp;
-          <button type="submit">Apply</button>
+          <button type="submit" id="apply-wcp-discount">Apply</button>
         </div>
       </UpdateDiscountForm>
     </div>
