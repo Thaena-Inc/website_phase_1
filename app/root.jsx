@@ -183,18 +183,18 @@ export function Layout({children}) {
         <link rel="stylesheet" href={appStyles}></link>
         <Meta />
         <Links />
-        {/* Manually load Customer Fields script for Helium forms */}
-        {/* Temporarily commented out to test if script error is breaking interactions */}
-        {/* <script
-          src="https://static.customerfields.com/releases/5.1.2/customer-fields.js"
-          nonce={nonce}
-          async
-        /> */}
       </head>
       <body>
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
+        {/* Manually load Customer Fields script for Helium forms */}
+        {/* Load in body with defer to avoid hydration conflicts */}
+        <script
+          src="https://static.customerfields.com/releases/5.1.2/customer-fields.js"
+          nonce={nonce}
+          defer
+        />
       </body>
     </html>
   );

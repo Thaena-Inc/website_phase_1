@@ -30,7 +30,7 @@ export default function DonorPage() {
           <div 
             className="absolute inset-0 z-0"
             style={{
-              background: 'linear-gradient(135deg, rgba(109, 79, 44, 0.09) 0%, rgba(109, 79, 44, 0.06) 48%, rgba(109, 79, 44, 0.00) 78%), linear-gradient(315deg, rgba(222, 176, 101, 0.08) 0%, rgba(222, 176, 101, 0.04) 40%, rgba(222, 176, 101, 0.00) 72%), #f7f3ec'
+              background: 'linear-gradient(135deg, rgba(222, 176, 101, 0.05) 0%, rgba(222, 176, 101, 0.13) 50%, rgba(222, 176, 101, 0.09) 100%) center center, linear-gradient(315deg, rgba(39, 91, 82, 0.08) 0%, rgba(39, 91, 82, 0.16) 50%, rgba(39, 91, 82, 0.23) 100%), linear-gradient(90deg, rgba(237, 232, 222, 0.1) 0%, rgba(237, 232, 222, 0.1) 50%, rgba(237, 232, 222, 0.1) 100%)'
             }}
           />
           
@@ -74,7 +74,9 @@ export default function DonorPage() {
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
-              opacity: 0.45
+              opacity: 0.45,
+              backgroundColor: 'rgba(255,255,255,0.3)',
+              backgroundBlendMode: 'lighten'
             }}
           />
           
@@ -121,7 +123,7 @@ export default function DonorPage() {
               </div>
 
               <div className="flex flex-col gap-2 max-w-[896px] w-full mt-[0.5rem] mb-[0.5rem]">
-                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate">
+                <p className="font-roboto text-base sm:text-lg leading-[1.625] font-bold text-slate text-center">
                   Most stool banks just screen for disease. We look for patterns of health across the whole system.
                 </p>
               </div>
@@ -151,7 +153,7 @@ export default function DonorPage() {
                 </div>
 
               <div className="gap-2 flex flex-col max-w-[896px] w-full mt-[0.5rem]">
-                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-medium text-teal-green">
+                <p className="font-playfair text-base sm:text-lg leading-[1.625] font-medium text-teal-green text-center">
                   This level of biological coherence is rare. That rarity is exactly why it matters.
                 </p>
               </div>
@@ -250,7 +252,7 @@ export default function DonorPage() {
         </section>
 
         {/* Screening Process */}
-        <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 bg-neutral-warm">
+        <section className="flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 bg-[#6d4f2c10]">
           <div className="w-full max-w-[1024px] mx-auto">
             <div className="flex flex-col items-center gap-6">
               <div className="w-full">
@@ -297,7 +299,7 @@ export default function DonorPage() {
                     },
                   ].map(({step, title, body}) => (
                     <div key={step} className="grid grid-cols-[auto_1fr] gap-3 items-start">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-rust/30 relative z-10 bg-cream">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-rust/30 relative z-10 bg-[#ede8de]">
                         <span className="font-mono text-sm text-rust">{step}</span>
                       </div>
                       <div className="flex flex-col gap-1">
@@ -311,7 +313,7 @@ export default function DonorPage() {
                 </div>
               </div>
 
-              <div className="w-24 h-[1px] bg-rust"></div>
+              {/* <div className="w-24 h-[1px] bg-rust"></div> */}
 
               <div className="flex flex-col gap-2 w-full max-w-[896px] mt-[2rem]">
                 <p className="font-roboto text-xl sm:text-[22px] leading-[1.625] font-medium text-slate">
@@ -398,7 +400,7 @@ export default function DonorPage() {
                 <img
                   src="https://cdn.shopify.com/s/files/1/0602/5281/5555/files/natalia-blauth-5iRGXjSHhs4-unsplash_-_cap_tattoo_hand.jpg?v=1767824532"
                   alt=""
-                  className="flex-shrink-0 h-auto sm:h-full"
+                  className="flex-shrink-0 h-auto"
                   style={{
                     maxWidth: '300px',
                     borderRadius: '12px',

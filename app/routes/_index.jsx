@@ -66,7 +66,22 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     const backEl = backInnerRef.current;
     if (!shellEl || !backEl) return;
 
+    // Store the current height to restore it later
+    const originalHeight = shellEl.style.height;
+    
+    // Temporarily unconstrain the parent to measure natural height
+    shellEl.style.height = 'auto';
+    
+    // Force a reflow to ensure the layout updates
+    void shellEl.offsetHeight;
+    
+    // Measure the button's natural unconstrained height
     const neededHeight = Math.ceil(backEl.getBoundingClientRect().height);
+    
+    // Restore the original height
+    shellEl.style.height = originalHeight;
+    
+    // Use the natural height for expansion logic
     const next = neededHeight > collapsedHeight ? neededHeight : null;
     if (next !== expandedHeight) setExpandedHeight(next);
   };
