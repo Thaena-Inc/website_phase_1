@@ -14,6 +14,7 @@ import {
 } from 'react-router';
 import favicon from '~/assets/favicon.svg';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
+import {CUSTOMER_DETAILS_QUERY} from '~/graphql/customer-account/CustomerDetailsQuery';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 
@@ -83,6 +84,11 @@ export function links() {
     },
     // Tailwind CSS loads last to ensure it has precedence over reset.css and app.css
     {rel: 'stylesheet', href: tailwindCss},
+    // BSS Commerce price styling
+    {
+      rel: 'stylesheet',
+      href: '/bss/component-price.css',
+    },
   ];
 }
 
@@ -96,11 +102,15 @@ export async function loader(args) {
   // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
 
+  // Resolve customer data
+  const customerData = await deferredData.customerData;
+
   const {storefront, env} = args.context;
 
   return {
     ...deferredData,
     ...criticalData,
+    ...customerData, // Spread customer tags and isLoggedIn
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
     shop: getShopAnalytics({
       storefront,
@@ -160,9 +170,38 @@ function loadDeferredData({context}) {
       console.error(error);
       return null;
     });
+
+  // Load customer tags if logged in
+  const customerDataPromise = (async () => {
+    try {
+      const isLoggedIn = await customerAccount.isLoggedIn();
+      if (!isLoggedIn) {
+        return {customerTags: [], isLoggedIn: false};
+      }
+      try {
+        const {data} = await customerAccount.query(CUSTOMER_DETAILS_QUERY, {
+          variables: {
+            language: customerAccount.i18n.language,
+          },
+        });
+        return {
+          customerTags: data?.customer?.tags || [],
+          isLoggedIn: true,
+        };
+      } catch (error) {
+        console.error('Error fetching customer data:', error);
+        return {customerTags: [], isLoggedIn: false};
+      }
+    } catch (error) {
+      console.error('Error checking login status:', error);
+      return {customerTags: [], isLoggedIn: false};
+    }
+  })();
+
   return {
     cart: cart.get(),
     isLoggedIn: customerAccount.isLoggedIn(),
+    customerData: customerDataPromise,
     footer,
   };
 }

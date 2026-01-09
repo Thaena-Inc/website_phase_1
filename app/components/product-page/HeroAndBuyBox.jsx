@@ -2,6 +2,10 @@ import {useEffect, useRef, useState, useMemo} from "react";
 import {ChevronDown, Minus, Plus} from "lucide-react";
 import {AddToCartButton} from "~/components/AddToCartButton";
 import {useAside} from "~/components/Aside";
+import {
+  calculateFunctionLabsPrice,
+  shouldApplyFunctionLabsPricing,
+} from '~/lib/bss/functionLabs';
 
 const VARIANT_ID_30 = "gid://shopify/ProductVariant/42146515615939";
 const VARIANT_ID_90 = "gid://shopify/ProductVariant/42146515648707";
@@ -106,7 +110,7 @@ function findSellingPlanByFrequency(sellingPlans, frequency) {
  *   } | null;
  * }}
  */
-export default function HeroAndBuyBox({productImage, product}) {
+export default function HeroAndBuyBox({productImage, product, customerTags = [], isLoggedIn = false}) {
   const {open} = useAside();
   const [selectedSize, setSelectedSize] = useState("30");
   const [purchaseType, setPurchaseType] = useState("onetime");
@@ -275,21 +279,39 @@ export default function HeroAndBuyBox({productImage, product}) {
     return null;
   }, [deliveryOptions, deliveryFrequency, purchaseType, sellingPlans]);
 
-  // Calculate subscription price - recalculates when variant or selling plan changes
+  // Function Labs pricing calculation
+  const functionLabsPrice = useMemo(() => {
+    if (!shouldApplyFunctionLabsPricing(isLoggedIn, customerTags, selectedVariant)) {
+      return null;
+    }
+    return calculateFunctionLabsPrice(basePrice, customerTags, selectedVariant);
+  }, [isLoggedIn, customerTags, selectedVariant, basePrice]);
+
+  // Calculate subscription price - apply to Function Labs price if available, otherwise base price
   // Always calculate this so it can be displayed in the "Subscribe & Save" button
+  const priceForSubscription = functionLabsPrice ? functionLabsPrice.discountedPrice : basePrice;
   const subscriptionPrice = useMemo(() => {
-    if (!selectedSellingPlan) return basePrice;
-    const calculatedPrice = calculateSubscriptionPrice(basePrice, selectedSellingPlan);
+    if (!selectedSellingPlan) return priceForSubscription;
+    const calculatedPrice = calculateSubscriptionPrice(priceForSubscription, selectedSellingPlan);
     return calculatedPrice;
-  }, [basePrice, selectedSellingPlan, selectedVariant]);
+  }, [priceForSubscription, selectedSellingPlan, selectedVariant]);
 
   // Current price based on purchase type
   // 7 capsule size should always show base price (no subscription discount)
+  // but Function Labs pricing can still apply
   const currentPrice = selectedSize === "7" 
-    ? basePrice 
+    ? (functionLabsPrice ? functionLabsPrice.discountedPrice : basePrice)
     : purchaseType === "subscribe" 
       ? subscriptionPrice 
-      : basePrice;
+      : (functionLabsPrice ? functionLabsPrice.discountedPrice : basePrice);
+
+  // Final price for display
+  const finalPrice = currentPrice;
+
+  // Determine if we should show strikethrough (when Function Labs pricing is active)
+  const showStrikethrough = functionLabsPrice !== null;
+  const displayPrice = finalPrice;
+  const originalPrice = functionLabsPrice ? functionLabsPrice.basePrice : basePrice;
 
   // Ensure deliveryFrequency matches an available option with a plan when switching to subscribe
   useEffect(() => {
@@ -569,9 +591,20 @@ export default function HeroAndBuyBox({productImage, product}) {
               <div className="flex flex-col sm:flex-row gap-4 items-start mt-2">
                 {/* Price - Always visible */}
                 <div className="flex-shrink-0">
-                  <p className="font-playfair text-3xl text-slate-dark">
-                    ${currentPrice.toFixed(2)}
-                  </p>
+                  {showStrikethrough ? (
+                    <div className="flex flex-col gap-1">
+                      <p className="font-playfair text-3xl text-slate-dark">
+                        ${displayPrice.toFixed(2)}
+                      </p>
+                      <p className="font-playfair text-xl text-slate-dark/60 line-through">
+                        ${originalPrice.toFixed(2)}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="font-playfair text-3xl text-slate-dark">
+                      ${displayPrice.toFixed(2)}
+                    </p>
+                  )}
                 </div>
 
                 {/* Purchase Options - Hidden when size 7 */}
@@ -614,7 +647,7 @@ export default function HeroAndBuyBox({productImage, product}) {
                         One-time purchase
                       </span>
                       <span className="text-sm text-slate-dark font-roboto">
-                        ${basePrice.toFixed(2)}
+                        ${(functionLabsPrice ? functionLabsPrice.discountedPrice : basePrice).toFixed(2)}
                       </span>
                     </div>
                   </button>

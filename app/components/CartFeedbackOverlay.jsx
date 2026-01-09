@@ -135,13 +135,13 @@ export function CartFeedbackOverlay() {
             </div>
           </div>
 
-          <a
-            href="https://thaena.com/cart"
+          <Link
+            to="/cart"
             className="mt-4 block text-center text-sm font-roboto text-slate-dark hover:text-slate-dark/70 transition-colors"
             onClick={handleClose}
           >
             View my cart ({cartQuantity})
-          </a>
+          </Link>
         </div>
 
         {/* Footer with buttons */}

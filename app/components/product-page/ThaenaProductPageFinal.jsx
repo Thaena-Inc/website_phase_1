@@ -34,9 +34,11 @@ import FinalCTA from "./FinalCTA";
  *       };
  *     };
  *   } | null;
+ *   customerTags?: string[];
+ *   isLoggedIn?: boolean;
  * }}
  */
-export default function ThaenaProductPage({product}) {
+export default function ThaenaProductPage({product, customerTags = [], isLoggedIn = false}) {
   // Get the main product image - prefer variant image, then featured image, then first media image
   const productImage =
     product?.selectedOrFirstAvailableVariant?.image ||
@@ -49,6 +51,8 @@ export default function ThaenaProductPage({product}) {
       <HeroAndBuyBox 
         productImage={productImage}
         product={product}
+        customerTags={customerTags}
+        isLoggedIn={isLoggedIn}
       />
       <WhatsInThaenaBiotic />
       <IsThaenaForYou />

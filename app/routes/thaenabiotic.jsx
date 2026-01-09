@@ -1,17 +1,36 @@
 import {useLoaderData} from 'react-router';
 import {getSelectedProductOptions} from '@shopify/hydrogen';
 import ThaenaProductPageFinal from '../components/product-page/ThaenaProductPageFinal.jsx';
+import {CUSTOMER_DETAILS_QUERY} from '~/graphql/customer-account/CustomerDetailsQuery';
 
 /**
  * @param {Route.LoaderArgs} args
  */
 export async function loader(args) {
   const {context, request} = args;
-  const {storefront} = context;
+  const {storefront, customerAccount} = context;
   
   // Try to find the ThaenaBiotic product - adjust handle if needed
   // Common handles: 'thaenabiotic', 'thaena-biotic', 'thaenabiotic-postbiotic-supplement'
   const handle = 'thaenabiotic'; // You may need to adjust this to match your actual product handle
+  
+  // Check if customer is logged in and load tags
+  let customerTags = [];
+  let isLoggedIn = false;
+  try {
+    isLoggedIn = await customerAccount.isLoggedIn();
+    if (isLoggedIn) {
+      const {data} = await customerAccount.query(CUSTOMER_DETAILS_QUERY, {
+        variables: {
+          language: customerAccount.i18n.language,
+        },
+      });
+      customerTags = data?.customer?.tags || [];
+    }
+  } catch (error) {
+    console.error('Error fetching customer tags:', error);
+    // Continue without customer tags if there's an error
+  }
   
   try {
     const {product} = await storefront.query(PRODUCT_QUERY, {
@@ -24,21 +43,21 @@ export async function loader(args) {
     if (!product?.id) {
       // If product not found, return null and components will handle gracefully
       console.warn(`Product with handle "${handle}" not found. Please check the product handle in thaenabiotic.jsx`);
-      return {product: null};
+      return {product: null, customerTags, isLoggedIn};
     }
 
-    return {product};
+    return {product, customerTags, isLoggedIn};
   } catch (error) {
     console.error('Error fetching product:', error);
-    return {product: null};
+    return {product: null, customerTags, isLoggedIn};
   }
 }
 
 export default function ThaenaBioticRoute() {
   /** @type {LoaderReturnData} */
-  const {product} = useLoaderData();
+  const {product, customerTags, isLoggedIn} = useLoaderData();
   
-  return <ThaenaProductPageFinal product={product} />;
+  return <ThaenaProductPageFinal product={product} customerTags={customerTags} isLoggedIn={isLoggedIn} />;
 }
 
 const SELLING_PLAN_FRAGMENT = `#graphql

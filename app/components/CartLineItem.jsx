@@ -1,8 +1,9 @@
 import {CartForm, Image} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
-import {Link} from 'react-router';
+import {Link, useRouteLoaderData} from 'react-router';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
+import {calculateFunctionLabsPrice} from '~/lib/bss/functionLabs';
 
 /**
  * A single line item in the cart. It displays the product image, title, price.
@@ -17,6 +18,27 @@ export function CartLineItem({layout, line}) {
   const {product, title, image, selectedOptions} = merchandise;
   const lineItemUrl = useVariantUrl(product.handle, selectedOptions);
   const {close} = useAside();
+
+  // Get customer data from root loader
+  const rootData = useRouteLoaderData('root');
+  const customerTags = rootData?.customerTags || [];
+  const isLoggedIn = rootData?.isLoggedIn || false;
+
+  // Calculate Function Labs price
+  const baseUnitPrice = parseFloat(line?.cost?.totalAmount?.amount || 0) / line.quantity;
+  const flPrice = calculateFunctionLabsPrice(
+    baseUnitPrice,
+    customerTags,
+    merchandise
+  );
+  
+  const lineItemPrice = flPrice 
+    ? flPrice.discountedPrice * line.quantity
+    : parseFloat(line?.cost?.totalAmount?.amount || 0);
+  
+  const originalLinePrice = flPrice
+    ? flPrice.basePrice * line.quantity
+    : null;
 
   return (
     <li key={id} className="cart-line">
@@ -52,7 +74,20 @@ export function CartLineItem({layout, line}) {
             </small>
           </p>
         )}
-        <ProductPrice price={line?.cost?.totalAmount} />
+        {flPrice ? (
+          <div className="product-price">
+            <div className="product-price-on-sale">
+              <span className="price-item price-item--sale">
+                ${lineItemPrice.toFixed(2)}
+              </span>
+              <s className="price-item price-item--regular">
+                ${originalLinePrice.toFixed(2)}
+              </s>
+            </div>
+          </div>
+        ) : (
+          <ProductPrice price={line?.cost?.totalAmount} />
+        )}
         <ul>
           {selectedOptions.map((option) => (
             <li key={option.name}>
