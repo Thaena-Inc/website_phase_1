@@ -233,7 +233,24 @@ export function Layout({children}) {
                 if (typeof window !== 'undefined') {
                   window.CF = window.CF || {};
                   window.CF.entrypoints = window.CF.entrypoints || [];
-                  console.log('[Helium] window.CF initialized before script load');
+                  
+                  // Set up environment configuration for Helium script
+                  window.CF.environment = window.CF.environment || {
+                    domain: window.location.hostname,
+                    baseApiUrl: 'https://app.customerfields.com',
+                    cfcsBaseUrl: 'https://cfcs.heliumdev.workers.dev',
+                    servicesApiUrl: 'https://app.customerfields.com',
+                    servicesToken: '__missing_services_token',
+                    version: '5.1.2',
+                    appEmbedEnabled: false,
+                    localeRootPath: '/',
+                    countryOptionTags: ''
+                  };
+                  
+                  console.log('[Helium] window.CF initialized before script load', {
+                    entrypoints: window.CF.entrypoints.length,
+                    environment: window.CF.environment
+                  });
                 }
               })();
             `,
