@@ -31,6 +31,28 @@ export default function AffiliatePage() {
 
       console.log('[Helium] Starting form initialization...');
       
+      // Helper function to check form content after mountForm
+      const checkFormContent = (formEl) => {
+        const reactTarget = formEl.querySelector('.cf-react-target');
+        const formContent = formEl.innerHTML.trim();
+        
+        if (!formContent || formContent === '<div class="cf-react-target"></div>') {
+          console.warn('[Helium] WARNING: Form appears empty after mountForm call');
+          console.warn('[Helium] Form innerHTML:', formContent);
+          console.warn('[Helium] React target content:', reactTarget?.innerHTML || 'No react target');
+          
+          // Check if there are any errors in the console that might explain this
+          console.log('[Helium] Checking for potential issues...', {
+            hasEnvironment: !!window.CF?.environment,
+            environmentKeys: window.CF?.environment ? Object.keys(window.CF.environment) : [],
+            servicesToken: window.CF?.environment?.servicesToken,
+            formId: formEl.getAttribute('data-cf-form')
+          });
+        } else {
+          console.log('[Helium] Form content detected:', formContent.substring(0, 200) + '...');
+        }
+      };
+      
       try {
         // Check if window.CF exists and has proper structure
         if (typeof window === 'undefined') {
@@ -54,6 +76,21 @@ export default function AffiliatePage() {
           console.error('[Helium] ERROR: window.CF.environment not configured');
           console.error('[Helium] window.CF state:', Object.keys(window.CF));
           return;
+        }
+
+        // Verify all required environment properties are present
+        const requiredEnvProps = ['domain', 'baseApiUrl', 'version', 'servicesApiUrl'];
+        const missingProps = requiredEnvProps.filter(prop => !window.CF.environment[prop]);
+        if (missingProps.length > 0) {
+          console.error('[Helium] ERROR: Missing required environment properties:', missingProps);
+          console.error('[Helium] Current environment:', window.CF.environment);
+          return;
+        }
+
+        // Check if servicesToken might be causing issues
+        if (window.CF.environment.servicesToken === '__missing_services_token') {
+          console.warn('[Helium] WARNING: servicesToken is placeholder. This might cause API calls to fail.');
+          console.warn('[Helium] The form might need a valid servicesToken to fetch form data.');
         }
 
         console.log('[Helium] window.CF structure verified:', {
@@ -96,10 +133,41 @@ export default function AffiliatePage() {
         // Use mountForm method to initialize the form directly
         if (typeof window.CF.mountForm === 'function') {
           console.log('[Helium] Calling mountForm with form element...');
+          console.log('[Helium] Form element details:', {
+            element: formElement,
+            formId: formElement.getAttribute('data-cf-form'),
+            hasReactTarget: !!formElement.querySelector('.cf-react-target'),
+            innerHTML: formElement.innerHTML.substring(0, 100)
+          });
+          
           try {
-            window.CF.mountForm(formElement);
-            console.log('[Helium] mountForm called successfully');
-            initialized = true;
+            // Try calling mountForm with form element
+            const result = window.CF.mountForm(formElement);
+            console.log('[Helium] mountForm called successfully, result:', result);
+            
+            // Check if mountForm returns a promise
+            if (result && typeof result.then === 'function') {
+              console.log('[Helium] mountForm returned a promise, waiting for resolution...');
+              result
+                .then(() => {
+                  console.log('[Helium] mountForm promise resolved');
+                  initialized = true;
+                  checkFormContent(formElement);
+                })
+                .catch((error) => {
+                  console.error('[Helium] ERROR: mountForm promise rejected:', error);
+                  console.error('[Helium] Error details:', {
+                    message: error.message,
+                    stack: error.stack
+                  });
+                });
+            } else {
+              initialized = true;
+              // Check form content after a delay to see if it rendered
+              setTimeout(() => {
+                checkFormContent(formElement);
+              }, 1000);
+            }
           } catch (error) {
             console.error('[Helium] ERROR calling mountForm:', error);
             console.error('[Helium] Error stack:', error.stack);
@@ -107,8 +175,24 @@ export default function AffiliatePage() {
               message: error.message,
               name: error.name,
               formElement: formElement,
-              formId: formElement.getAttribute('data-cf-form')
+              formId: formElement.getAttribute('data-cf-form'),
+              windowCFState: {
+                hasMountForm: typeof window.CF.mountForm === 'function',
+                environment: window.CF.environment,
+                entrypoints: window.CF.entrypoints
+              }
             });
+            
+            // Try alternative: call mountForm with form ID string
+            console.log('[Helium] Attempting alternative: mountForm with form ID string...');
+            try {
+              const formId = formElement.getAttribute('data-cf-form');
+              const altResult = window.CF.mountForm(formId);
+              console.log('[Helium] mountForm called with form ID, result:', altResult);
+              initialized = true;
+            } catch (altError) {
+              console.error('[Helium] Alternative mountForm call also failed:', altError);
+            }
             return;
           }
         } else {
@@ -118,16 +202,7 @@ export default function AffiliatePage() {
           return;
         }
 
-        // Check for any errors in the console after a short delay
-        setTimeout(() => {
-          const formContent = formElement.innerHTML.trim();
-          if (!formContent || formContent === '<div class="cf-react-target"></div>') {
-            console.warn('[Helium] WARNING: Form appears empty after initialization');
-            console.warn('[Helium] Form innerHTML:', formContent);
-          } else {
-            console.log('[Helium] Form content detected:', formContent.substring(0, 100) + '...');
-          }
-        }, 1000);
+        // Note: Form content checking is now handled in the checkFormContent function within mountForm call
 
       } catch (error) {
         console.error('[Helium] FATAL ERROR during initialization:', error);
@@ -143,32 +218,40 @@ export default function AffiliatePage() {
     const checkAndInitialize = () => {
       if (initialized) return;
 
-      // Check if script is loaded and mountForm is available
+      // Check if script tag exists
       const scriptTag = document.querySelector('script[src*="customer-fields.js"]');
-      const scriptLoaded = scriptTag && (scriptTag.complete || scriptTag.readyState === 'complete');
       
-      // Check if window.CF exists and mountForm is available
-      const cfReady = typeof window !== 'undefined' && 
+      // For deferred scripts, check if mountForm is available (better indicator than scriptTag.complete)
+      // The script is ready when mountForm function exists
+      const scriptReady = typeof window !== 'undefined' && 
         window.CF && 
-        typeof window.CF.mountForm === 'function';
+        typeof window.CF.mountForm === 'function' &&
+        window.CF.environment; // Also ensure environment is set up
 
-      if (scriptLoaded && cfReady) {
-        // Small delay to ensure React hydration is complete
+      if (scriptReady) {
+        // Script is ready - wait a bit longer to ensure full initialization
+        console.log('[Helium] Script ready, initializing form...');
         setTimeout(() => {
           initializeHeliumForm();
-        }, 200);
+        }, 500);
       } else if (retryCount < maxRetries) {
         retryCount++;
+        console.log(`[Helium] Script not ready yet (attempt ${retryCount}/${maxRetries}). Checking for mountForm...`, {
+          hasWindow: typeof window !== 'undefined',
+          hasCF: !!window?.CF,
+          hasMountForm: typeof window?.CF?.mountForm === 'function',
+          hasEnvironment: !!window?.CF?.environment
+        });
         setTimeout(checkAndInitialize, 500);
       } else {
         console.error('[Helium] ERROR: Max retries reached. Form may not initialize properly.');
         console.error('[Helium] Comprehensive debug info:', {
           scriptTag: !!scriptTag,
           scriptTagSrc: scriptTag?.src,
-          scriptLoaded,
+          scriptReady,
           scriptComplete: scriptTag?.complete,
           scriptReadyState: scriptTag?.readyState,
-          cfReady,
+          hasMountForm: typeof window?.CF?.mountForm === 'function',
           windowCF: typeof window !== 'undefined' ? {
             exists: !!window.CF,
           hasEntrypoints: !!window.CF?.entrypoints,

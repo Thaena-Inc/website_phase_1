@@ -235,17 +235,30 @@ export function Layout({children}) {
                   window.CF.entrypoints = window.CF.entrypoints || [];
                   
                   // Set up environment configuration for Helium script
+                  // Ensure all properties are defined (not undefined) to prevent TypeError
+                  const hostname = window.location.hostname || 'localhost';
                   window.CF.environment = window.CF.environment || {
-                    domain: window.location.hostname,
+                    domain: hostname,
                     baseApiUrl: 'https://app.customerfields.com',
                     cfcsBaseUrl: 'https://cfcs.heliumdev.workers.dev',
                     servicesApiUrl: 'https://app.customerfields.com',
-                    servicesToken: '__missing_services_token',
+                    servicesToken: '__missing_services_token', // May need to be replaced with actual token
                     version: '5.1.2',
                     appEmbedEnabled: false,
                     localeRootPath: '/',
-                    countryOptionTags: '<option value="US">United States</option><option value="CA">Canada</option>'
+                    countryOptionTags: '<option value="US">United States</option><option value="CA">Canada</option>',
+                    // Ensure all string properties are non-empty to prevent toString() errors
+                    globalApi: window.CF.globalApi || window.CF,
+                    scope: 'cf'
                   };
+                  
+                  // Ensure no undefined values that could cause toString() errors
+                  Object.keys(window.CF.environment).forEach(key => {
+                    if (window.CF.environment[key] === undefined) {
+                      console.warn('[Helium] WARNING: Environment property', key, 'is undefined, setting to empty string');
+                      window.CF.environment[key] = '';
+                    }
+                  });
                   
                   console.log('[Helium] window.CF initialized before script load', {
                     entrypoints: window.CF.entrypoints.length,
