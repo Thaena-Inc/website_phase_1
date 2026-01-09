@@ -185,6 +185,21 @@ export function Layout({children}) {
         <Links />
       </head>
       <body>
+        {/* Initialize window.CF before Helium script loads to prevent TypeError */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window !== 'undefined') {
+                  window.CF = window.CF || {};
+                  window.CF.entrypoints = window.CF.entrypoints || [];
+                  console.log('[Helium] window.CF initialized before script load');
+                }
+              })();
+            `,
+          }}
+        />
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />

@@ -19,22 +19,44 @@ export default function AffiliatePage() {
 
   // Initialize Helium form after script loads and React hydration completes
   useEffect(() => {
+    let initialized = false;
+    let retryCount = 0;
+    const maxRetries = 10;
+
     const initializeHeliumForm = () => {
-      console.log('[Helium] Starting form initialization...');
-      
-      // Check if Helium script has loaded
-      if (typeof window === 'undefined' || !window.CF) {
-        console.warn('[Helium] window.CF not found. Script may not be loaded yet.');
-        return false;
+      if (initialized) {
+        console.log('[Helium] Already initialized, skipping...');
+        return;
       }
 
-      console.log('[Helium] window.CF found:', window.CF);
+      console.log('[Helium] Starting form initialization...');
+      
+      // Check if window.CF exists and has proper structure
+      if (typeof window === 'undefined') {
+        console.warn('[Helium] window is undefined');
+        return;
+      }
+
+      if (!window.CF) {
+        console.warn('[Helium] window.CF not found. It should be initialized before script loads.');
+        return;
+      }
+
+      if (!Array.isArray(window.CF.entrypoints)) {
+        console.warn('[Helium] window.CF.entrypoints is not an array. Initializing...');
+        window.CF.entrypoints = [];
+      }
+
+      console.log('[Helium] window.CF structure verified:', {
+        entrypoints: window.CF.entrypoints,
+        hasInitEmbed: typeof window.CF.initEmbed === 'function'
+      });
 
       // Find form element
       const formElement = document.querySelector('form[data-cf-form="NPtl6j"]');
       if (!formElement) {
         console.error('[Helium] Form element not found with data-cf-form="NPtl6j"');
-        return false;
+        return;
       }
 
       console.log('[Helium] Form element found:', formElement);
@@ -47,91 +69,97 @@ export default function AffiliatePage() {
         console.log('[Helium] React target container found:', reactTarget);
       }
 
-      // Check if entrypoints are already set up
-      if (window.CF.entrypoints && Array.isArray(window.CF.entrypoints)) {
-        console.log('[Helium] Entrypoints already configured:', window.CF.entrypoints);
-      } else {
-        console.log('[Helium] Entrypoints not configured. Setting up...');
-        
-        // Set up entrypoints array if it doesn't exist
-        if (!window.CF.entrypoints) {
-          window.CF.entrypoints = [];
-        }
+      // Check if entrypoint already exists for this form
+      const existingEntrypoint = window.CF.entrypoints.find(
+        ep => ep.$form === formElement || ep.form?.id === 'NPtl6j'
+      );
 
-        // Create entrypoint for this form
-        const entrypoint = {
-          $form: formElement,
-          reactTarget: reactTarget || formElement.querySelector('.cf-react-target'),
-          form: { id: 'NPtl6j' },
-          restore: false
-        };
-
-        window.CF.entrypoints.push(entrypoint);
-        console.log('[Helium] Entrypoint added:', entrypoint);
+      if (existingEntrypoint) {
+        console.log('[Helium] Entrypoint already exists for this form:', existingEntrypoint);
+        initialized = true;
+        return;
       }
 
-      // Dispatch entrypoints ready event if script is listening
-      if (!window.CF.entrypoints || window.CF.entrypoints.length === 0) {
-        console.log('[Helium] Dispatching cf:entrypoints_ready event...');
-        const event = new CustomEvent('cf:entrypoints_ready', {
-          detail: { entrypoints: window.CF.entrypoints }
-        });
-        document.dispatchEvent(event);
-        console.log('[Helium] Event dispatched');
-      }
+      // Create entrypoint for this form
+      const entrypoint = {
+        $form: formElement,
+        reactTarget: reactTarget || formElement.querySelector('.cf-react-target'),
+        form: { id: 'NPtl6j' },
+        restore: false
+      };
 
-      // If initEmbed function exists, try calling it
-      if (typeof window.CF.initEmbed === 'function') {
-        console.log('[Helium] Calling initEmbed function...');
-        try {
-          window.CF.initEmbed();
-          console.log('[Helium] initEmbed called successfully');
-        } catch (error) {
-          console.error('[Helium] Error calling initEmbed:', error);
-        }
-      } else {
-        console.log('[Helium] initEmbed function not found. Script may initialize automatically.');
-      }
+      window.CF.entrypoints.push(entrypoint);
+      console.log('[Helium] Entrypoint added:', entrypoint);
+      initialized = true;
 
-      return true;
+      // Dispatch entrypoints ready event to trigger script initialization
+      console.log('[Helium] Dispatching cf:entrypoints_ready event...');
+      const event = new CustomEvent('cf:entrypoints_ready', {
+        detail: { entrypoints: window.CF.entrypoints }
+      });
+      document.dispatchEvent(event);
+      console.log('[Helium] Event dispatched successfully');
     };
 
-    // Wait for React hydration and script to load
+    // Wait for script to load and React hydration to complete
     const checkAndInitialize = () => {
-      // Check if script is loaded
-      const scriptLoaded = typeof window !== 'undefined' && 
-        (document.querySelector('script[src*="customer-fields.js"]')?.complete || 
-         window.CF !== undefined);
+      if (initialized) return;
 
-      if (scriptLoaded) {
+      // Check if script is loaded
+      const scriptTag = document.querySelector('script[src*="customer-fields.js"]');
+      const scriptLoaded = scriptTag && (scriptTag.complete || scriptTag.readyState === 'complete');
+      
+      // Check if window.CF exists (should be initialized by inline script)
+      const cfReady = typeof window !== 'undefined' && window.CF && Array.isArray(window.CF.entrypoints);
+
+      if (scriptLoaded && cfReady) {
         // Small delay to ensure React hydration is complete
         setTimeout(() => {
           initializeHeliumForm();
-        }, 100);
-      } else {
-        // Retry after a short delay
-        console.log('[Helium] Script not loaded yet. Retrying...');
+        }, 200);
+      } else if (retryCount < maxRetries) {
+        retryCount++;
         setTimeout(checkAndInitialize, 500);
+      } else {
+        console.error('[Helium] Max retries reached. Form may not initialize properly.');
+        console.error('[Helium] Debug info:', {
+          scriptTag: !!scriptTag,
+          scriptLoaded,
+          cfReady,
+          windowCF: typeof window !== 'undefined' ? window.CF : 'window undefined'
+        });
       }
     };
 
-    // Start checking after component mounts
-    const timeoutId = setTimeout(checkAndInitialize, 100);
-
-    // Also listen for script load event
+    // Listen for script load event
     const scriptTag = document.querySelector('script[src*="customer-fields.js"]');
     if (scriptTag) {
-      scriptTag.addEventListener('load', () => {
+      const handleScriptLoad = () => {
         console.log('[Helium] Script loaded event fired');
-        setTimeout(initializeHeliumForm, 100);
-      });
+        setTimeout(() => {
+          if (!initialized) {
+            checkAndInitialize();
+          }
+        }, 200);
+      };
+
+      if (scriptTag.complete || scriptTag.readyState === 'complete') {
+        // Script already loaded
+        setTimeout(handleScriptLoad, 100);
+      } else {
+        scriptTag.addEventListener('load', handleScriptLoad);
+        scriptTag.addEventListener('error', () => {
+          console.error('[Helium] Script failed to load');
+        });
+      }
     }
 
+    // Start checking after component mounts
+    setTimeout(checkAndInitialize, 300);
+
+    // Cleanup
     return () => {
-      clearTimeout(timeoutId);
-      if (scriptTag) {
-        scriptTag.removeEventListener('load', initializeHeliumForm);
-      }
+      // No cleanup needed for this effect
     };
   }, []);
 

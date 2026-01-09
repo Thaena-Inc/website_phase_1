@@ -1,5 +1,6 @@
 import {Link} from 'react-router';
-import {useId} from 'react';
+import {Suspense, useId} from 'react';
+import {Await, useAsyncValue} from 'react-router';
 import {Aside} from '~/components/Aside';
 import Footer from '~/components/NewFooter';
 import Header from '~/components/NewHeader';
@@ -9,6 +10,7 @@ import {
   SearchFormPredictive,
 } from '~/components/SearchFormPredictive';
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
+import {CartMain} from '~/components/CartMain';
 
 /**
  * @param {PageLayoutProps}
@@ -25,6 +27,7 @@ export function PageLayout({
     <Aside.Provider>
       <SearchAside />
       <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
+      <CartAside cart={cart} />
       {header && (
         <Header
           header={header}
@@ -146,6 +149,33 @@ function MobileMenuAside({header, publicStoreDomain}) {
       </Aside>
     )
   );
+}
+
+/**
+ * Cart aside component that displays the cart in a side panel
+ * @param {{
+ *   cart: PageLayoutProps['cart'];
+ * }}
+ */
+function CartAside({cart}) {
+  return (
+    <Aside type="cart" heading="CART">
+      <Suspense fallback={<div>Loading cart...</div>}>
+        <Await resolve={cart}>
+          <CartAsideContent />
+        </Await>
+      </Suspense>
+    </Aside>
+  );
+}
+
+/**
+ * Inner component that renders the cart content
+ * Uses useAsyncValue to get the resolved cart data
+ */
+function CartAsideContent() {
+  const cart = useAsyncValue();
+  return <CartMain layout="aside" cart={cart} />;
 }
 
 /**

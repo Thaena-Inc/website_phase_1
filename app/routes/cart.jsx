@@ -108,7 +108,9 @@ export async function action({request, context}) {
  */
 export async function loader({context}) {
   const {cart} = context;
-  return await cart.get();
+  // Get cart from context - this reads from cookies/session
+  const cartData = await cart.get();
+  return cartData;
 }
 
 export default function Cart() {
