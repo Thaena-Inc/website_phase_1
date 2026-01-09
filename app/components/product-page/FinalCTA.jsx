@@ -24,7 +24,7 @@ export default function FinalCTA() {
       />
       
       {/* Content Layer */}
-      <div className="max-w-[786px] flex flex-col justify-center items-center gap-6 relative z-20">
+      <div className="max-w-[896px] flex flex-col justify-center items-center gap-6 relative z-20">
       {/* Heading */}
       <h2 className="font-playfair text-3xl md:text-4xl lg:text-[48px] leading-[1] lg:leading-[48px] tracking-[-1.2px] text-teal-green text-center font-normal">
         The Power of the Human Microbiome, In a Capsule.
@@ -38,11 +38,11 @@ export default function FinalCTA() {
       </div>
 
       {/* CTA Button */}
-      <button className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-slate-dark shadow-lg hover:opacity-90 transition-opacity">
+      <a href="#buybox" className="h-14 px-10 py-7 flex items-center justify-center rounded-[10px] bg-slate-dark shadow-lg hover:opacity-90 transition-opacity">
         <span className="font-roboto text-lg font-medium leading-7 text-light-neutral">
           Shop ThaenaBiotic<sup>®</sup> Now
         </span>
-      </button>
+      </a>
     </div>
   </div>
   </>

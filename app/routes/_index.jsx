@@ -66,9 +66,30 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
     const backEl = backInnerRef.current;
     if (!shellEl || !backEl) return;
 
-    // Use scrollHeight to get the full content height including padding
-    // This works even when the element is constrained by parent height
-    const neededHeight = Math.ceil(backEl.scrollHeight);
+    // Get all child elements
+    const children = Array.from(backEl.children);
+    if (children.length === 0) return;
+
+    // Get the bounding box of the button
+    const buttonRect = backEl.getBoundingClientRect();
+    
+    // Find the bottom-most child element
+    let maxBottom = 0;
+    children.forEach(child => {
+      const childRect = child.getBoundingClientRect();
+      const bottomRelativeToButton = childRect.bottom - buttonRect.top;
+      maxBottom = Math.max(maxBottom, bottomRelativeToButton);
+    });
+
+    // Get computed styles to account for padding
+    const computedStyle = window.getComputedStyle(backEl);
+    const paddingTop = parseFloat(computedStyle.paddingTop) || 0;
+    const paddingBottom = parseFloat(computedStyle.paddingBottom) || 0;
+    
+    // Total height = bottom of last child + bottom padding
+    // (top padding is already included in the relative position)
+    const neededHeight = Math.ceil(maxBottom + paddingBottom);
+    
     const next = neededHeight > collapsedHeight ? neededHeight : null;
     if (next !== expandedHeight) setExpandedHeight(next);
   };
@@ -178,22 +199,24 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
         >
           <button
             onClick={() => setIsFlipped(true)}
-            className="w-full h-full flex flex-col items-center justify-center p-6 md:p-8 rounded-xl border border-[#EDE7DE] shadow-sm hover:shadow-md transition-shadow bg-earth-brown/10 text-left"
+            className="group w-full h-full flex flex-col items-center p-6 md:p-8 rounded-xl border border-[#a7b3a7b8] shadow-sm hover:shadow-md transition-shadow bg-[#ffffff5c] text-left"
           >
-            <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
-              {card.title}
-            </h3>
+            <div className="flex-1 flex items-center justify-center">
+              <h3 className="font-playfair text-[20px] md:text-[24px] font-semibold leading-[1.25] text-slate-dark w-full text-center m-0">
+                {card.title}
+              </h3>
+            </div>
             <svg
               width="20"
               height="20"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="flex-shrink-0 self-end mt-auto"
+              className="flex-shrink-0 self-end opacity-80 group-hover:opacity-100 transition-all group-hover:translate-x-1 group-hover:-translate-y-1"
             >
               <path
                 d="M7.5 4.1665L13.3333 9.99984L7.5 15.8332"
-                stroke="#925781"
+                stroke="#275b52"
                 strokeWidth="1.66667"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -210,7 +233,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
           <button
             ref={backInnerRef}
             onClick={() => setIsFlipped(false)}
-            className="w-full h-full flex flex-col items-end justify-center px-6 md:px-8 pt-[calc(1.5rem+1em)] md:pt-[calc(2rem+1em)] pb-[calc(1.5rem+1em)] md:pb-[calc(2rem+1em)] rounded-xl border border-deep-purple/40 shadow-lg bg-earth-brown/10 text-left"
+            className="w-full h-full flex flex-col items-end justify-center px-6 md:px-8 pt-[calc(1.5rem+1em)] md:pt-[calc(2rem+1em)] pb-[calc(1.5rem+1em)] md:pb-[calc(2rem+1em)] rounded-xl border border-[#a7b3a7b8] shadow-lg bg-[#ffffff4d] text-left"
           >
             <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark w-full mt-2">
               {renderContent(card.content, card.contentBold)}
@@ -225,7 +248,7 @@ function FlipCard({card, wrapperClassName = "", cardClassName = ""}) {
             >
               <path
                 d="M7.5 4.1665L13.3333 9.99984L7.5 15.8332"
-                stroke="#925781"
+                stroke="#275b52"
                 strokeWidth="1.66667"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -305,13 +328,13 @@ function ExpandableCard({card, isExpanded, onToggle}) {
   };
 
   return (
-    <div className="flex flex-col items-center flex-1 min-w-[250px] max-w-[320px] rounded-[24px] border border-sage shadow-sm hover:shadow-md transition-shadow">
-      <div className="w-[220px] flex flex-col items-center py-6">
+    <div className="flex flex-col items-center flex-1 min-w-[250px] max-w-[320px] rounded-[24px] border border-sage shadow-sm hover:shadow-md transition-shadow bg-[#ffffff30]">
+      <div className="w-[220px] flex flex-col items-center pt-6 pb-4">
         <div className="flex justify-center items-center self-stretch aspect-square rounded-xl mb-4">
           <img 
             src={card.image} 
             alt={card.title}
-            className="w-full h-full object-cover rounded-xl"
+            className="w-full h-full object-cover rounded-xl scale-[1.3]"
             onError={(e) => {
               console.error('Image failed to load. Please update the image URL.');
               e.target.style.display = 'none';
@@ -322,7 +345,7 @@ function ExpandableCard({card, isExpanded, onToggle}) {
         <button 
           type="button"
           onClick={onToggle}
-          className="flex items-center gap-5 w-full mb-4"
+          className="flex items-center gap-5 w-full"
           aria-expanded={isExpanded}
           aria-controls={contentId}
         >
@@ -351,7 +374,7 @@ function ExpandableCard({card, isExpanded, onToggle}) {
           id={contentId}
           className={`overflow-hidden transition-all duration-300 ${isExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}
         >
-          <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark/80">
+          <p className="font-roboto text-[14px] leading-[22.75px] text-slate-dark/80 mt-4">
             {renderContent(card.content, card.contentBold)}
           </p>
         </div>
@@ -363,27 +386,27 @@ function ExpandableCard({card, isExpanded, onToggle}) {
 const cards = [
   {
     id: 1,
-    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/microbiome-signals_png.png?v=1766004524",
+    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/t/2/assets/thaena_science_illustrations09-1671742507318.png?v=1671742514",
     title: <>You're an ecosystem, and your microbiome is central to that.</>,
     content: <>You carry more living microbes than human cells. When that living ecosystem breaks down food, it produces thousands of powerful molecules — the postbiotic nutrients that help fuel cellular energy, support immune balance, and influence mood.</>,
     contentBold: ["postbiotic nutrients"]
   },
   {
     id: 2,
-    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/quieted-signals_png.png?v=1766004524",
+    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/t/2/assets/thaena_science_illustrations15-1671742866462.png?v=1671742869",
     title: <>Modern living can starve this ecosystem.</>,
     content: <>You inherit your microbiome at birth, but low-fiber diets, antibiotics, ultra-processed food, infection, stress, and chronic imbalance can decrease its diversity. When diversity drops, postbiotic nutrient production drops, and your body loses one of its core sources of resilience.</>
   },
   {
     id: 3,
-    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/question-signals_png.png?v=1766004524",
+    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/t/2/assets/thaena_science_illustrations10-1671742651431.png?v=1671742653",
     title: <>You can't fake human biodiversity.</>,
     content: <>A thriving human microbiome produces a wide spectrum of postbiotic molecules. No plant, probiotic, or lab-grown system can replicate that full complex ecology. And when your own biodiversity is depleted, it may not be able to generate the signals you need — yet.</>,
     contentBold: ["yet."]
   },
   {
     id: 4,
-    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/postbiotic-blend_png.png?v=1766004524",
+    image: "https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Processing_Blog_Square-07.png?v=1672860686&width=375",
     title: <>ThaenaBiotic<sup>®</sup> is the regenerative bridge.</>,
     content: <>We source our postbiotic nutrients from rare, biodiverse human microbiomes. They're sterilized and refined, then delivered to you as regenerative support. It's a bridge that helps re-establish healthy signaling while your ecosystem rebuilds.</>,
     contentBold: ["re-establish healthy signaling"]
@@ -868,7 +891,7 @@ export default function Homepage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 px-6 bg-cream">
+      <section className="py-16 md:py-24 px-6 bg-[linear-gradient(135deg, rgba(222,176,101,0.03), rgba(222,176,101,0.01)), #f7f3ec]">
         <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
           <div className="flex flex-col items-center gap-3 w-full">
             <p className="font-mono text-[16px] leading-[20px] tracking-[0.7px] uppercase text-warm-brown text-center">

@@ -83,9 +83,9 @@ export default function TrackYourJourney() {
 
       {/* Download Button */}
       <div className="flex justify-center">
-        <button className="h-14 px-11 rounded-xl border-2 border-slate-dark hover:opacity-75 transition-opacity">
+        <a href="https://thaena.com/pages/chloe-app" className="h-14 px-11 rounded-xl border-2 border-slate-dark hover:opacity-75 transition-opacity flex items-center justify-center">
           <span className="font-roboto-mono text-base font-medium leading-6 text-slate-dark">Enroll in our CHLOE Study</span>
-        </button>
+        </a>
       </div>
     </div>
   </div>

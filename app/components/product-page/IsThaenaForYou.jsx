@@ -32,12 +32,12 @@ export default function IsThaenaForYou() {
               Most probiotics add bacteria your body doesn't recognize — they often can't colonize or communicate with your native microbes. ThaenaBiotic<sup>®</sup> delivers what your gut actually uses: the nutrient signals (postbiotics) that tell your body how to digest, regulate, and heal.
             </p>
           </div>
-          <button className="mt-3 flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
+          <a href="https://thaena.com/pages/scientific-approach" className="mt-3 flex items-center justify-center gap-2 text-sepia font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
             Learn More About the Difference Between Probiotics + ThaenaBiotic<sup>®</sup>
             <svg className="w-[9.33px] h-[9.33px] flex-shrink-0" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0.666504 5.33342H9.99984M9.99984 5.33342L5.33317 0.666748M9.99984 5.33342L5.33317 10.0001" stroke="#9F5D3C" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </button>
+          </a>
         </div>
 
         {/* Card 2: Recovering from antibiotics */}
@@ -80,9 +80,9 @@ export default function IsThaenaForYou() {
               If you can't tolerate certain foods, your microbes can't make the nutrients those foods would normally create. Our donors eat the full spectrum of foods — so ThaenaBiotic<sup>®</sup> gives you the full spectrum of postbiotics. You get the nourishment your gut's been missing until you can reintroduce foods naturally again over time.
             </p>
           </div>
-          <button className="mt-3 flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
+          <a href="https://thaena.com/blogs/blog/the-intervention-menu-how-to-choose-what-actually-works-for-your-gut?_pos=1&_sid=4df321a55&_ss=r" className="mt-3 flex items-center justify-center gap-2 text-purple font-roboto text-sm leading-5 hover:opacity-80 transition-opacity">
             🌿 To Help You Build Toward Real Food Freedom — Without Fear
-          </button>
+          </a>
         </div>
 
         {/* Card 4: Optimized everything */}
@@ -135,9 +135,9 @@ export default function IsThaenaForYou() {
         <p className="font-roboto text-lg leading-7 text-slate-dark text-center">
           Still not sure? Talk to your healthcare provider about whether ThaenaBiotic<sup>®</sup> is right for you.
         </p>
-        <button className="h-14 px-11 rounded-xl border-2 border-slate-dark bg-neutral-light hover:opacity-75 transition-opacity">
+        <a href="https://thaena.com/pages/our-process" className="h-14 px-11 rounded-xl border-2 border-slate-dark bg-neutral-light hover:opacity-75 transition-opacity flex items-center justify-center">
           <span className="font-roboto-mono text-sm font-medium leading-5 text-slate-dark">Explore the Science</span>
-        </button>
+        </a>
       </div>
     </div>
   </div>

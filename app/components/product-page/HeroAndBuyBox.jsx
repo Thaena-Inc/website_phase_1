@@ -422,7 +422,7 @@ export default function HeroAndBuyBox({productImage, product, customerTags = [],
   return (
     <>
       {/* Product Section */}
-      <div className="min-h-screen bg-neutral-light">
+      <div id="buybox" className="min-h-screen bg-neutral-light">
         <main className="container mx-auto px-4 py-8 md:py-12">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto">
             {/* Product Image Section */}

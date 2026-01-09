@@ -236,6 +236,7 @@ export function Layout({children}) {
                   
                   // Set up environment configuration for Helium script
                   // Ensure all properties are defined (not undefined) to prevent TypeError
+                  // IMPORTANT: No circular references - don't reference window.CF in environment
                   const hostname = window.location.hostname || 'localhost';
                   window.CF.environment = window.CF.environment || {
                     domain: hostname,
@@ -246,10 +247,9 @@ export function Layout({children}) {
                     version: '5.1.2',
                     appEmbedEnabled: false,
                     localeRootPath: '/',
-                    countryOptionTags: '<option value="US">United States</option><option value="CA">Canada</option>',
-                    // Ensure all string properties are non-empty to prevent toString() errors
-                    globalApi: window.CF.globalApi || window.CF,
-                    scope: 'cf'
+                    countryOptionTags: '<option value="US">United States</option><option value="CA">Canada</option>'
+                    // Removed globalApi and scope to prevent circular reference
+                    // The script will set these itself if needed
                   };
                   
                   // Ensure no undefined values that could cause toString() errors

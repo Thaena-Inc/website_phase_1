@@ -55,7 +55,7 @@ export default function DonorPage() {
               </div>
 
               <a
-                href="#donor-application"
+                href="https://thaena.com/pages/become-a-donor"
                 className="inline-flex h-14 px-8 items-center justify-center rounded-[10px] bg-slate-dark hover:bg-slate-dark/90 text-cream font-roboto text-lg font-medium whitespace-nowrap shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)]"
               >
                 Apply to be a Donor
@@ -414,7 +414,7 @@ export default function DonorPage() {
 
               <div className="mt-6">
                 <a
-                  href="/thaenabiotic"
+                  href="https://thaena.com/pages/our-process"
                   className="inline-flex items-center gap-2 text-sm text-slate-dark underline font-roboto hover:opacity-80 transition-opacity"
                 >
                   See our full safety process
@@ -465,8 +465,15 @@ export default function DonorPage() {
                     },
                     {
                       question: 'Can I apply to be a donor?',
-                      answer:
-                        'Yes! If you meet the strict health criteria outlined above, you can apply through our donor application process. Only 3% of applicants are accepted.',
+                      answer: (
+                        <>
+                          Yes! If you meet the strict health criteria outlined above, you can apply through our{' '}
+                          <a href="https://thaena.com/pages/become-a-donor" className="text-slate underline hover:opacity-80">
+                            donor application process
+                          </a>
+                          . Less than 1% of applicants are accepted.
+                        </>
+                      ),
                     },
                     {
                       question: 'How many donors do you have?',
@@ -539,9 +546,7 @@ export default function DonorPage() {
               </div>
 
               <a
-                href="https://9zft9a2cyhi.typeform.com/to/y2Fbvx72"
-                target="_blank"
-                rel="noreferrer"
+                href="https://thaena.com/pages/become-a-donor"
                 className="inline-flex h-14 px-8 items-center justify-center rounded-[10px] bg-slate-dark hover:bg-slate-dark/90 text-cream font-roboto text-lg font-medium shadow-[0_10px_15px_-3px_rgba(0,0,0,0.10),0_4px_6px_-4px_rgba(0,0,0,0.10)]"
               >
                 Apply to the Thaena Donor Program
