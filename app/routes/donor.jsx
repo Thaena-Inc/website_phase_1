@@ -26,11 +26,22 @@ export default function DonorPage() {
       <div className="relative z-10 flex flex-col">
         {/* Hero */}
         <section className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-24 bg-neutral-warm">
-          {/* Background Gradient Layer */}
+          {/* Background Image Layer */}
           <div 
             className="absolute inset-0 z-0"
             style={{
-              background: 'linear-gradient(135deg, rgba(222, 176, 101, 0.05) 0%, rgba(222, 176, 101, 0.13) 50%, rgba(222, 176, 101, 0.09) 100%) center center, linear-gradient(315deg, rgba(39, 91, 82, 0.08) 0%, rgba(39, 91, 82, 0.16) 50%, rgba(39, 91, 82, 0.23) 100%), linear-gradient(90deg, rgba(237, 232, 222, 0.1) 0%, rgba(237, 232, 222, 0.1) 50%, rgba(237, 232, 222, 0.1) 100%)'
+              backgroundImage: 'url(https://cdn.shopify.com/s/files/1/0602/5281/5555/files/image_2.png?v=1765998217)',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center center',
+              backgroundSize: 'cover'
+            }}
+          />
+          
+          {/* Background Gradient Overlay Layer */}
+          <div 
+            className="absolute inset-0 z-[1]"
+            style={{
+              background: 'linear-gradient(90deg, rgba(237, 232, 222, 0.6) 0%, rgba(237, 232, 222, 0.55) 50%, rgba(237, 232, 222, 0.4) 100%)'
             }}
           />
           

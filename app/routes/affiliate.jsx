@@ -31,25 +31,42 @@ export default function AffiliatePage() {
 
       console.log('[Helium] Starting form initialization...');
       
-      // Helper function to check form content after mountForm
+        // Helper function to check form content after mountForm
       const checkFormContent = (formEl) => {
         const reactTarget = formEl.querySelector('.cf-react-target');
         const formContent = formEl.innerHTML.trim();
+        const reactTargetContent = reactTarget?.innerHTML || '';
         
-        if (!formContent || formContent === '<div class="cf-react-target"></div>') {
+        console.log('[Helium] Checking form content...', {
+          formInnerHTML: formContent.substring(0, 200),
+          reactTargetExists: !!reactTarget,
+          reactTargetContent: reactTargetContent.substring(0, 200),
+          reactTargetChildren: reactTarget?.children?.length || 0,
+          formChildren: formEl.children.length,
+          allFormElements: Array.from(formEl.querySelectorAll('*')).map(el => el.tagName.toLowerCase() + (el.className ? '.' + el.className : '')).slice(0, 10)
+        });
+        
+        if (!formContent || formContent === '<div class="cf-react-target"></div>' || !reactTargetContent) {
           console.warn('[Helium] WARNING: Form appears empty after mountForm call');
           console.warn('[Helium] Form innerHTML:', formContent);
-          console.warn('[Helium] React target content:', reactTarget?.innerHTML || 'No react target');
+          console.warn('[Helium] React target content:', reactTargetContent || 'No react target content');
           
-          // Check if there are any errors in the console that might explain this
-          console.log('[Helium] Checking for potential issues...', {
+          // Check Network tab for API calls
+          console.log('[Helium] Potential issues:', {
             hasEnvironment: !!window.CF?.environment,
             environmentKeys: window.CF?.environment ? Object.keys(window.CF.environment) : [],
             servicesToken: window.CF?.environment?.servicesToken,
-            formId: formEl.getAttribute('data-cf-form')
+            isPlaceholderToken: window.CF?.environment?.servicesToken === '__missing_services_token',
+            formId: formEl.getAttribute('data-cf-form'),
+            mountFormAvailable: typeof window.CF?.mountForm === 'function',
+            windowCFMethods: Object.keys(window.CF || {}).filter(key => typeof window.CF[key] === 'function')
           });
+          
+          // Check if there are any network errors visible (suggestion for user)
+          console.warn('[Helium] ACTION REQUIRED: Check Network tab for API requests to customerfields.com');
+          console.warn('[Helium] If API requests are failing, servicesToken may need to be a valid token');
         } else {
-          console.log('[Helium] Form content detected:', formContent.substring(0, 200) + '...');
+          console.log('[Helium] ✓ Form content detected!', formContent.substring(0, 200) + '...');
         }
       };
       
@@ -118,16 +135,69 @@ export default function AffiliatePage() {
           attributes: Array.from(formElement.attributes).map(attr => `${attr.name}="${attr.value}"`)
         });
 
-        // Check if React target exists
-        const reactTarget = formElement.querySelector('.cf-react-target');
+        // Ensure React target exists and is accessible
+        let reactTarget = formElement.querySelector('.cf-react-target');
         if (!reactTarget) {
           console.warn('[Helium] WARNING: React target container not found. Creating one...');
-          const newTarget = document.createElement('div');
-          newTarget.className = 'cf-react-target';
-          formElement.appendChild(newTarget);
-          console.log('[Helium] React target container created:', newTarget);
+          reactTarget = document.createElement('div');
+          reactTarget.className = 'cf-react-target';
+          formElement.appendChild(reactTarget);
+          console.log('[Helium] React target container created:', reactTarget);
         } else {
           console.log('[Helium] React target container found:', reactTarget);
+          console.log('[Helium] React target details:', {
+            element: reactTarget,
+            parentElement: reactTarget.parentElement,
+            isConnected: reactTarget.isConnected,
+            innerHTML: reactTarget.innerHTML,
+            className: reactTarget.className
+          });
+        }
+
+        // Try entrypoints approach first (let script auto-initialize)
+        // The script might expect entrypoints to be set up for auto-initialization
+        console.log('[Helium] Setting up entrypoint for auto-initialization...');
+        if (!window.CF.entrypoints || !Array.isArray(window.CF.entrypoints)) {
+          window.CF.entrypoints = [];
+        }
+
+        // Check if entrypoint already exists
+        const existingEntrypoint = window.CF.entrypoints.find(
+          ep => ep.$form === formElement || ep.form?.id === 'NPtl6j'
+        );
+
+        if (!existingEntrypoint) {
+          const entrypoint = {
+            $form: formElement,
+            reactTarget: reactTarget,
+            form: { id: 'NPtl6j' },
+            restore: false
+          };
+          window.CF.entrypoints.push(entrypoint);
+          console.log('[Helium] Entrypoint added for auto-initialization:', entrypoint);
+          
+          // Dispatch entrypoints ready event in case script is listening
+          console.log('[Helium] Dispatching cf:entrypoints_ready event...');
+          const event = new CustomEvent('cf:entrypoints_ready', {
+            detail: { entrypoints: window.CF.entrypoints },
+            bubbles: true,
+            cancelable: true
+          });
+          document.dispatchEvent(event);
+          console.log('[Helium] Event dispatched, waiting for script auto-initialization...');
+          
+          // Wait a bit to see if script auto-initializes
+          setTimeout(() => {
+            const contentAfterEvent = formElement.innerHTML.trim();
+            if (contentAfterEvent && contentAfterEvent !== '<div class="cf-react-target"></div>') {
+              console.log('[Helium] ✓ Form auto-initialized via entrypoints event!');
+              initialized = true;
+            } else {
+              console.log('[Helium] Script did not auto-initialize via entrypoints, mountForm should be called...');
+            }
+          }, 1000);
+        } else {
+          console.log('[Helium] Entrypoint already exists, proceeding with mountForm...');
         }
 
         // Use mountForm method to initialize the form directly
@@ -136,37 +206,75 @@ export default function AffiliatePage() {
           console.log('[Helium] Form element details:', {
             element: formElement,
             formId: formElement.getAttribute('data-cf-form'),
-            hasReactTarget: !!formElement.querySelector('.cf-react-target'),
-            innerHTML: formElement.innerHTML.substring(0, 100)
+            hasReactTarget: !!reactTarget,
+            reactTargetElement: reactTarget,
+            innerHTML: formElement.innerHTML,
+            isConnected: formElement.isConnected
+          });
+
+          // Check if form data might be needed first
+          console.log('[Helium] Checking if form data is available:', {
+            hasEntrypoints: !!window.CF.entrypoints,
+            entrypointsLength: window.CF.entrypoints?.length,
+            environment: window.CF.environment,
+            servicesToken: window.CF.environment?.servicesToken
           });
           
           try {
             // Try calling mountForm with form element
+            console.log('[Helium] Attempting mountForm call...');
             const result = window.CF.mountForm(formElement);
-            console.log('[Helium] mountForm called successfully, result:', result);
+            console.log('[Helium] mountForm called, result type:', typeof result);
+            console.log('[Helium] mountForm result:', result);
+            console.log('[Helium] Is result a promise?', result && typeof result.then === 'function');
             
             // Check if mountForm returns a promise
             if (result && typeof result.then === 'function') {
               console.log('[Helium] mountForm returned a promise, waiting for resolution...');
               result
-                .then(() => {
-                  console.log('[Helium] mountForm promise resolved');
+                .then((resolvedValue) => {
+                  console.log('[Helium] mountForm promise resolved with:', resolvedValue);
                   initialized = true;
-                  checkFormContent(formElement);
+                  // Check form content after promise resolves
+                  setTimeout(() => {
+                    checkFormContent(formElement);
+                  }, 500);
                 })
                 .catch((error) => {
                   console.error('[Helium] ERROR: mountForm promise rejected:', error);
                   console.error('[Helium] Error details:', {
                     message: error.message,
-                    stack: error.stack
+                    stack: error.stack,
+                    name: error.name
                   });
                 });
             } else {
+              console.log('[Helium] mountForm returned non-promise value:', result);
               initialized = true;
-              // Check form content after a delay to see if it rendered
+              // Check form content multiple times with increasing delays
+              // Form might render asynchronously even if mountForm returns undefined
               setTimeout(() => {
                 checkFormContent(formElement);
-              }, 1000);
+              }, 500);
+              setTimeout(() => {
+                checkFormContent(formElement);
+              }, 2000);
+              setTimeout(() => {
+                checkFormContent(formElement);
+              }, 5000);
+              
+              // If still empty, the form may need API access or different initialization
+              setTimeout(() => {
+                const finalContent = formElement.innerHTML.trim();
+                if (!finalContent || finalContent === '<div class="cf-react-target"></div>') {
+                  console.error('[Helium] Form still empty after all attempts');
+                  console.error('[Helium] This suggests:');
+                  console.error('[Helium] 1. Form data needs to be fetched from API (check Network tab)');
+                  console.error('[Helium] 2. servicesToken may need to be valid (currently placeholder)');
+                  console.error('[Helium] 3. Form may need different initialization approach');
+                  console.error('[Helium] 4. Contact Helium support for Hydrogen-specific guidance');
+                }
+              }, 6000);
             }
           } catch (error) {
             console.error('[Helium] ERROR calling mountForm:', error);
@@ -190,6 +298,9 @@ export default function AffiliatePage() {
               const altResult = window.CF.mountForm(formId);
               console.log('[Helium] mountForm called with form ID, result:', altResult);
               initialized = true;
+              setTimeout(() => {
+                checkFormContent(formElement);
+              }, 1000);
             } catch (altError) {
               console.error('[Helium] Alternative mountForm call also failed:', altError);
             }
@@ -364,11 +475,11 @@ export default function AffiliatePage() {
       color: 'text-earth-brown',
     },
     {
-      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Bile-Acids-Icon.png?v=1767817105',
+      icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Bile-Acids-Icon.png?v=1768008721',
       bgColor: 'bg-golden/20',
       title: 'Bile acids',
       description: 'Digestive signaling and balance',
-      color: 'text-rust',
+      color: 'text-[#bf8650]',
     },
     {
       icon: 'https://cdn.shopify.com/s/files/1/0602/5281/5555/files/Peptides-Icon.png?v=1766099676',
@@ -540,23 +651,23 @@ export default function AffiliatePage() {
 
               <div className="grid grid-cols-2 gap-[14px] my-[6px] mb-[18px] sm:grid-cols-1 md:grid-cols-2" role="list" aria-label="Product highlights">
                 <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
-                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">No colonization required</div>
-                  <div className="text-sm text-slate-dark/80 leading-[1.4]">No live microbes or bacterial DNA</div>
+                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35] font-roboto">No colonization required</div>
+                  <div className="text-sm text-slate-dark/80 leading-[1.4] font-roboto">No live microbes or bacterial DNA</div>
                 </div>
 
                 <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
-                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">Designed for sensitive guts</div>
-                  <div className="text-sm text-slate-dark/80 leading-[1.4]">Full-spectrum molecular diversity</div>
+                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35] font-roboto">Designed for sensitive guts</div>
+                  <div className="text-sm text-slate-dark/80 leading-[1.4] font-roboto">Full-spectrum molecular diversity</div>
                 </div>
 
                 <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
-                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">No refrigeration</div>
-                  <div className="text-sm text-slate-dark/80 leading-[1.4]">Support for travel, disruption, and daily rhythm</div>
+                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35] font-roboto">No refrigeration</div>
+                  <div className="text-sm text-slate-dark/80 leading-[1.4] font-roboto">Support for travel, disruption, and daily rhythm</div>
                 </div>
 
                 <div className="bg-neutral-light border border-sage/50 rounded-xl p-[14px_14px_13px] shadow-[0_10px_30px_rgba(0,0,0,0.06)] content-center" role="listitem">
-                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35]">Subscription available</div>
-                  <div className="text-sm text-slate-dark/80 leading-[1.4]">30-day money-back guarantee</div>
+                  <div className="text-base font-semibold tracking-[0.01em] mb-1.5 text-slate-dark leading-[1.35] font-roboto">Subscription available</div>
+                  <div className="text-sm text-slate-dark/80 leading-[1.4] font-roboto">30-day money-back guarantee</div>
                 </div>
               </div>
 
@@ -599,13 +710,13 @@ export default function AffiliatePage() {
           </div>
 
           <div className="max-w-[1024px] mx-auto mb-[42px] text-center">
-            <div className="text-base text-slate-dark font-semibold">
+            <div className="text-base text-slate-dark font-semibold font-roboto">
               Most gut supplements focus on: <span className="font-bold">Adding strains (probiotics)</span>, or <span className="font-bold">Feeding strains (prebiotics)</span>
             </div>
           </div>
 
           <div className="max-w-[1024px] w-fit mx-auto mb-[34px] p-[22px_24px_24px] border border-sage rounded-xl text-center">
-            <div className="text-base text-slate-dark mb-3 font-semibold">
+            <div className="text-base text-slate-dark mb-3 font-semibold font-roboto">
               ThaenaBiotic<sup>®</sup> focuses on something more foundational:
             </div>
             <div className="font-playfair text-[22px] leading-[1.35] text-slate-dark">
@@ -622,12 +733,12 @@ export default function AffiliatePage() {
 
               return (
                 <div key={index} className="py-2">
-                  <div className="text-base leading-[1.5] text-slate-dark/80 font-semibold border-l-2 border-sage pl-[14px]">
+                  <div className="text-base leading-[1.5] text-slate-dark/80 font-medium border-l-2 border-sage pl-[14px] font-roboto">
                     {mainText}
                     {subText && (
                       <>
                         <br />
-                        <span className="font-medium text-slate-dark/60 ml-1.5">
+                        <span className="font-normal text-slate-dark/60 ml-1.5 font-roboto">
                           ({subText})
                         </span>
                       </>
